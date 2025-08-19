@@ -1,0 +1,20 @@
+# Python/FastAPI backend
+backend/venv/
+backend/__pycache__/
+*.pyc
+.env
+
+# Node.js/Vite frontend
+frontend/frontend-main/node_modules/
+frontend/frontend-main/dist/
+.env*
+!.env.example
+
+# IDE/Editor specific
+.vscode/
+.idea/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+node_modules

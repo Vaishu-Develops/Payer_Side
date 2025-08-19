@@ -1,0 +1,110 @@
+// src/services/hospitalService.jsx
+import api from './api';
+
+// Individual API endpoint functions for backend integration
+export const getHospitals = async (params = {}) => {
+  try {
+    console.log('📤 Sending request to /hospitals endpoint with params:', params);
+    const response = await api.get('/hospitals', { params });
+    console.log('📥 Received response from /hospitals endpoint:', response.status);
+    return response;
+  } catch (error) {
+    console.error('❌ Error in getHospitals:', error.message);
+    throw error;
+  }
+};
+
+export const getHospitalDetails = (id) => 
+  api.get(`/hospitals/${id}`);
+
+export const getHospitalMetrics = (id) => 
+  api.get(`/hospitals/${id}/metrics`);
+
+export const getHospitalCertifications = (id) => 
+  api.get(`/hospitals/${id}/certifications`);
+
+export const getHospitalEquipment = (id, category = null) => 
+  api.get(`/hospitals/${id}/equipment`, { 
+    params: category ? { category } : {} 
+  });
+
+export const getHospitalAddresses = (id) =>
+  api.get(`/hospitals/${id}/addresses`);
+
+export const getHospitalSpecialties = (id) =>
+  api.get(`/hospitals/${id}/specialties`);
+
+export const getHospitalDoctors = (id) =>
+  api.get(`/hospitals/${id}/doctors`);
+
+export const getHospitalInfrastructure = (id) =>
+  api.get(`/hospitals/${id}/infrastructure`);
+
+export const getHospitalContacts = (id) =>
+  api.get(`/hospitals/${id}/contacts`);
+
+export const getWardData = (id) =>
+  api.get(`/hospitals/${id}/wards`);
+
+export const getHospitalProfile = async (id) => {
+  if (!id) {
+    throw new Error('Hospital ID is required');
+  }
+
+  try {
+    // Fetch data from the backend endpoints
+    const responses = await Promise.allSettled([
+      getHospitalDetails(id),
+      api.get('/hospital_addresses'), // Get all addresses and filter by hospital_id
+      api.get('/hospital_contacts'),  // Get all contacts and filter by hospital_id
+      api.get('/hospital_certifications'), // Get all certifications and filter by hospital_id
+      api.get('/hospital_equipment'), // Get all equipment and filter by hospital_id
+    ]);
+
+    const [hospitalRes, addressesRes, contactsRes, certificationsRes, equipmentRes] = responses;
+
+    if (hospitalRes.status === 'rejected') {
+      throw new Error(`Failed to fetch main hospital data: ${hospitalRes.reason.message}`);
+    }
+
+    // Filter data by hospital_id
+    const allAddresses = addressesRes.status === 'fulfilled' ? addressesRes.value.data : [];
+    const allContacts = contactsRes.status === 'fulfilled' ? contactsRes.value.data : [];
+    const allCertifications = certificationsRes.status === 'fulfilled' ? certificationsRes.value.data : [];
+    const allEquipment = equipmentRes.status === 'fulfilled' ? equipmentRes.value.data : [];
+
+    const profile = {
+      hospital: hospitalRes.value.data,
+      addresses: Array.isArray(allAddresses) ? allAddresses.filter(addr => String(addr.hospital_id) === String(id)) : [],
+      contacts: Array.isArray(allContacts) ? allContacts.filter(contact => String(contact.hospital_id) === String(id)) : [],
+      certifications: Array.isArray(allCertifications) ? allCertifications.filter(cert => String(cert.hospital_id) === String(id)) : [],
+      equipment: Array.isArray(allEquipment) ? allEquipment.filter(equip => String(equip.hospital_id) === String(id)) : [],
+    };
+
+    // Add equipment summary with safe array
+    const equipmentArray = Array.isArray(profile.equipment) ? profile.equipment : [];
+    profile.equipment_summary = {
+      diagnostic_count: equipmentArray.filter(e => e.category?.toLowerCase().includes('diagnostic')).length,
+      critical_care_count: equipmentArray.filter(e => e.category?.toLowerCase().includes('critical')).length,
+      surgical_count: equipmentArray.filter(e => e.category?.toLowerCase().includes('surgery')).length,
+      total_count: equipmentArray.length,
+    };
+
+    console.log(`Hospital ${id} profile:`, {
+      addresses: profile.addresses.length,
+      contacts: profile.contacts.length,
+      certifications: profile.certifications.length,
+      equipment: profile.equipment.length
+    });
+
+    return profile;
+  } catch (error) {
+    console.error(`Error fetching hospital profile for ID ${id}:`, error);
+    throw new Error(`Could not fetch complete hospital profile. ${error.message}`);
+  }
+};
+
+export const getEquipmentMatrix = (equipment_type = null) =>
+  api.get('/analytics/equipment-matrix', { 
+    params: equipment_type ? { equipment_type } : {} 
+  });

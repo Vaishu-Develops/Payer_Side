@@ -1,0 +1,53 @@
+/* Import Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Override Bootstrap styles that conflict with Ant Design */
+.ant-layout,
+.ant-layout-header,
+.ant-layout-sider,
+.ant-layout-content {
+  box-sizing: border-box !important;
+}
+
+/* Prevent Bootstrap from affecting Ant Design Menu */
+.ant-menu {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ant-menu-item {
+  margin: 0 !important;
+  padding: 0 12px !important;
+}
+
+/* Prevent Bootstrap from affecting Ant Design Cards */
+.ant-card {
+  margin-bottom: 0 !important;
+}
+
+/* Prevent Bootstrap grid from affecting Ant Design */
+.ant-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.ant-col {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Fix text alignment issues */
+.ant-statistic-content {
+  text-align: center !important;
+}
+
+/* Ensure proper spacing for Bootstrap components */
+.container-fluid {
+  padding: 0;
+}
+
+/* Reset any Bootstrap typography that might interfere */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}

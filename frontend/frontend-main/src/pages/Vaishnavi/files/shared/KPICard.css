@@ -1,0 +1,74 @@
+/* src/components/shared/KPICard.css */
+.kpi-card {
+  border: none;
+  border-left: 5px solid #0d6efd; /* Blue accent color */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.kpi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.kpi-icon {
+    font-size: 2.5rem;
+    color: #0d6efd;
+}
+
+
+/* Document Verification Specific Styles */
+.document-verification {
+  padding: 20px;
+}
+
+.kpi-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.hospital-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.hospital-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.progress-container {
+  height: 10px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.status-badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-badge.green {
+  background: #e6f7ff;
+  color: #52c41a;
+}
+
+.status-badge.orange {
+  background: #fff7e6;
+  color: #fa8c16;
+}
+
+.status-badge.red {
+  background: #fff1f0;
+  color: #f5222d;
+}

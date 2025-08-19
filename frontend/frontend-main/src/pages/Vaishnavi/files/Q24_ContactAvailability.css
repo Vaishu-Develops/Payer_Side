@@ -1,0 +1,309 @@
+/* Contact Availability Matrix - Simple & Clean Design */
+.kpi-container {
+  padding: 24px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.kpi-title {
+  color: #1f2937 !important;
+  text-align: center;
+  margin-bottom: 32px !important;
+  font-weight: 600;
+  font-size: 2rem !important;
+}
+
+/* KPI Cards - Fixed Alignment */
+.advanced-kpi-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 200px; /* Fixed height for consistent alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.advanced-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-color: #3b82f6;
+}
+
+.kpi-content {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 12px; /* Consistent spacing between elements */
+}
+
+/* Progress Circle Container */
+.advanced-progress-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+/* Animated Progress Circle */
+.ant-progress-circle {
+  animation: progress-fade-in 0.8s ease-out;
+}
+
+.ant-progress-circle .ant-progress-circle-path {
+  animation: progress-draw 2s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes progress-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes progress-draw {
+  from {
+    stroke-dasharray: 0 295.31px;
+  }
+  to {
+    stroke-dasharray: var(--dash-array, 206.717px 88.593px);
+  }
+}
+
+/* KPI Labels - Consistent Typography */
+.kpi-label {
+  color: #374151 !important;
+  margin: 0 !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 1.2;
+}
+
+.kpi-value {
+  color: #1f2937 !important;
+  margin: 0 !important;
+  font-weight: 700 !important;
+  font-size: 2.25rem !important;
+  line-height: 1;
+  animation: number-count-up 1.5s ease-out forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+@keyframes number-count-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kpi-subtitle {
+  color: #6b7280 !important;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* KPI Icons - Simple Animation */
+.kpi-icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+  animation: icon-bounce-in 0.6s ease-out;
+}
+
+.kpi-icon.success {
+  color: #10b981;
+}
+
+.kpi-icon.error {
+  color: #ef4444;
+}
+
+@keyframes icon-bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Requirements Card */
+.requirements-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.requirements-card .ant-card-body {
+  padding: 20px 24px;
+}
+
+.requirement-text {
+  color: #374151 !important;
+  font-weight: 600;
+  font-size: 16px;
+  margin-right: 12px;
+}
+
+.requirement-tag {
+  background: #f3f4f6 !important;
+  border: 1px solid #d1d5db !important;
+  color: #374151 !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease;
+}
+
+.requirement-tag:hover {
+  background: #e5e7eb !important;
+  border-color: #9ca3af !important;
+  transform: translateY(-1px);
+}
+
+/* Table Card */
+.advanced-table-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.advanced-table-card .ant-card-body {
+  padding: 0;
+}
+
+/* Glass Tags - Simplified */
+.glass-tag {
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  padding: 4px 12px !important;
+  border-radius: 6px !important;
+}
+
+.glass-tag.success {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+  border: 1px solid #bbf7d0 !important;
+}
+
+.glass-tag.error {
+  background: #fef2f2 !important;
+  color: #991b1b !important;
+  border: 1px solid #fecaca !important;
+}
+
+/* Summary Card */
+.summary-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.summary-text {
+  color: #374151 !important;
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Card Animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.slide-in {
+  animation: slide-in 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .kpi-container {
+    padding: 16px;
+  }
+  
+  .kpi-title {
+    font-size: 1.75rem !important;
+    margin-bottom: 24px !important;
+  }
+  
+  .advanced-kpi-card {
+    height: 180px;
+  }
+  
+  .kpi-content {
+    padding: 16px;
+    gap: 8px;
+  }
+  
+  .kpi-icon {
+    font-size: 32px;
+  }
+  
+  .kpi-value {
+    font-size: 1.875rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .requirement-tag {
+    margin: 4px 0 !important;
+  }
+  
+  .requirements-card .ant-card-body {
+    padding: 16px;
+  }
+}
