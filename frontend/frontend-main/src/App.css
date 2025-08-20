@@ -112,3 +112,19 @@ ul, ol {
   font-weight: 600;
   line-height: 1.2;
 }
+
+/* Component Isolation - Prevent global styles from affecting specific components */
+.ant-card {
+  position: relative;
+}
+
+.ant-card .ant-card-body {
+  position: relative;
+}
+
+/* Ensure component-specific CSS takes precedence */
+[class*="-dashboard"] .ant-card,
+[class*="-container"] .ant-card,
+[class*="-performance"] .ant-card {
+  position: relative !important;
+}

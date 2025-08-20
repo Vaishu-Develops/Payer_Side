@@ -1,654 +1,938 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import './Q22_CertificationMatrix.css';
-import api from '../../../services/api';
+// src/pages/Vaishnavi/files/Q22_CertificationMatrix.jsx
+import React, { useState, useEffect, useCallback } from "react";
+import {
+  Card,
+  Spin,
+  Alert,
+  Table,
+  Tag,
+  Badge,
+  Select,
+  Input,
+  Row,
+  Col,
+  Button,
+  Tooltip,
+  Space,
+  DatePicker,
+  Modal,
+  Progress,
+  Statistic,
+  Typography,
+  message
+} from "antd";
+import {
+  CheckCircleOutlined,
+  ExclamationCircleOutlined,
+  CloseCircleOutlined,
+  ClockCircleOutlined,
+  EyeOutlined,
+  DownloadOutlined,
+  FilterOutlined,
+  ReloadOutlined
+} from "@ant-design/icons";
+import dayjs from "dayjs";
+import isBetween from 'dayjs/plugin/isBetween';
+import * as XLSX from 'xlsx';
+import dataService from '../../../services/dataService.jsx';
 
-// Import API service to fetch data
-const fetchCertificationData = async () => {
-    try {
-        const response = await api.get('/hospitals/certifications');
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching certification data:', error);
-        return null;
-    }
-};
+dayjs.extend(isBetween);
 
-// Fallback certification data (will only be used if API fails)
-const fallbackCertificationsData = {
-    "hospitals": [
-        {
-            "hospital_id": "CERT001",
-            "name": "Regional Medical Center",
-            "location": "New York, NY",
-            "type": "Academic Medical Center",
-            "certifications": [
-                {
-                    "category": "Accreditation",
-                    "name": "Joint Commission",
-                    "status": "Active",
-                    "level": "Full Accreditation",
-                    "issued_date": "2023-03-15",
-                    "expiry_date": "2026-03-15",
-                    "badge_url": "/badges/jcaho.png",
-                    "conditions": [],
-                    "score": 95
-                },
-                {
-                    "category": "Quality",
-                    "name": "Magnet Status",
-                    "status": "Active",
-                    "issued_date": "2022-08-20",
-                    "expiry_date": "2026-08-20",
-                    "badge_url": "/badges/magnet.png",
-                    "score": 92
-                },
-                {
-                    "category": "Specialty",
-                    "name": "Trauma Center Level I",
-                    "status": "Active",
-                    "issued_date": "2023-01-10",
-                    "expiry_date": "2026-01-10",
-                    "badge_url": "/badges/trauma1.png",
-                    "score": 98
-                },
-                {
-                    "category": "Quality",
-                    "name": "Leapfrog A Grade",
-                    "status": "Active",
-                    "issued_date": "2023-10-01",
-                    "expiry_date": "2024-10-01",
-                    "badge_url": "/badges/leapfrog.png",
-                    "score": 89
-                }
-            ],
-            "ratings": {
-                "cms_stars": 4,
-                "leapfrog_grade": "A",
-                "safety_score": 87
-            }
-        },
-        {
-            "hospital_id": "CERT002",
-            "name": "Metropolitan General Hospital",
-            "location": "Los Angeles, CA",
-            "type": "Community Hospital",
-            "certifications": [
-                {
-                    "category": "Accreditation",
-                    "name": "Joint Commission",
-                    "status": "Active",
-                    "level": "Full Accreditation",
-                    "issued_date": "2022-11-20",
-                    "expiry_date": "2025-11-20",
-                    "badge_url": "/badges/jcaho.png",
-                    "conditions": ["Infection Control"],
-                    "score": 88
-                },
-                {
-                    "category": "Accreditation",
-                    "name": "DNV GL Healthcare",
-                    "status": "Expired",
-                    "level": "ISO 9001",
-                    "issued_date": "2021-05-15",
-                    "expiry_date": "2024-05-15",
-                    "badge_url": "/badges/dnv.png",
-                    "score": 82
-                },
-                {
-                    "category": "Specialty",
-                    "name": "Stroke Center",
-                    "status": "Active",
-                    "issued_date": "2023-06-01",
-                    "expiry_date": "2026-06-01",
-                    "badge_url": "/badges/stroke.png",
-                    "score": 91
-                },
-                {
-                    "category": "Quality",
-                    "name": "CMS 5-Star Rating",
-                    "status": "Active",
-                    "issued_date": "2023-07-01",
-                    "expiry_date": "2024-07-01",
-                    "badge_url": "/badges/cms5star.png",
-                    "score": 94
-                }
-            ],
-            "ratings": {
-                "cms_stars": 5,
-                "leapfrog_grade": "B",
-                "safety_score": 82
-            }
-        },
-        {
-            "hospital_id": "CERT003",
-            "name": "University Medical Center",
-            "location": "Chicago, IL",
-            "type": "Teaching Hospital",
-            "certifications": [
-                {
-                    "category": "Accreditation",
-                    "name": "Joint Commission",
-                    "status": "Under Review",
-                    "level": "Full Accreditation",
-                    "issued_date": "2021-12-01",
-                    "expiry_date": "2024-12-01",
-                    "badge_url": "/badges/jcaho.png",
-                    "conditions": [],
-                    "score": 91
-                },
-                {
-                    "category": "Quality",
-                    "name": "Magnet Status",
-                    "status": "Active",
-                    "issued_date": "2021-03-15",
-                    "expiry_date": "2025-03-15",
-                    "badge_url": "/badges/magnet.png",
-                    "score": 96
-                },
-                {
-                    "category": "Specialty",
-                    "name": "Trauma Center Level II",
-                    "status": "Active",
-                    "issued_date": "2022-09-10",
-                    "expiry_date": "2025-09-10",
-                    "badge_url": "/badges/trauma2.png",
-                    "score": 85
-                },
-                {
-                    "category": "Specialty",
-                    "name": "Cancer Center Accreditation",
-                    "status": "Expiring Soon",
-                    "issued_date": "2021-11-01",
-                    "expiry_date": "2024-11-01",
-                    "badge_url": "/badges/cancer.png",
-                    "score": 93
-                },
-                {
-                    "category": "Quality",
-                    "name": "Beacon Award",
-                    "status": "Active",
-                    "issued_date": "2023-02-20",
-                    "expiry_date": "2026-02-20",
-                    "badge_url": "/badges/beacon.png",
-                    "score": 90
-                }
-            ],
-            "ratings": {
-                "cms_stars": 3,
-                "leapfrog_grade": "A",
-                "safety_score": 91
-            }
-        },
-        {
-            "hospital_id": "CERT004",
-            "name": "Riverside Community Hospital",
-            "location": "Houston, TX",
-            "type": "Community Hospital",
-            "certifications": [
-                {
-                    "category": "Accreditation",
-                    "name": "HFAP",
-                    "status": "Active",
-                    "level": "Full Accreditation",
-                    "issued_date": "2023-04-01",
-                    "expiry_date": "2026-04-01",
-                    "badge_url": "/badges/hfap.png",
-                    "conditions": [],
-                    "score": 87
-                },
-                {
-                    "category": "Specialty",
-                    "name": "Cardiac Care Certification",
-                    "status": "Active",
-                    "issued_date": "2022-12-15",
-                    "expiry_date": "2025-12-15",
-                    "badge_url": "/badges/cardiac.png",
-                    "score": 89
-                },
-                {
-                    "category": "Quality",
-                    "name": "Leapfrog B Grade",
-                    "status": "Active",
-                    "issued_date": "2023-10-01",
-                    "expiry_date": "2024-10-01",
-                    "badge_url": "/badges/leapfrog.png",
-                    "score": 78
-                }
-            ],
-            "ratings": {
-                "cms_stars": 3,
-                "leapfrog_grade": "B",
-                "safety_score": 79
-            }
-        },
-        {
-            "hospital_id": "CERT005",
-            "name": "St. Mary's Medical Center",
-            "location": "Miami, FL",
-            "type": "Faith-Based Hospital",
-            "certifications": [
-                {
-                    "category": "Accreditation",
-                    "name": "Joint Commission",
-                    "status": "Conditional",
-                    "level": "Accredited with Conditions",
-                    "issued_date": "2023-01-15",
-                    "expiry_date": "2025-01-15",
-                    "badge_url": "/badges/jcaho.png",
-                    "conditions": ["Patient Safety", "Quality Management"],
-                    "score": 76
-                },
-                {
-                    "category": "Accreditation",
-                    "name": "AAAHC",
-                    "status": "Active",
-                    "level": "Ambulatory Care",
-                    "issued_date": "2022-07-01",
-                    "expiry_date": "2025-07-01",
-                    "badge_url": "/badges/aaahc.png",
-                    "conditions": [],
-                    "score": 84
-                },
-                {
-                    "category": "Specialty",
-                    "name": "Stroke Center",
-                    "status": "Denied",
-                    "issued_date": null,
-                    "expiry_date": null,
-                    "badge_url": "/badges/stroke.png",
-                    "score": 65
-                }
-            ],
-            "ratings": {
-                "cms_stars": 2,
-                "leapfrog_grade": "C",
-                "safety_score": 71
-            }
-        }
-    ]
-};
+const { Option } = Select;
+const { Search } = Input;
+const { RangePicker } = DatePicker;
+const { Text, Title } = Typography;
 
-const CertificationMatrix = () => {
-    const [hospitalsData, setHospitalsData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [selectedHospitals, setSelectedHospitals] = useState([]);
-    const [filters, setFilters] = useState({
-        category: 'all',
-        status: 'all',
-        search: ''
-    });
-    const [showComparison, setShowComparison] = useState(false);
+const Q22_CertificationMatrix = () => {
+  const [certifications, setCertifications] = useState([]);
+  const [hospitals, setHospitals] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [filteredData, setFilteredData] = useState([]);
+  const [selectedHospitals, setSelectedHospitals] = useState([]);
+  const [selectedCertifications, setSelectedCertifications] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [dateRange, setDateRange] = useState(null);
+  const [detailsModalVisible, setDetailsModalVisible] = useState(false);
+  const [selectedCertDetail, setSelectedCertDetail] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
 
-    // Load hospital certification data
-    useEffect(() => {
-        const loadData = async () => {
-            try {
-                const data = await fetchCertificationData();
-                if (data && data.hospitals) {
-                    setHospitalsData(data.hospitals);
-                } else {
-                    console.log('Falling back to local data');
-                    setHospitalsData(fallbackCertificationsData.hospitals);
-                }
-            } catch (error) {
-                console.error('Error loading certification data:', error);
-                setHospitalsData(fallbackCertificationsData.hospitals);
-            } finally {
-                setLoading(false);
-            }
-        };
+  // Define applyFilters before any useEffect that uses it
+  const applyFilters = useCallback(() => {
+    console.log('🔍 applyFilters called');
+    console.log('📊 Current certifications:', certifications, 'Type:', typeof certifications, 'IsArray:', Array.isArray(certifications));
+    console.log('🏥 Current hospitals:', hospitals, 'Type:', typeof hospitals, 'IsArray:', Array.isArray(hospitals));
+
+    // Ensure we have arrays to work with
+    const certsArray = Array.isArray(certifications) ? certifications : [];
+    const hospsArray = Array.isArray(hospitals) ? hospitals : [];
+
+    console.log('🔍 Working with certs array length:', certsArray.length, 'hosps array length:', hospsArray.length);
+
+    let filtered = certsArray.filter(cert => {
+      // Hospital filter
+      if (selectedHospitals.length > 0 && !selectedHospitals.includes(cert.hospital_id)) {
+        return false;
+      }
+
+      // Certification type filter
+      if (selectedCertifications.length > 0 && !selectedCertifications.includes(cert.certification_type)) {
+        return false;
+      }
+
+      // Search term filter
+      if (searchTerm) {
+        const searchLower = searchTerm.toLowerCase();
+        const hospital = hospsArray.find(h => h.id === cert.hospital_id);
         
-        loadData();
-    }, []);
+        if (!hospital?.name?.toLowerCase().includes(searchLower) &&
+            !cert.certification_type?.toLowerCase().includes(searchLower) &&
+            !cert.issuing_authority?.toLowerCase().includes(searchLower)) {
+          return false;
+        }
+      }
 
-    // Define the exact certifications that should appear (from the JSON data)
-    const allCertifications = useMemo(() => {
-        // Only include certifications that actually exist in the JSON data
-        const validCertifications = [
-            "AAAHC",
-            "Beacon Award",
-            "CMS 5-Star Rating",
-            "Cancer Center Accreditation",
-            "Cardiac Care Certification",
-            "DNV GL Healthcare",
-            "HFAP",
-            "Joint Commission",
-            "Leapfrog A Grade",
-            "Leapfrog B Grade",
-            "Magnet Status",
-            "Stroke Center",
-            "Trauma Center Level I",
-            "Trauma Center Level II"
-        ];
-        return validCertifications;
-    }, []);
+      // Date range filter
+      if (dateRange && dateRange.length === 2) {
+        const certDate = dayjs(cert.issued_date);
+        if (!certDate.isBetween(dateRange[0], dateRange[1], 'day', '[]')) {
+          return false;
+        }
+      }
 
-    // Filter hospitals based on search and filters
-    const filteredHospitals = useMemo(() => {
-        return hospitalsData.filter(hospital => {
-            const matchesSearch = hospital.name.toLowerCase().includes(filters.search.toLowerCase());
+      return true;
+    });
 
-            if (filters.category !== 'all') {
-                const hasCategory = hospital.certifications?.some(cert =>
-                    cert.category.toLowerCase() === filters.category.toLowerCase()
-                );
-                if (!hasCategory) return false;
-            }
+    console.log('🔍 Filtered result:', filtered, 'Length:', filtered.length);
+    setFilteredData(filtered);
+  }, [certifications, hospitals, selectedHospitals, selectedCertifications, searchTerm, dateRange]);
 
-            if (filters.status !== 'all') {
-                const hasStatus = hospital.certifications?.some(cert =>
-                    cert.status.toLowerCase() === filters.status.toLowerCase()
-                );
-                if (!hasStatus) return false;
-            }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-            return matchesSearch;
-        });
-    }, [hospitalsData, filters]);
+  useEffect(() => {
+    applyFilters();
+  }, [applyFilters]);
 
-    // Get certification status for a hospital
-    const getCertificationStatus = (hospital, certificationName) => {
-        const cert = hospital.certifications?.find(c => c.name === certificationName);
-        return cert || null;
-    };
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-    // Status badge component
-    const StatusBadge = ({ status, certification }) => {
-        const getStatusInfo = (status) => {
-            switch (status?.toLowerCase()) {
-                case 'active':
-                    return { class: 'status-active', icon: '✅', text: 'Active' };
-                case 'expired':
-                    return { class: 'status-expired', icon: '❌', text: 'Expired' };
-                case 'expiring soon':
-                    return { class: 'status-expiring', icon: '⏰', text: 'Expiring Soon' };
-                case 'under review':
-                    return { class: 'status-review', icon: '🔄', text: 'Under Review' };
-                case 'conditional':
-                    return { class: 'status-conditional', icon: '⚠️', text: 'Conditional' };
-                case 'denied':
-                    return { class: 'status-denied', icon: '🚫', text: 'Denied' };
-                default:
-                    return { class: 'status-none', icon: '—', text: 'Not Certified' };
-            }
-        };
+      console.log('🚀 Starting data fetch...');
 
-        const statusInfo = getStatusInfo(status);
+      const [certificationData, hospitalData] = await Promise.all([
+        dataService.getAllHospitalCertifications(),
+        dataService.fetchHospitalsData()
+      ]);
 
-        return (
-            <div className={`status-badge ${statusInfo.class}`} title={certification ? `Score: ${certification.score || 'N/A'}` : 'Not certified'}>
-                <span className="status-icon">{statusInfo.icon}</span>
-                <span className="status-text">{statusInfo.text}</span>
-                {certification?.score && <span className="status-score">({certification.score})</span>}
-            </div>
-        );
-    };
+      console.log('📊 Raw certification data:', certificationData);
+      console.log('🏥 Raw hospital data:', hospitalData);
+      console.log('📊 Certification data type:', typeof certificationData);
+      console.log('🏥 Hospital data type:', typeof hospitalData);
+      console.log('📊 Certification data isArray:', Array.isArray(certificationData));
+      console.log('🏥 Hospital data isArray:', Array.isArray(hospitalData));
 
-    // Hospital comparison component
-    const HospitalComparison = () => {
-        if (selectedHospitals.length === 0) return null;
+      // Handle data structure - extract arrays if wrapped in objects
+      let certArray = [];
+      if (Array.isArray(certificationData)) {
+        certArray = certificationData;
+        console.log('✅ Certification data is direct array');
+      } else if (certificationData?.success && certificationData?.data) {
+        // Handle dataService response format
+        certArray = Array.isArray(certificationData.data) 
+          ? certificationData.data 
+          : certificationData.data?.certifications || certificationData.data || [];
+        console.log('🔄 Extracted certification array from dataService response');
+      } else {
+        certArray = certificationData?.certifications || certificationData?.data || [];
+        console.log('⚠️ Fallback certification array extraction');
+      }
 
-        const selectedData = hospitalsData.filter(h => selectedHospitals.includes(h.hospital_id));
+      let hospArray = [];
+      if (Array.isArray(hospitalData)) {
+        hospArray = hospitalData;
+        console.log('✅ Hospital data is direct array');
+      } else if (hospitalData?.success && hospitalData?.data) {
+        // Handle dataService response format
+        hospArray = hospitalData.data?.hospitals || hospitalData.data || [];
+        console.log('🔄 Extracted hospital array from dataService response');
+      } else {
+        hospArray = hospitalData?.hospitals || hospitalData?.data || [];
+        console.log('⚠️ Fallback hospital array extraction');
+      }
 
-        return (
-            <div className="comparison-panel">
-                <div className="comparison-header">
-                    <h3>Hospital Comparison ({selectedData.length} hospitals)</h3>
-                    <button onClick={() => setShowComparison(!showComparison)} className="toggle-btn">
-                        {showComparison ? 'Hide' : 'Show'} Comparison
-                    </button>
-                </div>
+      console.log('📊 Final cert array:', certArray, 'Length:', certArray.length, 'IsArray:', Array.isArray(certArray));
+      console.log('🏥 Final hosp array:', hospArray, 'Length:', hospArray.length, 'IsArray:', Array.isArray(hospArray));
 
-                {showComparison && (
-                    <div className="comparison-content">
-                        <div className="comparison-grid">
-                            <div className="comparison-row header">
-                                <div className="comparison-cell">Certification</div>
-                                {selectedData.map(hospital => (
-                                    <div key={hospital.hospital_id} className="comparison-cell hospital-header">
-                                        {hospital.name}
-                                    </div>
-                                ))}
-                            </div>
-
-                            {allCertifications.map(certName => (
-                                <div key={certName} className="comparison-row">
-                                    <div className="comparison-cell cert-name">{certName}</div>
-                                    {selectedData.map(hospital => {
-                                        const cert = getCertificationStatus(hospital, certName);
-                                        return (
-                                            <div key={hospital.hospital_id} className="comparison-cell">
-                                                <StatusBadge status={cert?.status} certification={cert} />
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-            </div>
-        );
-    };
-
-    // Analytics summary
-    const getAnalytics = () => {
-        const totalCertifications = allCertifications.length;
-        const totalHospitals = hospitalsData.length;
-
-        const statusCounts = {
-            active: 0,
-            expired: 0,
-            expiring: 0,
-            conditional: 0,
-            denied: 0
-        };
-
-        hospitalsData.forEach(hospital => {
-            hospital.certifications?.forEach(cert => {
-                const status = cert.status.toLowerCase();
-                if (status === 'active') statusCounts.active++;
-                else if (status === 'expired') statusCounts.expired++;
-                else if (status === 'expiring soon') statusCounts.expiring++;
-                else if (status === 'conditional') statusCounts.conditional++;
-                else if (status === 'denied') statusCounts.denied++;
-            });
-        });
-
-        return { totalCertifications, totalHospitals, statusCounts };
-    };
-
-    const analytics = getAnalytics();
-
-    if (loading) {
-        return <div className="loading">Loading certification data...</div>;
+      setCertifications(certArray);
+      setHospitals(hospArray);
+      
+      message.success('Certification data loaded successfully');
+    } catch (err) {
+      console.error("❌ Error fetching data:", err);
+      setError(err.message || "Failed to fetch data");
+      message.error('Failed to load certification data');
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const refreshData = async () => {
+    try {
+      setRefreshing(true);
+      await fetchData();
+    } catch (error) {
+      console.error('Refresh error:', error);
+      message.error('Failed to refresh data');
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  const getCertificationStatus = (cert) => {
+    const expiryDate = dayjs(cert.expiry_date);
+    const today = dayjs();
+    const daysUntilExpiry = expiryDate.diff(today, 'days');
+
+    if (daysUntilExpiry < 0) {
+      return { 
+        status: 'expired', 
+        color: 'red', 
+        icon: <CloseCircleOutlined />,
+        text: 'Expired'
+      };
+    } else if (daysUntilExpiry <= 90) {
+      return { 
+        status: 'expiring-soon', 
+        color: 'orange', 
+        icon: <ExclamationCircleOutlined />,
+        text: 'Expiring Soon'
+      };
+    } else if (daysUntilExpiry <= 180) {
+      return { 
+        status: 'warning', 
+        color: 'gold', 
+        icon: <ClockCircleOutlined />,
+        text: 'Warning'
+      };
+    } else {
+      return { 
+        status: 'active', 
+        color: 'green', 
+        icon: <CheckCircleOutlined />,
+        text: 'Active'
+      };
+    }
+  };
+
+  const getMatrixData = () => {
+    // Ensure hospitals and filteredData are arrays
+    const hospitalsArray = Array.isArray(hospitals) ? hospitals : [];
+    const filteredArray = Array.isArray(filteredData) ? filteredData : [];
+    
+    // Group certifications by hospital
+    const matrix = {};
+    const certTypes = [...new Set(filteredArray.map(cert => cert.certification_type))].sort();
+
+    // Filter hospitals based on selection
+    const relevantHospitals = hospitalsArray.filter(hospital => 
+      selectedHospitals.length === 0 || selectedHospitals.includes(hospital.id)
+    );
+
+    relevantHospitals.forEach(hospital => {
+      matrix[hospital.id] = {
+        hospital,
+        certifications: {},
+        totalCertifications: 0,
+        activeCertifications: 0,
+        expiringSoon: 0
+      };
+
+      certTypes.forEach(type => {
+        const cert = filteredArray.find(c => c.hospital_id === hospital.id && c.certification_type === type);
+        matrix[hospital.id].certifications[type] = cert || null;
+        
+        if (cert) {
+          matrix[hospital.id].totalCertifications++;
+          const status = getCertificationStatus(cert);
+          if (status.status === 'active') {
+            matrix[hospital.id].activeCertifications++;
+          } else if (status.status === 'expiring-soon') {
+            matrix[hospital.id].expiringSoon++;
+          }
+        }
+      });
+    });
+
+    return { matrix, certTypes };
+  };
+
+  const showCertificationDetails = (cert) => {
+    setSelectedCertDetail(cert);
+    setDetailsModalVisible(true);
+  };
+
+  const exportToExcel = async () => {
+    try {
+      message.loading('Preparing Excel export...', 1);
+      
+      const { matrix, certTypes } = getMatrixData();
+      const hospitalsArray = Array.isArray(hospitals) ? hospitals : [];
+      const filteredArray = Array.isArray(filteredData) ? filteredData : [];
+
+      // Create workbook
+      const workbook = XLSX.utils.book_new();
+
+      // Sheet 1: Certification Matrix
+      const matrixData = [];
+      
+      // Headers for matrix sheet
+      const matrixHeaders = [
+        'Hospital Name',
+        'Hospital Type', 
+        'Category',
+        'Operational Beds',
+        'Total Certifications',
+        'Active Certifications',
+        'Expiring Soon',
+        ...certTypes.map(type => `${type} Level`),
+        ...certTypes.map(type => `${type} Expiry`),
+        ...certTypes.map(type => `${type} Status`)
+      ];
+      
+      matrixData.push(matrixHeaders);
+
+      // Data rows for matrix
+      Object.values(matrix).forEach(item => {
+        const row = [
+          item.hospital.name || '',
+          item.hospital.hospital_type || '',
+          item.hospital.category || '',
+          item.hospital.beds_operational || 0,
+          item.totalCertifications || 0,
+          item.activeCertifications || 0,
+          item.expiringSoon || 0
+        ];
+
+        // Add certification levels
+        certTypes.forEach(type => {
+          const cert = item.certifications[type];
+          row.push(cert ? cert.certification_level || '' : 'Not Certified');
+        });
+
+        // Add expiry dates
+        certTypes.forEach(type => {
+          const cert = item.certifications[type];
+          row.push(cert ? dayjs(cert.expiry_date).format('DD/MM/YYYY') : 'N/A');
+        });
+
+        // Add status
+        certTypes.forEach(type => {
+          const cert = item.certifications[type];
+          if (cert) {
+            const status = getCertificationStatus(cert);
+            row.push(status.text);
+          } else {
+            row.push('N/A');
+          }
+        });
+
+        matrixData.push(row);
+      });
+
+      const matrixWorksheet = XLSX.utils.aoa_to_sheet(matrixData);
+      XLSX.utils.book_append_sheet(workbook, matrixWorksheet, 'Certification Matrix');
+
+      // Sheet 2: Detailed Certifications
+      const detailedData = [];
+      
+      // Headers for detailed sheet
+      const detailedHeaders = [
+        'Hospital ID',
+        'Hospital Name',
+        'Hospital Type',
+        'Hospital Category',
+        'Operational Beds',
+        'Certification Type',
+        'Certification Level',
+        'Certificate Number',
+        'Issued Date',
+        'Expiry Date',
+        'Days Until Expiry',
+        'Issuing Authority',
+        'Status',
+        'Remarks'
+      ];
+      
+      detailedData.push(detailedHeaders);
+
+      // Data rows for detailed certifications
+      filteredArray.forEach(cert => {
+        const hospital = hospitalsArray.find(h => h.id === cert.hospital_id);
+        const status = getCertificationStatus(cert);
+        const expiryDate = dayjs(cert.expiry_date);
+        const daysUntilExpiry = expiryDate.diff(dayjs(), 'days');
+
+        const row = [
+          cert.hospital_id || '',
+          hospital?.name || 'Unknown Hospital',
+          hospital?.hospital_type || '',
+          hospital?.category || '',
+          hospital?.beds_operational || 0,
+          cert.certification_type || '',
+          cert.certification_level || '',
+          cert.certificate_number || '',
+          dayjs(cert.issued_date).format('DD/MM/YYYY'),
+          dayjs(cert.expiry_date).format('DD/MM/YYYY'),
+          daysUntilExpiry,
+          cert.issuing_authority || '',
+          status.text,
+          cert.remarks || ''
+        ];
+
+        detailedData.push(row);
+      });
+
+      const detailedWorksheet = XLSX.utils.aoa_to_sheet(detailedData);
+      XLSX.utils.book_append_sheet(workbook, detailedWorksheet, 'Detailed Certifications');
+
+      // Sheet 3: Summary Statistics
+      const stats = getComplianceStats();
+      const summaryData = [
+        ['Metric', 'Value', 'Description'],
+        ['Total Hospitals', stats.totalHospitals, 'Number of hospitals in current view'],
+        ['Total Certifications', stats.actualCertified, 'Total number of certifications held'],
+        ['Possible Certifications', stats.totalPossible, 'Maximum possible certifications'],
+        ['Compliance Rate (%)', stats.complianceRate, 'Percentage of possible certifications achieved'],
+        ['Active Certifications', stats.totalActive, 'Number of currently active certifications'],
+        ['Expiring Soon', stats.expiringSoon, 'Certifications expiring within 90 days'],
+        ['Active Rate (%)', stats.activeRate, 'Percentage of certifications that are active'],
+        [],
+        ['Certification Types Breakdown', '', ''],
+        ...certTypes.map(type => [
+          type,
+          filteredArray.filter(c => c.certification_type === type).length,
+          `Total ${type} certifications`
+        ]),
+        [],
+        ['Export Date', dayjs().format('DD/MM/YYYY HH:mm:ss'), 'When this report was generated'],
+        ['Filter Applied', '', ''],
+        ['Selected Hospitals', selectedHospitals.length > 0 ? selectedHospitals.length : 'All', 'Number of hospitals filtered'],
+        ['Selected Cert Types', selectedCertifications.length > 0 ? selectedCertifications.length : 'All', 'Number of certification types filtered'],
+        ['Search Term', searchTerm || 'None', 'Search filter applied'],
+        ['Date Range', dateRange ? `${dateRange[0].format('DD/MM/YYYY')} to ${dateRange[1].format('DD/MM/YYYY')}` : 'None', 'Date range filter applied']
+      ];
+
+      const summaryWorksheet = XLSX.utils.aoa_to_sheet(summaryData);
+      XLSX.utils.book_append_sheet(workbook, summaryWorksheet, 'Summary');
+
+      // Generate filename with timestamp
+      const filename = `Hospital_Certifications_Matrix_${dayjs().format('YYYY-MM-DD_HH-mm-ss')}.xlsx`;
+      
+      // Write and download the file
+      XLSX.writeFile(workbook, filename);
+      
+      message.success('Excel file exported successfully');
+    } catch (error) {
+      console.error('Excel export error:', error);
+      message.error('Failed to export Excel file');
+    }
+  };
+
+  const getComplianceStats = () => {
+    const { matrix, certTypes } = getMatrixData();
+    const matrixValues = Object.values(matrix);
+    
+    const totalHospitals = matrixValues.length;
+    const totalPossible = totalHospitals * certTypes.length;
+    const actualCertified = matrixValues.reduce((acc, item) => {
+      return acc + Object.values(item.certifications).filter(cert => cert !== null).length;
+    }, 0);
+
+    const expiringSoon = matrixValues.reduce((acc, item) => acc + item.expiringSoon, 0);
+    const totalActive = matrixValues.reduce((acc, item) => acc + item.activeCertifications, 0);
+
+    // Calculate rates with proper handling of edge cases
+    const complianceRate = totalPossible > 0 ? Math.round((actualCertified / totalPossible) * 100) : 0;
+    const activeRate = actualCertified > 0 ? Math.round((totalActive / actualCertified) * 100) : 0;
+
+    console.log('📊 Compliance Stats:', {
+      totalHospitals,
+      totalPossible,
+      actualCertified,
+      complianceRate,
+      certTypes: certTypes.length
+    });
+
+    return {
+      totalHospitals,
+      totalPossible,
+      actualCertified,
+      expiringSoon,
+      totalActive,
+      complianceRate,
+      activeRate
+    };
+  };
+
+  const renderMatrixTable = () => {
+    const { matrix, certTypes } = getMatrixData();
+
+    const columns = [
+      {
+        title: 'Hospital Information',
+        dataIndex: 'hospital',
+        key: 'hospital',
+        fixed: 'left',
+        width: 280,
+        render: (hospital, record) => (
+          <div>
+            <Text strong style={{ display: 'block' }}>{hospital.name}</Text>
+            <Text type="secondary" style={{ fontSize: '12px', display: 'block' }}>
+              {hospital.category} | {hospital.beds_operational} beds
+            </Text>
+            <Text type="secondary" style={{ fontSize: '11px' }}>
+              Certifications: {record.totalCertifications} 
+              {record.expiringSoon > 0 && (
+                <Text type="warning"> | {record.expiringSoon} expiring</Text>
+              )}
+            </Text>
+          </div>
+        ),
+      },
+      ...certTypes.map(type => ({
+        title: (
+          <div style={{ textAlign: 'center' }}>
+            <div>{type}</div>
+            <div style={{ fontSize: '10px', color: '#666', fontWeight: 'normal' }}>
+              {Array.isArray(filteredData) ? filteredData.filter(c => c.certification_type === type).length : 0} total
+            </div>
+          </div>
+        ),
+        dataIndex: ['certifications', type],
+        key: type,
+        width: 160,
+        align: 'center',
+        render: (cert) => {
+          if (!cert) {
+            return (
+              <div>
+                <Tag color="default">Not Certified</Tag>
+              </div>
+            );
+          }
+
+          const statusInfo = getCertificationStatus(cert);
+          return (
+            <div>
+              <Tooltip 
+                title={
+                  <div>
+                    <div><strong>Level:</strong> {cert.certification_level}</div>
+                    <div><strong>Certificate:</strong> {cert.certificate_number}</div>
+                    <div><strong>Expires:</strong> {dayjs(cert.expiry_date).format('DD MMM YYYY')}</div>
+                    <div><strong>Authority:</strong> {cert.issuing_authority}</div>
+                    <div style={{ marginTop: '8px', color: '#1890ff' }}>Click for full details</div>
+                  </div>
+                }
+              >
+                <Tag
+                  color={statusInfo.color}
+                  style={{ 
+                    cursor: 'pointer', 
+                    marginBottom: '4px',
+                    minWidth: '80px',
+                    textAlign: 'center'
+                  }}
+                  onClick={() => showCertificationDetails(cert)}
+                  icon={statusInfo.icon}
+                >
+                  {cert.certification_level}
+                </Tag>
+              </Tooltip>
+              <div style={{ fontSize: '10px', color: '#666' }}>
+                Exp: {dayjs(cert.expiry_date).format('MMM YY')}
+              </div>
+            </div>
+          );
+        },
+      })),
+    ];
 
     return (
-        <div className="certification-matrix">
-            <div className="container-fluid">
-                <div className="matrix-header text-center mb-4">
-                    <h1 className="display-4 text-primary mb-3">Hospital Certification Comparison Matrix</h1>
-                    <p className="lead text-muted">Compare certification status across healthcare organizations</p>
-                </div>
-
-                {/* Analytics Dashboard */}
-                <div className="analytics-dashboard row g-3 mb-4">
-                    <div className="col-md-6">
-                        <div className="analytics-card card h-100">
-                            <div className="card-body">
-                                <h5 className="card-title">Overview</h5>
-                                <div className="analytics-stats d-flex justify-content-around">
-                                    <div className="stat text-center">
-                                        <span className="stat-number display-4 text-primary">{analytics.totalHospitals}</span>
-                                        <div className="stat-label text-muted">Hospitals</div>
-                                    </div>
-                                    <div className="stat text-center">
-                                        <span className="stat-number display-4 text-info">{analytics.totalCertifications}</span>
-                                        <div className="stat-label text-muted">Certification Types</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-md-6">
-                        <div className="analytics-card card h-100">
-                            <div className="card-body">
-                                <h5 className="card-title">Certification Status</h5>
-                                <div className="status-stats">
-                                    <div className="status-stat active badge bg-success me-2 mb-2">✅ Active: {analytics.statusCounts.active}</div>
-                                    <div className="status-stat expiring badge bg-warning me-2 mb-2">⏰ Expiring: {analytics.statusCounts.expiring}</div>
-                                    <div className="status-stat expired badge bg-danger me-2 mb-2">❌ Expired: {analytics.statusCounts.expired}</div>
-                                    <div className="status-stat conditional badge bg-secondary me-2 mb-2">⚠️ Conditional: {analytics.statusCounts.conditional}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Filters */}
-                <div className="filters-panel card mb-4">
-                    <div className="card-body">
-                        <div className="row g-3">
-                            <div className="col-md-4">
-                                <label className="form-label fw-bold">Search Hospitals:</label>
-                                <input
-                                    type="text"
-                                    placeholder="Search by hospital name..."
-                                    value={filters.search}
-                                    onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-                                    className="form-control"
-                                />
-                            </div>
-
-                            <div className="col-md-4">
-                                <label className="form-label fw-bold">Category:</label>
-                                <select
-                                    value={filters.category}
-                                    onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-                                    className="form-select"
-                                >
-                                    <option value="all">All Categories</option>
-                                    <option value="accreditation">Accreditation</option>
-                                    <option value="quality">Quality</option>
-                                    <option value="specialty">Specialty</option>
-                                </select>
-                            </div>
-
-                            <div className="col-md-4">
-                                <label className="form-label fw-bold">Status:</label>
-                                <select
-                                    value={filters.status}
-                                    onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-                                    className="form-select"
-                                >
-                                    <option value="all">All Statuses</option>
-                                    <option value="active">Active</option>
-                                    <option value="expired">Expired</option>
-                                    <option value="expiring soon">Expiring Soon</option>
-                                    <option value="conditional">Conditional</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Hospital Comparison */}
-                <HospitalComparison />
-
-                {/* Certification Matrix */}
-                <div className="matrix-container card">
-                    <div className="card-body p-0">
-                        <div className="table-responsive">
-                            <table className="table table-bordered table-hover mb-0">
-                                <thead className="table-dark sticky-top">
-                                    <tr>
-                                        <th className="hospital-header-cell">
-                                            <div className="d-flex align-items-center">
-                                                <input
-                                                    type="checkbox"
-                                                    className="form-check-input me-2"
-                                                    onChange={(e) => {
-                                                        if (e.target.checked) {
-                                                            setSelectedHospitals(filteredHospitals.map(h => h.hospital_id));
-                                                        } else {
-                                                            setSelectedHospitals([]);
-                                                        }
-                                                    }}
-                                                    checked={selectedHospitals.length === filteredHospitals.length && filteredHospitals.length > 0}
-                                                />
-                                                Hospital
-                                            </div>
-                                        </th>
-                                        {allCertifications.map(certName => (
-                                            <th key={certName} className="cert-header-cell text-center">
-                                                <div className="cert-header-text">{certName}</div>
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    {filteredHospitals.map(hospital => (
-                                        <tr key={hospital.hospital_id}>
-                                            <td className="hospital-info-cell">
-                                                <div className="d-flex align-items-start">
-                                                    <input
-                                                        type="checkbox"
-                                                        className="form-check-input me-3 mt-1"
-                                                        checked={selectedHospitals.includes(hospital.hospital_id)}
-                                                        onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                setSelectedHospitals([...selectedHospitals, hospital.hospital_id]);
-                                                            } else {
-                                                                setSelectedHospitals(selectedHospitals.filter(id => id !== hospital.hospital_id));
-                                                            }
-                                                        }}
-                                                    />
-                                                    <div className="hospital-details">
-                                                        <div className="hospital-name fw-bold text-primary">{hospital.name}</div>
-                                                        <div className="hospital-location text-muted small">{hospital.location}</div>
-                                                        <div className="hospital-type text-secondary small">{hospital.type}</div>
-                                                        <div className="hospital-ratings small">
-                                                            <span className="badge bg-info me-1">CMS: {hospital.ratings?.cms_stars}★</span>
-                                                            <span className="badge bg-success me-1">Leapfrog: {hospital.ratings?.leapfrog_grade}</span>
-                                                            <span className="badge bg-warning">Safety: {hospital.ratings?.safety_score}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            {allCertifications.map(certName => {
-                                                const certification = getCertificationStatus(hospital, certName);
-                                                return (
-                                                    <td key={certName} className="cert-status-cell text-center">
-                                                        <StatusBadge status={certification?.status} certification={certification} />
-                                                        {certification?.conditions && certification.conditions.length > 0 && (
-                                                            <div className="conditions mt-1" title={`Conditions: ${certification.conditions.join(', ')}`}>
-                                                                <span className="badge bg-warning">⚠️ {certification.conditions.length}</span>
-                                                            </div>
-                                                        )}
-                                                    </td>
-                                                );
-                                            })}
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                {filteredHospitals.length === 0 && (
-                    <div className="alert alert-info text-center mt-4">
-                        <h5>No Results Found</h5>
-                        <p className="mb-0">No hospitals match the current filters. Please adjust your search criteria.</p>
-                    </div>
-                )}
-            </div>
-        </div>
+      <Table
+        columns={columns}
+        dataSource={Object.values(matrix)}
+        rowKey={(record) => record.hospital.id}
+        scroll={{ x: 'max-content', y: 600 }}
+        pagination={{ 
+          pageSize: 15,
+          showSizeChanger: true,
+          showQuickJumper: true,
+          showTotal: (total, range) => 
+            `${range[0]}-${range[1]} of ${total} hospitals`
+        }}
+        size="middle"
+        loading={loading}
+      />
     );
+  };
+
+  const clearAllFilters = () => {
+    setSelectedHospitals([]);
+    setSelectedCertifications([]);
+    setSearchTerm("");
+    setDateRange(null);
+    message.info('All filters cleared');
+  };
+
+  const stats = getComplianceStats();
+
+  if (loading) {
+    return (
+      <div style={{ padding: "24px", backgroundColor: "#f0f2f5", minHeight: "100vh" }}>
+        <Card>
+          <div style={{ textAlign: 'center', padding: '50px' }}>
+            <Spin size="large" tip="Loading certification data..." />
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{ padding: "24px", backgroundColor: "#f0f2f5", minHeight: "100vh" }}>
+        <Card>
+          <Alert 
+            message="Error Loading Data" 
+            description={error} 
+            type="error" 
+            showIcon 
+            action={
+              <Button size="small" danger onClick={fetchData}>
+                Retry
+              </Button>
+            }
+          />
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: "24px", backgroundColor: "#f0f2f5", minHeight: "100vh" }}>
+      <Card>
+        <div style={{ marginBottom: '24px' }}>
+          <Row align="middle" justify="space-between">
+            <Col>
+              <Title level={2}>Hospital Certification Comparison Matrix</Title>
+              <Text type="secondary">
+                Compare certification status across {hospitals.length} healthcare organizations
+              </Text>
+            </Col>
+            <Col>
+              <Space>
+                <Button
+                  icon={<ReloadOutlined />}
+                  onClick={refreshData}
+                  loading={refreshing}
+                >
+                  Refresh
+                </Button>
+                <Button
+                  type="primary"
+                  icon={<DownloadOutlined />}
+                  onClick={exportToExcel}
+                  disabled={!Array.isArray(filteredData) || filteredData.length === 0}
+                >
+                  Export to Excel
+                </Button>
+              </Space>
+            </Col>
+          </Row>
+        </div>
+
+        {/* Statistics Dashboard */}
+        <Row gutter={16} style={{ marginBottom: '24px' }}>
+          <Col span={6}>
+            <Card>
+              <Statistic
+                title="Total Hospitals"
+                value={stats.totalHospitals}
+                prefix={<CheckCircleOutlined />}
+              />
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card>
+              <Statistic
+                title="Total Certifications"
+                value={stats.actualCertified}
+                suffix={`/ ${stats.totalPossible}`}
+                prefix={<ClockCircleOutlined />}
+              />
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card>
+              <Statistic
+                title="Compliance Rate"
+                value={stats.complianceRate || 0}
+                suffix="%"
+                prefix={
+                  stats.complianceRate >= 80 ? <CheckCircleOutlined style={{ color: '#52c41a' }} /> 
+                  : stats.complianceRate >= 60 ? <ExclamationCircleOutlined style={{ color: '#faad14' }} />
+                  : <ExclamationCircleOutlined style={{ color: '#ff4d4f' }} />
+                }
+                valueStyle={{
+                  color: stats.complianceRate >= 80 ? '#52c41a' 
+                       : stats.complianceRate >= 60 ? '#faad14' 
+                       : '#ff4d4f'
+                }}
+              />
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card>
+              <div style={{ textAlign: 'center' }}>
+                <Progress
+                  type="circle"
+                  percent={stats.complianceRate || 0}
+                  size={80}
+                  status={
+                    stats.complianceRate === 0 && stats.totalHospitals === 0 
+                      ? 'active'  // Loading/No data state
+                      : stats.complianceRate >= 80 
+                        ? 'success'   // High compliance
+                        : stats.complianceRate >= 60 
+                          ? 'normal'    // Medium compliance
+                          : 'exception' // Low compliance
+                  }
+                  format={(percent) => stats.totalHospitals === 0 ? 'Loading...' : `${percent}%`}
+                />
+                <div style={{ marginTop: '8px', fontSize: '12px', color: '#666' }}>
+                  Overall Compliance
+                </div>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+
+        {/* Additional Stats Row */}
+        <Row gutter={16} style={{ marginBottom: '24px' }}>
+          <Col span={8}>
+            <Card>
+              <Statistic
+                title="Active Certifications"
+                value={stats.totalActive}
+                valueStyle={{ color: '#3f8600' }}
+                prefix={<CheckCircleOutlined />}
+              />
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card>
+              <Statistic
+                title="Expiring Soon"
+                value={stats.expiringSoon}
+                valueStyle={{ color: '#cf1322' }}
+                prefix={<ExclamationCircleOutlined />}
+              />
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card>
+              <Statistic
+                title="Active Rate"
+                value={stats.activeRate}
+                suffix="%"
+                valueStyle={{ color: stats.activeRate > 80 ? '#3f8600' : '#1890ff' }}
+              />
+            </Card>
+          </Col>
+        </Row>
+
+        {/* Filters */}
+        <Card 
+          style={{ marginBottom: '16px' }}
+          title={
+            <Space>
+              <FilterOutlined />
+              <span>Filters</span>
+            </Space>
+          }
+          extra={
+            <Button size="small" onClick={clearAllFilters}>
+              Clear All
+            </Button>
+          }
+        >
+          <Row gutter={16}>
+            <Col span={6}>
+              <Search
+                placeholder="Search hospitals or certifications..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{ width: '100%' }}
+                allowClear
+              />
+            </Col>
+            <Col span={6}>
+              <Select
+                mode="multiple"
+                placeholder="Filter by Hospital"
+                style={{ width: '100%' }}
+                value={selectedHospitals}
+                onChange={setSelectedHospitals}
+                allowClear
+                maxTagCount='responsive'
+              >
+                {hospitals.map(hospital => (
+                  <Option key={hospital.id} value={hospital.id}>
+                    {hospital.name}
+                  </Option>
+                ))}
+              </Select>
+            </Col>
+            <Col span={6}>
+              <Select
+                mode="multiple"
+                placeholder="Filter by Certification Type"
+                style={{ width: '100%' }}
+                value={selectedCertifications}
+                onChange={setSelectedCertifications}
+                allowClear
+                maxTagCount='responsive'
+              >
+                {[...new Set(certifications.map(cert => cert.certification_type))].sort().map(type => (
+                  <Option key={type} value={type}>
+                    {type}
+                  </Option>
+                ))}
+              </Select>
+            </Col>
+            <Col span={6}>
+              <RangePicker
+                style={{ width: '100%' }}
+                value={dateRange}
+                onChange={setDateRange}
+                placeholder={['Start Date', 'End Date']}
+              />
+            </Col>
+          </Row>
+        </Card>
+
+        {/* Certification Matrix */}
+        <Card title={`Certification Comparison Matrix (${stats.totalHospitals} hospitals)`}>
+          {(!Array.isArray(filteredData) || filteredData.length === 0) && !loading ? (
+            <div style={{ textAlign: 'center', padding: '50px' }}>
+              <Text type="secondary">No certification data found with current filters</Text>
+            </div>
+          ) : (
+            renderMatrixTable()
+          )}
+        </Card>
+
+        {/* Certification Details Modal */}
+        <Modal
+          title="Certification Details"
+          open={detailsModalVisible}
+          onCancel={() => setDetailsModalVisible(false)}
+          footer={null}
+          width={700}
+        >
+          {selectedCertDetail && (
+            <div>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Text strong>Hospital:</Text>
+                  <br />
+                  <Text>{hospitals.find(h => h.id === selectedCertDetail.hospital_id)?.name}</Text>
+                </Col>
+                <Col span={12}>
+                  <Text strong>Certification Type:</Text>
+                  <br />
+                  <Text>{selectedCertDetail.certification_type}</Text>
+                </Col>
+              </Row>
+              <br />
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Text strong>Level:</Text>
+                  <br />
+                  <Text>{selectedCertDetail.certification_level}</Text>
+                </Col>
+                <Col span={12}>
+                  <Text strong>Certificate Number:</Text>
+                  <br />
+                  <Text copyable>{selectedCertDetail.certificate_number}</Text>
+                </Col>
+              </Row>
+              <br />
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Text strong>Issued Date:</Text>
+                  <br />
+                  <Text>{dayjs(selectedCertDetail.issued_date).format('DD MMMM YYYY')}</Text>
+                </Col>
+                <Col span={12}>
+                  <Text strong>Expiry Date:</Text>
+                  <br />
+                  <Text>{dayjs(selectedCertDetail.expiry_date).format('DD MMMM YYYY')}</Text>
+                </Col>
+              </Row>
+              <br />
+              <Row gutter={16}>
+                <Col span={24}>
+                  <Text strong>Issuing Authority:</Text>
+                  <br />
+                  <Text>{selectedCertDetail.issuing_authority}</Text>
+                </Col>
+              </Row>
+              <br />
+              <Row gutter={16}>
+                <Col span={24}>
+                  <Text strong>Status:</Text>
+                  <br />
+                  {(() => {
+                    const statusInfo = getCertificationStatus(selectedCertDetail);
+                    const expiryDate = dayjs(selectedCertDetail.expiry_date);
+                    const daysUntilExpiry = expiryDate.diff(dayjs(), 'days');
+                    
+                    return (
+                      <Space>
+                        <Tag color={statusInfo.color} icon={statusInfo.icon}>
+                          {statusInfo.text}
+                        </Tag>
+                        <Text type="secondary">
+                          ({daysUntilExpiry >= 0 ? `${daysUntilExpiry} days remaining` : `Expired ${Math.abs(daysUntilExpiry)} days ago`})
+                        </Text>
+                      </Space>
+                    );
+                  })()}
+                </Col>
+              </Row>
+              {selectedCertDetail.remarks && (
+                <>
+                  <br />
+                  <Row gutter={16}>
+                    <Col span={24}>
+                      <Text strong>Remarks:</Text>
+                      <br />
+                      <Text>{selectedCertDetail.remarks}</Text>
+                    </Col>
+                  </Row>
+                </>
+              )}
+            </div>
+          )}
+        </Modal>
+      </Card>
+    </div>
+  );
 };
 
-export default CertificationMatrix;
+export default Q22_CertificationMatrix;

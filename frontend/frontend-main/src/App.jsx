@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Button, Layout, Menu } from 'antd';
 import { BankOutlined, LogoutOutlined, HomeOutlined } from '@ant-design/icons';
@@ -7,15 +7,18 @@ import './App.css';
 import ErrorBoundary from './components/ErrorBoundary';
 import LandingPage from './pages/LandingPage';
 import Q01_HospitalList from './pages/Vaishnavi/files/Q01_HospitalList';
-import Q06_StateWiseHospitalCount from './pages/Vaishnavi/files/Q06_StateWiseHospitalCount';
-import Q08_DocumentVerification from './pages/Vaishnavi/files/Q08_DocumentVerification';
-import Q24_ContactAvailability from './pages/Vaishnavi/files/Q24_ContactAvailability';
 import Q02_NabhCertifiedHospitals from './pages/Vaishnavi/files/Q02_NabhCertifiedHospitals';
 import Q04_EquipmentAvailability from './pages/Vaishnavi/files/Q04_EquipmentAvailability';
+import Q06_StateWiseHospitalCount from './pages/Vaishnavi/files/Q06_StateWiseHospitalCount';
+import Q08_DocumentVerification from './pages/Vaishnavi/files/Q08_DocumentVerification';
 import Q12_WardOccupancy from './pages/Vaishnavi/files/Q12_WardOccupancy';
-import HospitalProfileDrawer from './pages/Vaishnavi/files/shared/HospitalProfileDrawer';
-import Q20_HospitalMap from './pages/Vaishnavi/files/Q20_HospitalMap';
+import Q14_HospitalPerformance from './pages/Vaishnavi/files/Q14_HospitalPerformance';
 import Q18_BedCapacityDashboard from './pages/Vaishnavi/files/Q18_BedCapacityDashboard'; 
+import Q20_HospitalMap from './pages/Vaishnavi/files/Q20_HospitalMap';
+import Q22_CertificationMatrix from './pages/Vaishnavi/files/Q22_CertificationMatrix';
+import Q24_ContactAvailability from './pages/Vaishnavi/files/Q24_ContactAvailability';
+import HospitalProfileDrawer from './pages/Vaishnavi/files/shared/HospitalProfileDrawer';
+import testAPI from './utils/apiTest';
 
 
 
@@ -24,6 +27,11 @@ const { Header, Sider, Content } = Layout;
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+
+  // Test API connectivity on app start
+  useEffect(() => {
+    testAPI();
+  }, []);
 
   const handleLogin = () => {
     setIsAuthenticated(true);
@@ -158,18 +166,6 @@ function App() {
                       label: <Link to="/q1">Q1: Hospital List</Link>
                     },
                     {
-                      key: 'q6',
-                      label: <Link to="/q6">Q6: State Wise Hospital Count</Link>
-                    },
-                    {
-                      key: 'q8',
-                      label: <Link to="/q8">Q8: Document Verification</Link>
-                    },
-                    {
-                      key: 'q24',
-                      label: <Link to="/q24">Q24: Contact Availability</Link>
-                    },
-                    {
                       key: 'q2',
                       label: <Link to="/q2">Q2: NABH Certified Hospitals</Link>
                     },
@@ -178,24 +174,36 @@ function App() {
                       label: <Link to="/q4">Q4: Equipment Availability</Link>
                     },
                     {
+                      key: 'q6',
+                      label: <Link to="/q6">Q6: State Wise Hospital Count</Link>
+                    },
+                    {
+                      key: 'q8',
+                      label: <Link to="/q8">Q8: Document Verification</Link>
+                    },
+                    {
                       key: 'q12',
                       label: <Link to="/q12">Q12: Ward Occupancy</Link>
                     },
                     {
-                      key: 'q20',
-                      label: <Link to="/q20">Q20: Hospital Mapping</Link>
+                      key: 'q14',
+                      label: <Link to="/q14">Q14: Hospital Performance</Link>
                     },
                     {
                       key: 'q18',
                       label: <Link to="/q18">Q18: Bed Capacity</Link>
                     },
                     {
+                      key: 'q20',
+                      label: <Link to="/q20">Q20: Hospital Mapping</Link>
+                    },
+                    {
                       key: 'q22',
                       label: <Link to="/q22">Q22: Certification Matrix</Link>
                     },
                     {
-                      key: 'q14',
-                      label: <Link to="/q14">Q14: Hospital Performance</Link>
+                      key: 'q24',
+                      label: <Link to="/q24">Q24: Contact Availability</Link>
                     },
                     
                     // More questions will be added here
@@ -217,13 +225,15 @@ function App() {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/q1" element={<ErrorBoundary><Q01_HospitalList /></ErrorBoundary>} />
                 <Route path="/q2" element={<ErrorBoundary><Q02_NabhCertifiedHospitals /></ErrorBoundary>} />
+                <Route path="/q4" element={<ErrorBoundary><Q04_EquipmentAvailability /></ErrorBoundary>} />
                 <Route path="/q6" element={<ErrorBoundary><Q06_StateWiseHospitalCount /></ErrorBoundary>} />
                 <Route path="/q8" element={<ErrorBoundary><Q08_DocumentVerification /></ErrorBoundary>} />
-                <Route path="/q24" element={<ErrorBoundary><Q24_ContactAvailability /></ErrorBoundary>} />
-                <Route path="/q4" element={<ErrorBoundary><Q04_EquipmentAvailability /></ErrorBoundary>} />
                 <Route path="/q12" element={<ErrorBoundary><Q12_WardOccupancy /></ErrorBoundary>} />
-                <Route path="/q20" element={<ErrorBoundary><Q20_HospitalMap /></ErrorBoundary>} />
+                <Route path="/q14" element={<ErrorBoundary><Q14_HospitalPerformance /></ErrorBoundary>} />
                 <Route path="/q18" element={<ErrorBoundary><Q18_BedCapacityDashboard /></ErrorBoundary>} />
+                <Route path="/q20" element={<ErrorBoundary><Q20_HospitalMap /></ErrorBoundary>} />
+                <Route path="/q22" element={<ErrorBoundary><Q22_CertificationMatrix /></ErrorBoundary>} />
+                <Route path="/q24" element={<ErrorBoundary><Q24_ContactAvailability /></ErrorBoundary>} />
                 
                 {/* More routes will be added here */}
               </Routes>

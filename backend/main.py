@@ -905,6 +905,11 @@ def get_hospital_equipment():
     """Get all hospital equipment"""
     return load_json_data("hospital_equipment.json")
 
+@app.get("/hospital_metrics", tags=["Metrics"])
+def get_hospital_metrics_all():
+    """Get all hospital metrics"""
+    return load_json_data("hospital_metrics.json")
+
 @app.get("/wards_rooms", tags=["Wards"])
 def get_wards_rooms():
     """Get all ward and room data"""
