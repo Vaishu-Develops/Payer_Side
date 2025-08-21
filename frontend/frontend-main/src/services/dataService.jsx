@@ -1,5 +1,5 @@
 // Comprehensive Data Service - Fetches data from the backend API
-const API_BASE_URL = '/api';
+const API_BASE_URL = 'http://127.0.0.1:8000';
 
 class DataService {
   async handleRequest(endpoint, options = {}) {
@@ -78,8 +78,16 @@ class DataService {
     return this.handleRequest('/hospital_equipment');
   }
 
+  async getHospitalInfrastructure() {
+    return this.handleRequest('/hospital_infrastructure');
+  }
+
   async getWardsRooms() {
     return this.handleRequest('/wards_rooms');
+  }
+
+  async getHospitalMetrics() {
+    return this.handleRequest('/hospital_metrics');
   }
 
   async getBedCapacity() {

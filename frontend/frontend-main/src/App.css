@@ -76,6 +76,16 @@ ul, ol {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin-bottom: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+.ant-card .ant-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .ant-card:hover {
@@ -83,15 +93,19 @@ ul, ol {
   transition: box-shadow 0.3s ease;
 }
 
-/* Grid system fixes */
+/* Grid system fixes for equal height cards */
 .ant-row {
   margin-left: 0 !important;
   margin-right: 0 !important;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .ant-col {
   padding-left: 8px;
   padding-right: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Text alignment fixes */
@@ -127,4 +141,64 @@ ul, ol {
 [class*="-container"] .ant-card,
 [class*="-performance"] .ant-card {
   position: relative !important;
+}
+
+/* Dashboard specific styling for consistent card layout */
+.dashboard-row {
+  display: flex !important;
+  align-items: stretch !important;
+  margin-bottom: 24px;
+}
+
+.dashboard-col {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.dashboard-col .ant-card {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.dashboard-col .ant-card .ant-card-body {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Statistic cards specific styling */
+.stat-card {
+  text-align: center;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-card .ant-card-body {
+  padding: 20px 24px;
+}
+
+/* Hospital cards specific styling */
+.hospital-card {
+  min-height: 250px;
+}
+
+.hospital-card .ant-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Chart cards specific styling */
+.chart-card {
+  min-height: 400px;
+}
+
+.chart-card .ant-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
 }

@@ -372,7 +372,17 @@ const Q14_HospitalPerformance = () => {
       width: 80,
       fixed: 'left',
       render: (rank) => (
-        <Tag color={rank <= 3 ? 'gold' : rank <= 5 ? 'blue' : rank <= 10 ? 'green' : 'default'}>
+        <Tag 
+          style={{ 
+            backgroundColor: rank <= 3 ? '#fff7e6' : rank <= 5 ? '#e6f7ff' : rank <= 10 ? '#f6ffed' : '#fafafa',
+            borderColor: rank <= 3 ? '#faad14' : rank <= 5 ? '#1890ff' : rank <= 10 ? '#52c41a' : '#d9d9d9',
+            color: rank <= 3 ? '#ad6800' : rank <= 5 ? '#0050b3' : rank <= 10 ? '#237804' : '#595959',
+            fontWeight: '700',
+            fontSize: '12px',
+            padding: '2px 8px',
+            borderRadius: '6px'
+          }}
+        >
           #{rank}
         </Tag>
       ),
@@ -388,7 +398,7 @@ const Q14_HospitalPerformance = () => {
       render: (text, record) => (
         <div>
           <Text strong style={{ color: '#1890ff' }}>{text}</Text>
-          <div style={{ fontSize: '12px', color: '#666' }}>
+          <div style={{ fontSize: '12px', color: '#434343', fontWeight: '500' }}>
             {record.category} | {record.bedsOperational} beds
           </div>
         </div>
@@ -401,7 +411,21 @@ const Q14_HospitalPerformance = () => {
       key: 'doctorBedRatio',
       width: 130,
       render: (value, record) => (
-        <Tag color={record.doctorPerformance.color} style={{ fontWeight: 'bold' }}>
+        <Tag 
+          style={{ 
+            backgroundColor: record.doctorPerformance.color === '#52c41a' ? '#f6ffed' :
+                           record.doctorPerformance.color === '#1890ff' ? '#e6f7ff' :
+                           record.doctorPerformance.color === '#faad14' ? '#fffbe6' : '#fff2f0',
+            borderColor: record.doctorPerformance.color,
+            color: record.doctorPerformance.color === '#52c41a' ? '#237804' :
+                 record.doctorPerformance.color === '#1890ff' ? '#0050b3' :
+                 record.doctorPerformance.color === '#faad14' ? '#ad6800' : '#a8071a',
+            fontWeight: '700',
+            fontSize: '12px',
+            padding: '2px 8px',
+            borderRadius: '6px'
+          }}
+        >
           {value}
         </Tag>
       ),
@@ -413,7 +437,21 @@ const Q14_HospitalPerformance = () => {
       key: 'nurseBedRatio',
       width: 130,
       render: (value, record) => (
-        <Tag color={record.nursePerformance.color} style={{ fontWeight: 'bold' }}>
+        <Tag 
+          style={{ 
+            backgroundColor: record.nursePerformance.color === '#52c41a' ? '#f6ffed' :
+                           record.nursePerformance.color === '#1890ff' ? '#e6f7ff' :
+                           record.nursePerformance.color === '#faad14' ? '#fffbe6' : '#fff2f0',
+            borderColor: record.nursePerformance.color,
+            color: record.nursePerformance.color === '#52c41a' ? '#237804' :
+                 record.nursePerformance.color === '#1890ff' ? '#0050b3' :
+                 record.nursePerformance.color === '#faad14' ? '#ad6800' : '#a8071a',
+            fontWeight: '700',
+            fontSize: '12px',
+            padding: '2px 8px',
+            borderRadius: '6px'
+          }}
+        >
           {value}
         </Tag>
       ),
@@ -425,7 +463,17 @@ const Q14_HospitalPerformance = () => {
       key: 'icuDoctorRatio',
       width: 130,
       render: (value) => (
-        <Tag color="orange" style={{ fontWeight: 'bold' }}>
+        <Tag 
+          style={{ 
+            backgroundColor: '#fffbe6',
+            borderColor: '#faad14',
+            color: '#ad6800',
+            fontWeight: '700',
+            fontSize: '12px',
+            padding: '2px 8px',
+            borderRadius: '6px'
+          }}
+        >
           {value}
         </Tag>
       ),
@@ -437,7 +485,17 @@ const Q14_HospitalPerformance = () => {
       key: 'icuNurseRatio',
       width: 130,
       render: (value) => (
-        <Tag color="purple" style={{ fontWeight: 'bold' }}>
+        <Tag 
+          style={{ 
+            backgroundColor: '#f9f0ff',
+            borderColor: '#722ed1',
+            color: '#531dab',
+            fontWeight: '700',
+            fontSize: '12px',
+            padding: '2px 8px',
+            borderRadius: '6px'
+          }}
+        >
           {value}
         </Tag>
       ),
@@ -450,9 +508,9 @@ const Q14_HospitalPerformance = () => {
       render: (_, record) => (
         <div style={{ fontSize: '12px' }}>
           <div><strong>👨‍⚕️ {record.totalDoctors}</strong> Total Doctors</div>
-          <div style={{ color: '#666' }}>• {record.mciDoctors} MCI Certified</div>
-          <div style={{ color: '#666' }}>• {record.consultants} Consultants</div>
-          <div style={{ color: '#666' }}>• {record.surgeons} Surgeons</div>
+          <div style={{ color: '#434343', fontWeight: '500' }}>• {record.mciDoctors} MCI Certified</div>
+          <div style={{ color: '#434343', fontWeight: '500' }}>• {record.consultants} Consultants</div>
+          <div style={{ color: '#434343', fontWeight: '500' }}>• {record.surgeons} Surgeons</div>
         </div>
       ),
     },
@@ -463,7 +521,7 @@ const Q14_HospitalPerformance = () => {
       render: (_, record) => (
         <div style={{ fontSize: '12px' }}>
           <div><strong>👩‍⚕️ {record.totalNurses}</strong> Total Nurses</div>
-          <div style={{ color: '#666' }}>• {record.icuNurses} ICU Nurses</div>
+          <div style={{ color: '#434343', fontWeight: '500' }}>• {record.icuNurses} ICU Nurses</div>
         </div>
       ),
     },
@@ -474,7 +532,7 @@ const Q14_HospitalPerformance = () => {
       render: (_, record) => (
         <div style={{ fontSize: '12px' }}>
           <div><strong>🏥 {record.icuDoctors}</strong> ICU Doctors</div>
-          <div style={{ color: '#666' }}>MBBS/MD Qualified</div>
+          <div style={{ color: '#434343', fontWeight: '500' }}>MBBS/MD Qualified</div>
         </div>
       ),
     },
@@ -484,7 +542,7 @@ const Q14_HospitalPerformance = () => {
       key: 'lastCalculated',
       width: 120,
       render: (date) => (
-        <Text style={{ fontSize: '11px', color: '#666' }}>
+        <Text style={{ fontSize: '11px', color: '#434343', fontWeight: '500' }}>
           {date}
         </Text>
       ),
@@ -497,7 +555,7 @@ const Q14_HospitalPerformance = () => {
         <Card>
           <div style={{ textAlign: 'center', padding: '100px 50px' }}>
             <Spin size="large" />
-            <div style={{ marginTop: '16px', fontSize: '16px', color: '#666' }}>
+            <div style={{ marginTop: '16px', fontSize: '16px', color: '#434343', fontWeight: '600' }}>
               Loading hospital performance metrics...
             </div>
           </div>
@@ -698,7 +756,22 @@ const Q14_HospitalPerformance = () => {
                     showInfo={false}
                     style={{ marginBottom: '12px' }}
                   />
-                  <Tag color={getPerformanceLevel(currentMetrics.doctor_bed_ratio, benchmarks.doctor_bed_ratio).level}>
+                  <Tag 
+                    className={`ant-tag-${getPerformanceLevel(currentMetrics.doctor_bed_ratio, benchmarks.doctor_bed_ratio).level}`}
+                    style={{ 
+                      backgroundColor: getPerformanceLevel(currentMetrics.doctor_bed_ratio, benchmarks.doctor_bed_ratio).level === 'excellent' ? '#f6ffed' :
+                                     getPerformanceLevel(currentMetrics.doctor_bed_ratio, benchmarks.doctor_bed_ratio).level === 'good' ? '#e6f7ff' :
+                                     getPerformanceLevel(currentMetrics.doctor_bed_ratio, benchmarks.doctor_bed_ratio).level === 'acceptable' ? '#fffbe6' : '#fff2f0',
+                      borderColor: getPerformanceLevel(currentMetrics.doctor_bed_ratio, benchmarks.doctor_bed_ratio).color,
+                      color: getPerformanceLevel(currentMetrics.doctor_bed_ratio, benchmarks.doctor_bed_ratio).level === 'excellent' ? '#237804' :
+                           getPerformanceLevel(currentMetrics.doctor_bed_ratio, benchmarks.doctor_bed_ratio).level === 'good' ? '#0050b3' :
+                           getPerformanceLevel(currentMetrics.doctor_bed_ratio, benchmarks.doctor_bed_ratio).level === 'acceptable' ? '#ad6800' : '#a8071a',
+                      fontWeight: '700',
+                      fontSize: '12px',
+                      padding: '2px 8px',
+                      borderRadius: '6px'
+                    }}
+                  >
                     {getPerformanceLevel(currentMetrics.doctor_bed_ratio, benchmarks.doctor_bed_ratio).label}
                   </Tag>
                 </div>
@@ -720,7 +793,22 @@ const Q14_HospitalPerformance = () => {
                     showInfo={false}
                     style={{ marginBottom: '12px' }}
                   />
-                  <Tag color={getPerformanceLevel(currentMetrics.nurse_bed_ratio, benchmarks.nurse_bed_ratio).level}>
+                  <Tag 
+                    className={`ant-tag-${getPerformanceLevel(currentMetrics.nurse_bed_ratio, benchmarks.nurse_bed_ratio).level}`}
+                    style={{ 
+                      backgroundColor: getPerformanceLevel(currentMetrics.nurse_bed_ratio, benchmarks.nurse_bed_ratio).level === 'excellent' ? '#f6ffed' :
+                                     getPerformanceLevel(currentMetrics.nurse_bed_ratio, benchmarks.nurse_bed_ratio).level === 'good' ? '#e6f7ff' :
+                                     getPerformanceLevel(currentMetrics.nurse_bed_ratio, benchmarks.nurse_bed_ratio).level === 'acceptable' ? '#fffbe6' : '#fff2f0',
+                      borderColor: getPerformanceLevel(currentMetrics.nurse_bed_ratio, benchmarks.nurse_bed_ratio).color,
+                      color: getPerformanceLevel(currentMetrics.nurse_bed_ratio, benchmarks.nurse_bed_ratio).level === 'excellent' ? '#237804' :
+                           getPerformanceLevel(currentMetrics.nurse_bed_ratio, benchmarks.nurse_bed_ratio).level === 'good' ? '#0050b3' :
+                           getPerformanceLevel(currentMetrics.nurse_bed_ratio, benchmarks.nurse_bed_ratio).level === 'acceptable' ? '#ad6800' : '#a8071a',
+                      fontWeight: '700',
+                      fontSize: '12px',
+                      padding: '2px 8px',
+                      borderRadius: '6px'
+                    }}
+                  >
                     {getPerformanceLevel(currentMetrics.nurse_bed_ratio, benchmarks.nurse_bed_ratio).label}
                   </Tag>
                 </div>
@@ -742,7 +830,22 @@ const Q14_HospitalPerformance = () => {
                     showInfo={false}
                     style={{ marginBottom: '12px' }}
                   />
-                  <Tag color={getPerformanceLevel(currentMetrics.icu_doctor_bed_ratio, benchmarks.icu_doctor_bed_ratio).level}>
+                  <Tag 
+                    className={`ant-tag-${getPerformanceLevel(currentMetrics.icu_doctor_bed_ratio, benchmarks.icu_doctor_bed_ratio).level}`}
+                    style={{ 
+                      backgroundColor: getPerformanceLevel(currentMetrics.icu_doctor_bed_ratio, benchmarks.icu_doctor_bed_ratio).level === 'excellent' ? '#f6ffed' :
+                                     getPerformanceLevel(currentMetrics.icu_doctor_bed_ratio, benchmarks.icu_doctor_bed_ratio).level === 'good' ? '#e6f7ff' :
+                                     getPerformanceLevel(currentMetrics.icu_doctor_bed_ratio, benchmarks.icu_doctor_bed_ratio).level === 'acceptable' ? '#fffbe6' : '#fff2f0',
+                      borderColor: getPerformanceLevel(currentMetrics.icu_doctor_bed_ratio, benchmarks.icu_doctor_bed_ratio).color,
+                      color: getPerformanceLevel(currentMetrics.icu_doctor_bed_ratio, benchmarks.icu_doctor_bed_ratio).level === 'excellent' ? '#237804' :
+                           getPerformanceLevel(currentMetrics.icu_doctor_bed_ratio, benchmarks.icu_doctor_bed_ratio).level === 'good' ? '#0050b3' :
+                           getPerformanceLevel(currentMetrics.icu_doctor_bed_ratio, benchmarks.icu_doctor_bed_ratio).level === 'acceptable' ? '#ad6800' : '#a8071a',
+                      fontWeight: '700',
+                      fontSize: '12px',
+                      padding: '2px 8px',
+                      borderRadius: '6px'
+                    }}
+                  >
                     {getPerformanceLevel(currentMetrics.icu_doctor_bed_ratio, benchmarks.icu_doctor_bed_ratio).label}
                   </Tag>
                 </div>
@@ -764,7 +867,22 @@ const Q14_HospitalPerformance = () => {
                     showInfo={false}
                     style={{ marginBottom: '12px' }}
                   />
-                  <Tag color={getPerformanceLevel(currentMetrics.icu_nurse_bed_ratio, benchmarks.icu_nurse_bed_ratio).level}>
+                  <Tag 
+                    className={`ant-tag-${getPerformanceLevel(currentMetrics.icu_nurse_bed_ratio, benchmarks.icu_nurse_bed_ratio).level}`}
+                    style={{ 
+                      backgroundColor: getPerformanceLevel(currentMetrics.icu_nurse_bed_ratio, benchmarks.icu_nurse_bed_ratio).level === 'excellent' ? '#f6ffed' :
+                                     getPerformanceLevel(currentMetrics.icu_nurse_bed_ratio, benchmarks.icu_nurse_bed_ratio).level === 'good' ? '#e6f7ff' :
+                                     getPerformanceLevel(currentMetrics.icu_nurse_bed_ratio, benchmarks.icu_nurse_bed_ratio).level === 'acceptable' ? '#fffbe6' : '#fff2f0',
+                      borderColor: getPerformanceLevel(currentMetrics.icu_nurse_bed_ratio, benchmarks.icu_nurse_bed_ratio).color,
+                      color: getPerformanceLevel(currentMetrics.icu_nurse_bed_ratio, benchmarks.icu_nurse_bed_ratio).level === 'excellent' ? '#237804' :
+                           getPerformanceLevel(currentMetrics.icu_nurse_bed_ratio, benchmarks.icu_nurse_bed_ratio).level === 'good' ? '#0050b3' :
+                           getPerformanceLevel(currentMetrics.icu_nurse_bed_ratio, benchmarks.icu_nurse_bed_ratio).level === 'acceptable' ? '#ad6800' : '#a8071a',
+                      fontWeight: '700',
+                      fontSize: '12px',
+                      padding: '2px 8px',
+                      borderRadius: '6px'
+                    }}
+                  >
                     {getPerformanceLevel(currentMetrics.icu_nurse_bed_ratio, benchmarks.icu_nurse_bed_ratio).label}
                   </Tag>
                 </div>
@@ -807,9 +925,10 @@ const Q14_HospitalPerformance = () => {
                             drawBorder: false,
                           },
                           ticks: {
-                            color: '#666',
+                            color: '#434343',
                             font: {
-                              size: 12
+                              size: 12,
+                              weight: '500'
                             }
                           }
                         },
@@ -819,9 +938,10 @@ const Q14_HospitalPerformance = () => {
                             drawBorder: false,
                           },
                           ticks: {
-                            color: '#666',
+                            color: '#434343',
                             font: {
-                              size: 12
+                              size: 12,
+                              weight: '500'
                             }
                           }
                         },

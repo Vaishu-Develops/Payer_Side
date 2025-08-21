@@ -13,12 +13,18 @@ import Q06_StateWiseHospitalCount from './pages/Vaishnavi/files/Q06_StateWiseHos
 import Q08_DocumentVerification from './pages/Vaishnavi/files/Q08_DocumentVerification';
 import Q12_WardOccupancy from './pages/Vaishnavi/files/Q12_WardOccupancy';
 import Q14_HospitalPerformance from './pages/Vaishnavi/files/Q14_HospitalPerformance';
+import Q16_HospitalRiskDashboard from './pages/Vaishnavi/files/Q16_HospitalRiskDashboard';
 import Q18_BedCapacityDashboard from './pages/Vaishnavi/files/Q18_BedCapacityDashboard'; 
 import Q20_HospitalMap from './pages/Vaishnavi/files/Q20_HospitalMap';
 import Q22_CertificationMatrix from './pages/Vaishnavi/files/Q22_CertificationMatrix';
 import Q24_ContactAvailability from './pages/Vaishnavi/files/Q24_ContactAvailability';
+import Q26_StaffingAdequacy from './pages/Vaishnavi/files/Q26_StaffingAdequacy';
 import HospitalProfileDrawer from './pages/Vaishnavi/files/shared/HospitalProfileDrawer';
 import testAPI from './utils/apiTest';
+import Q01_HospitalTypeDistribution from './pages/Vaishnavi/files/Q01_HospitalTypeDistribution';
+import Q03_EmergencyContactAvailability from './pages/Vaishnavi/files/Q03_EmergencyContactAvailability';
+import Q05_HospitalInfrastructureScoring from './pages/Vaishnavi/files/Q05_HospitalInfrastructureScoring';
+
 
 
 
@@ -205,7 +211,27 @@ function App() {
                       key: 'q24',
                       label: <Link to="/q24">Q24: Contact Availability</Link>
                     },
-                    
+                    {
+                      key: 'q16',
+                      label: <Link to="/q16">Q16: Hospital Risk Dashboard</Link>
+                    },
+                    {
+                      key: 'q26',
+                      label: <Link to="/q26">Q26: Staffing Adequacy</Link>
+                    },
+                    {
+                      key: 'q01',
+                      label: <Link to="/q01">Q01: Hospital Type Distribution</Link>
+                    },
+                    {
+                      key: 'q03',
+                      label: <Link to="/q03">Q03: Emergency Contact Availability</Link>
+                    },
+                    {
+                      key: 'q05',
+                      label: <Link to="/q05">Q05: Hospital Infrastructure Scoring</Link>
+                    }
+
                     // More questions will be added here
                   ]
                 }
@@ -234,7 +260,11 @@ function App() {
                 <Route path="/q20" element={<ErrorBoundary><Q20_HospitalMap /></ErrorBoundary>} />
                 <Route path="/q22" element={<ErrorBoundary><Q22_CertificationMatrix /></ErrorBoundary>} />
                 <Route path="/q24" element={<ErrorBoundary><Q24_ContactAvailability /></ErrorBoundary>} />
-                
+                <Route path="/q16" element={<ErrorBoundary><Q16_HospitalRiskDashboard /></ErrorBoundary>} />
+                <Route path="/q26" element={<ErrorBoundary><Q26_StaffingAdequacy /></ErrorBoundary>} />
+                <Route path="/q01" element={<ErrorBoundary><Q01_HospitalTypeDistribution /></ErrorBoundary>} />
+                <Route path="/q03" element={<ErrorBoundary><Q03_EmergencyContactAvailability /></ErrorBoundary>} />
+                <Route path="/q05" element={<ErrorBoundary><Q05_HospitalInfrastructureScoring /></ErrorBoundary>} />
                 {/* More routes will be added here */}
               </Routes>
             </ErrorBoundary>

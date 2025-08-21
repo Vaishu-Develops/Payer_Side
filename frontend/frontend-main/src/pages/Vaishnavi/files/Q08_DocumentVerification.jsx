@@ -53,7 +53,7 @@ const DocumentVerification = () => {
       </Row>
 
       <div>
-        {(stats.hospitals || []).map(hospital => {
+        {stats.hospitals.map(hospital => {
           const completion = calculateCompletion(hospital);
           const status = getStatusBadge(completion);
           
@@ -63,47 +63,15 @@ const DocumentVerification = () => {
               <Progress 
                 percent={completion} 
                 status={completion === 100 ? 'success' : 'active'} 
+                strokeColor={status.color === 'green' ? '#52c41a' : status.color === 'orange' ? '#faad14' : '#f5222d'}
               />
               <Badge 
-                status={status.status} 
+                status={status.color === 'green' ? 'success' : status.color === 'orange' ? 'warning' : 'error'} 
                 text={`${status.text} (${completion}%)`}
               />
-              
-              {/* Document Details */}
-              <div style={{ marginTop: '16px' }}>
-                <Row gutter={[8, 8]}>
-                  {hospital.documents && Object.entries(hospital.documents).map(([docType, docInfo]) => (
-                    <Col key={docType} span={6}>
-                      <div style={{ 
-                        padding: '8px', 
-                        border: '1px solid #d9d9d9', 
-                        borderRadius: '4px',
-                        textAlign: 'center'
-                      }}>
-                        <div style={{ fontSize: '12px', marginBottom: '4px' }}>
-                          {docType.charAt(0).toUpperCase() + docType.slice(1)}
-                        </div>
-                        <Badge 
-                          status={docInfo.status === 'verified' ? 'success' : 
-                                 docInfo.status === 'pending' ? 'processing' : 'error'} 
-                          text={docInfo.status}
-                        />
-                      </div>
-                    </Col>
-                  ))}
-                </Row>
-              </div>
             </Card>
           );
         })}
-        
-        {(!stats.hospitals || stats.hospitals.length === 0) && (
-          <Card>
-            <div style={{ textAlign: 'center', padding: '40px' }}>
-              <Text type="secondary">No hospital document data available</Text>
-            </div>
-          </Card>
-        )}
       </div>
     </div>
   );

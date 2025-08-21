@@ -9,9 +9,6 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
-# Import document routes
-from document_routes import register_document_routes
-
 # Initialize FastAPI app
 app = FastAPI(
     title="Hospital Mock API for Payer Dashboard",
@@ -39,48 +36,41 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Data storage
-data_cache = {}
-
 def load_json_data(filename: str) -> Any:
-    """Load JSON data from file with caching and structure normalization"""
-    if filename not in data_cache:
-        file_path = os.path.join("data", filename)
-        try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
+    """Load JSON data from file without caching and with structure normalization"""
+    file_path = os.path.join("data", filename)
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            
+            # Normalize data structure by extracting the list from the top-level key
+            if isinstance(data, dict):
+                # Common top-level keys that hold a list of items
+                for key in ["hospitals", "documents", "certifications", "users", "contacts", "equipment", "specialties", "wards", "rooms", "metrics"]:
+                    if key in data and isinstance(data[key], list):
+                        print(f"✅ Loaded {filename} and extracted list from '{key}' key")
+                        return data[key]
                 
-                # Normalize data structure by extracting the list from the top-level key
-                if isinstance(data, dict):
-                    # Common top-level keys that hold a list of items
-                    for key in ["hospitals", "documents", "certifications", "users", "contacts", "equipment", "specialties", "wards", "rooms", "metrics"]:
-                        if key in data and isinstance(data[key], list):
-                            print(f"✅ Loaded {filename} and extracted list from '{key}' key")
-                            data_cache[filename] = data[key]
-                            return data_cache[filename]
-                    
-                    # If no common list key is found, cache the dictionary as is
-                    print(f"✅ Loaded {filename} with custom dictionary structure")
-                    data_cache[filename] = data
-                
-                elif isinstance(data, list):
-                    print(f"✅ Loaded {filename} with list structure: {len(data)} items")
-                    data_cache[filename] = data
-                else:
-                    print(f"⚠️ Unexpected data type in {filename}: {type(data)}")
-                    data_cache[filename] = data
+                # If no common list key is found, return the dictionary as is
+                print(f"✅ Loaded {filename} with custom dictionary structure")
+                return data
+            
+            elif isinstance(data, list):
+                print(f"✅ Loaded {filename} with list structure: {len(data)} items")
+                return data
+            else:
+                print(f"⚠️ Unexpected data type in {filename}: {type(data)}")
+                return data
 
-        except FileNotFoundError:
-            print(f"❌ File not found: {filename}")
-            raise HTTPException(status_code=404, detail=f"Data file {filename} not found")
-        except json.JSONDecodeError as e:
-            print(f"❌ JSON decode error in {filename}: {e}")
-            raise HTTPException(status_code=500, detail=f"Invalid JSON in {filename}")
-        except Exception as e:
-            print(f"❌ Unexpected error loading {filename}: {e}")
-            raise HTTPException(status_code=500, detail=f"Error loading {filename}")
-    
-    return data_cache[filename]
+    except FileNotFoundError:
+        print(f"❌ File not found: {filename}")
+        raise HTTPException(status_code=404, detail=f"Data file {filename} not found")
+    except json.JSONDecodeError as e:
+        print(f"❌ JSON decode error in {filename}: {e}")
+        raise HTTPException(status_code=500, detail=f"Invalid JSON in {filename}")
+    except Exception as e:
+        print(f"❌ Unexpected error loading {filename}: {e}")
+        raise HTTPException(status_code=500, detail=f"Error loading {filename}")
 
 def get_list_from_data(data: Any) -> List[Dict]:
     """Helper to ensure we get a list from loaded JSON data"""
@@ -115,11 +105,7 @@ def get_all_hospitals(
     min_beds: Optional[int] = Query(None, description="Minimum bed count")
 ):
     """Get all hospitals with optional filtering"""
-    # Clear cache to ensure fresh data
-    if "hospitals.json" in data_cache:
-        del data_cache["hospitals.json"]
-    if "hospital_addresses.json" in data_cache:
-        del data_cache["hospital_addresses.json"]
+    
     
     hospitals = load_json_data("hospitals.json")
     addresses = load_json_data("hospital_addresses.json")
@@ -898,25 +884,43 @@ def get_hospital_contacts():
 @app.get("/hospital_certifications", tags=["Certifications"])
 def get_hospital_certifications():
     """Get all hospital certifications"""
-    return load_json_data("hospital_certifications.json")
+    file_path = os.path.join("data", "hospital_certifications.json")
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Data file not found")
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=500, detail="Invalid JSON")
 
 @app.get("/hospital_equipment", tags=["Equipment"])
 def get_hospital_equipment():
     """Get all hospital equipment"""
     return load_json_data("hospital_equipment.json")
 
+@app.get("/hospital_infrastructure", tags=["Infrastructure"])
+def get_hospital_infrastructure_all():
+    """Get all hospital infrastructure data"""
+    return load_json_data("hospital_infrastructure.json")
+
 @app.get("/hospital_metrics", tags=["Metrics"])
 def get_hospital_metrics_all():
     """Get all hospital metrics"""
-    return load_json_data("hospital_metrics.json")
+    file_path = os.path.join("data", "hospital_metrics.json")
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Data file not found")
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=500, detail="Invalid JSON")
 
 @app.get("/wards_rooms", tags=["Wards"])
 def get_wards_rooms():
     """Get all ward and room data"""
     return load_json_data("wards_rooms.json")
-
-# Register document routes with the app
-register_document_routes(app)
 
 if __name__ == "__main__":
     import uvicorn

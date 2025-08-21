@@ -1,0 +1,53 @@
+.hospital-type-dashboard {
+  padding: 24px;
+  background-color: #f0f2f5;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.summary-stats .ant-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+  border-radius: 8px;
+}
+
+.summary-stats .ant-statistic-title {
+  font-size: 16px;
+  color: #595959;
+}
+
+.summary-stats .ant-statistic-content {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.custom-tooltip {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.custom-tooltip .label {
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.custom-tooltip .desc {
+  margin: 5px 0 0;
+  color: #666;
+}
+
+/* Ensure recharts text is visible and well-styled */
+.recharts-legend-item-text,
+.recharts-text.recharts-label,
+.recharts-cartesian-axis-tick-value {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-size: 13px;
+}

@@ -14,7 +14,7 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    include: ['leaflet', 'react-leaflet']
+    include: ['leaflet', 'react-leaflet', '@ant-design/icons']
   },
   define: {
     global: 'globalThis'
