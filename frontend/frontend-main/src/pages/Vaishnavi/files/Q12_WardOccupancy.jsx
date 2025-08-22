@@ -42,7 +42,7 @@ import {
   TeamOutlined
 } from '@ant-design/icons';
 import { useWardData } from '../../../hooks/useWardData';
-import './Q12_WardOccupancy.css';
+import './styles/Q12_WardOccupancy.css';
 
 const { Title, Text, Paragraph } = Typography;
 const { Option } = Select;

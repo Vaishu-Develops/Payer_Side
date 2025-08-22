@@ -1,6 +1,6 @@
 // src/pages/Vaishnavi files/Q14_HospitalPerformance.jsx
 import React, { useState, useEffect, useCallback } from 'react';
-import './Q14_HospitalPerformance.css';
+import './styles/Q14_HospitalPerformance.css';
 import { 
   Card, 
   Spin, 

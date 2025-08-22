@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, BarChart, Ba
 import { HomeOutlined, BankOutlined } from '@ant-design/icons';
 import { fetchHospitalData } from '../../../services/hospitalTypeService';
 import { processHospitalDistribution } from '../../../utils/hospitalTypeUtils';
-import './Q01_HospitalTypeDistribution.css';
+import './styles/Q01_HospitalTypeDistribution.css';
 
 const { Title } = Typography;
 
@@ -84,24 +84,24 @@ const Q01_HospitalTypeDistribution = () => {
 
   return (
     <div className="hospital-type-dashboard">
-      <Title level={2} style={{ marginBottom: 24 }}>Hospital Type Distribution Analysis</Title>
+      <Title level={2} className="page-title">Hospital Type Distribution Analysis</Title>
       
       <Row gutter={[24, 24]} className="summary-stats">
         <Col xs={24} sm={12}>
-          <Card>
+          <Card className="stats-card">
             <Statistic title="Total Hospitals" value={summaryStats.totalHospitals} prefix={<HomeOutlined />} />
           </Card>
         </Col>
         <Col xs={24} sm={12}>
-          <Card>
+          <Card className="stats-card">
             <Statistic title="Total Operational Beds" value={summaryStats.totalBeds.toLocaleString()} prefix={<BankOutlined />} />
           </Card>
         </Col>
       </Row>
 
-      <Row gutter={[24, 24]} style={{ marginTop: 24 }}>
+      <Row gutter={[24, 24]} className="chart-row">
         <Col xs={24} lg={12}>
-          <Card title="Distribution by Hospital Count">
+          <Card title="Distribution by Hospital Count" className="chart-card">
             <ResponsiveContainer width="100%" height={400}>
               <PieChart>
                 <Pie data={chartData} dataKey="hospitalCount" nameKey="name" cx="50%" cy="50%" outerRadius={150} fill="#8884d8" label>
@@ -116,7 +116,7 @@ const Q01_HospitalTypeDistribution = () => {
           </Card>
         </Col>
         <Col xs={24} lg={12}>
-          <Card title="Distribution by Bed Capacity">
+          <Card title="Distribution by Bed Capacity" className="chart-card">
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={chartData} layout="vertical" margin={{ top: 20, right: 30, left: 40, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" />

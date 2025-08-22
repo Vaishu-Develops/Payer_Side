@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Table, Tag, Typography, Spin, Progress } from 'antd';
 import { CheckOutlined, CloseOutlined, PhoneOutlined, TeamOutlined, AlertOutlined } from '@ant-design/icons';
 import useContactAnalysis from '../../../hooks/useContactAnalysis';
-import './Q24_ContactAvailability.css';
+import './styles/Q24_ContactAvailability.css';
 
 const { Title, Text } = Typography;
 

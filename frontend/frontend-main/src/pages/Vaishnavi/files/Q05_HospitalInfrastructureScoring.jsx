@@ -3,7 +3,7 @@ import { Card, Col, Row, Spin, Alert, Typography, Progress, Tag, Empty } from 'a
 import { HddOutlined, HeartOutlined, ToolOutlined, RocketOutlined } from '@ant-design/icons';
 import { fetchInfrastructureData } from '../../../services/infrastructureService';
 import { calculateInfrastructureScore } from '../../../utils/infrastructureUtils';
-import './Q05_HospitalInfrastructureScoring.css';
+import './styles/Q05_HospitalInfrastructureScoring.css';
 
 const { Title, Text } = Typography;
 

@@ -1,0 +1,244 @@
+/* Q02_NabhCertifiedHospitals.css */
+
+.nabh-hospitals-container {
+  padding: 24px;
+}
+
+.nabh-hospitals-header {
+  margin-bottom: 24px;
+}
+
+.nabh-hospitals-filters {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nabh-hospitals-grid {
+  min-height: 400px;
+}
+
+.nabh-hospitals-grid .ant-col {
+  margin-bottom: 16px !important;
+  display: flex !important;
+}
+
+.nabh-hospitals-grid .ant-col > * {
+  width: 100% !important;
+}
+
+/* More specific targeting for the cards within this component */
+.nabh-hospitals-container .ant-card.hospital-certification-card {
+  height: 200px !important;
+  min-height: 200px !important; /* Override global min-height */
+  max-height: 200px !important; /* Add max-height constraint */
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  margin-bottom: 0 !important; /* Override Bootstrap/index.css */
+}
+
+.nabh-hospitals-container .ant-card.hospital-certification-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important; /* Override Q18 hover */
+  transform: translateY(-2px);
+}
+
+/* Override global card body styles */
+.nabh-hospitals-container .ant-card.hospital-certification-card .ant-card-body {
+  height: 152px !important;
+  max-height: 152px !important;
+  min-height: 152px !important;
+  flex: none !important; /* Override global flex: 1 */
+  padding: 12px !important; /* Override any global padding */
+}
+
+/* Hospital Certification Card Styles */
+.hospital-certification-card {
+  height: 200px !important; /* Reduced height significantly */
+  min-height: 200px !important;
+  max-height: 200px !important;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-sizing: border-box !important;
+}
+
+.hospital-certification-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.hospital-certification-card .ant-card-body {
+  padding: 12px !important; /* Further reduced padding */
+  height: 152px !important; /* Fixed height: 200px - 48px actions */
+  max-height: 152px !important;
+  min-height: 152px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.hospital-certification-card .ant-card-meta {
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 0 !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+.hospital-certification-card .ant-card-meta-title {
+  margin-bottom: 6px !important; /* Further reduced margin */
+  font-size: 14px !important; /* Smaller font */
+  font-weight: 600;
+  color: #1890ff;
+  line-height: 1.2 !important; /* Tighter line height */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 18px !important; /* Fixed height */
+}
+
+.hospital-certification-card .ant-card-meta-description {
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important; /* Further reduced gap */
+  margin: 0 !important;
+  overflow: hidden !important;
+  height: calc(100% - 24px) !important; /* Remaining space after title */
+}
+
+.hospital-certification-card .certification-tags {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important; /* Minimal gap between tags */
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.hospital-certification-card .ant-tag {
+  margin: 0 !important;
+  font-size: 10px !important; /* Even smaller font */
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding: 1px 4px !important; /* Minimal padding */
+  line-height: 1.1 !important;
+  height: 18px !important; /* Fixed height */
+}
+
+.hospital-certification-card .bed-info {
+  color: #666;
+  font-size: 11px !important; /* Even smaller font */
+  display: flex;
+  align-items: center;
+  margin-top: auto !important; /* Push to bottom */
+  padding-top: 2px;
+  flex-shrink: 0 !important;
+  height: 16px !important; /* Fixed height */
+}
+
+.hospital-certification-card .ant-card-actions {
+  border-top: 1px solid #f0f0f0;
+  background: #fafafa;
+  padding: 0 !important;
+  height: 48px !important; /* Fixed height */
+  min-height: 48px !important;
+  max-height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.hospital-certification-card .ant-card-actions li {
+  margin: 0 !important;
+  width: 100%;
+  text-align: center;
+  height: 48px !important;
+  line-height: 48px !important;
+}
+
+.hospital-certification-card .ant-card-actions .ant-btn {
+  border: none !important;
+  height: 48px !important; /* Match actions height */
+  width: 100% !important;
+  font-weight: 500;
+  color: #1890ff;
+  background: transparent !important;
+  transition: all 0.2s ease;
+  font-size: 12px !important; /* Smaller button text */
+  box-sizing: border-box !important;
+}
+
+.hospital-certification-card .ant-card-actions .ant-btn:hover {
+  background: #e6f7ff;
+  color: #0050b3;
+}
+
+/* Loading and Empty States */
+.nabh-loading {
+  text-align: center;
+  padding: 50px;
+}
+
+.nabh-loading .ant-spin-nested-loading {
+  padding: 40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hospital-certification-card {
+    height: 260px !important;
+  }
+  
+  .hospital-certification-card .ant-card-body {
+    padding: 16px !important;
+  }
+  
+  .hospital-certification-card .ant-card-meta-title {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .nabh-hospitals-container {
+    padding: 16px;
+  }
+  
+  .hospital-certification-card {
+    height: 240px !important;
+  }
+  
+  .hospital-certification-card .ant-card-body {
+    padding: 14px !important;
+  }
+}
+
+/* HIGHEST SPECIFICITY OVERRIDES - Place at end to ensure they take precedence */
+.nabh-hospitals-container .nabh-hospitals-grid .ant-col .ant-card.hospital-certification-card {
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
+  transition: all 0.3s ease !important;
+}
+
+.nabh-hospitals-container .nabh-hospitals-grid .ant-col .ant-card.hospital-certification-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  transform: translateY(-2px) !important;
+}
+
+.nabh-hospitals-container .nabh-hospitals-grid .ant-col .ant-card.hospital-certification-card .ant-card-body {
+  height: 152px !important;
+  max-height: 152px !important;
+  min-height: 152px !important;
+  padding: 12px !important;
+  flex: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
