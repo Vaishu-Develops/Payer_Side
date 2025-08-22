@@ -90,6 +90,14 @@ class DataService {
     return this.handleRequest('/hospital_metrics');
   }
 
+  async getMedicalSpecialties() {
+    return this.handleRequest('/medical_specialties');
+  }
+
+  async getDoctors() {
+    return this.handleRequest('/doctors');
+  }
+
   async getBedCapacity() {
     // This endpoint doesn't seem to exist in the backend,
     // so we will mock it for now. A proper backend endpoint should be created.

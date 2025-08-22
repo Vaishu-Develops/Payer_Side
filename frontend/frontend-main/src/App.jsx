@@ -24,7 +24,8 @@ import testAPI from './utils/apiTest';
 import Q01_HospitalTypeDistribution from './pages/Vaishnavi/files/Q01_HospitalTypeDistribution';
 import Q03_EmergencyContactAvailability from './pages/Vaishnavi/files/Q03_EmergencyContactAvailability';
 import Q05_HospitalInfrastructureScoring from './pages/Vaishnavi/files/Q05_HospitalInfrastructureScoring';
-
+import Q07_DoctorSpecialtyDistribution from './pages/Vaishnavi/files/Q07_DoctorSpecialtyDistribution';
+import Q09_HospitalCapabilityAssessment from './pages/Vaishnavi/files/Q09_HospitalCapabilityAssessment';
 
 
 
@@ -230,7 +231,15 @@ function App() {
                     {
                       key: 'q05',
                       label: <Link to="/q05">Q05: Hospital Infrastructure Scoring</Link>
-                    }
+                    },
+                    {
+                      key: 'q07',
+                      label: <Link to="/q07">Q07: Doctor Specialty Distribution</Link>
+                    },
+                    {
+                      key: 'q09',
+                      label: <Link to="/q09">Q09: Hospital Capability Assessment</Link>
+                    },
 
                     // More questions will be added here
                   ]
@@ -265,6 +274,8 @@ function App() {
                 <Route path="/q01" element={<ErrorBoundary><Q01_HospitalTypeDistribution /></ErrorBoundary>} />
                 <Route path="/q03" element={<ErrorBoundary><Q03_EmergencyContactAvailability /></ErrorBoundary>} />
                 <Route path="/q05" element={<ErrorBoundary><Q05_HospitalInfrastructureScoring /></ErrorBoundary>} />
+                <Route path="/q07" element={<ErrorBoundary><Q07_DoctorSpecialtyDistribution /></ErrorBoundary>} />
+                <Route path="/q09" element={<ErrorBoundary><Q09_HospitalCapabilityAssessment /></ErrorBoundary>} />
                 {/* More routes will be added here */}
               </Routes>
             </ErrorBoundary>
