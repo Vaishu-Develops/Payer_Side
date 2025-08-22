@@ -19,17 +19,17 @@ const HospitalCertificationCard = ({ hospital }) => {
     <>
       <Card
         hoverable
-        style={{ height: '100%' }}
+        className="hospital-certification-card"
         actions={[
-          <Button type="text" key="profile" style={{ color: '#00529B' }} onClick={handleViewProfile}>
+          <Button type="text" key="profile" onClick={handleViewProfile}>
             View Profile <RightOutlined />
           </Button>,
         ]}
       >
         <Card.Meta
-          title={<Title level={5}>{hospitalName}</Title>}
+          title={hospitalName}
           description={
-            <Space direction="vertical" style={{ width: '100%', marginTop: '12px' }}>
+            <div className="certification-tags">
               <Tag icon={<SafetyCertificateOutlined />} color="blue">
                 {level}
               </Tag>
@@ -37,12 +37,11 @@ const HospitalCertificationCard = ({ hospital }) => {
                 {statusInfo.text}
                 {statusInfo.daysRemaining >= 0 && ` (${statusInfo.daysRemaining} days left)`}
               </Tag>
-              <Text type="secondary">
-                {/* CORRECTED LINE: Using the new icon here */}
+              <div className="bed-info">
                 <ApartmentOutlined style={{ marginRight: 8 }} />
                 {beds} Operational Beds
-              </Text>
-            </Space>
+              </div>
+            </div>
           }
         />
       </Card>

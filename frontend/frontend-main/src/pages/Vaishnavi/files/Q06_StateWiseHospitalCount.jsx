@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { Card, Typography, Row, Col, Radio, Select, Table, Spin, Alert } from 'antd';
 import { BarChartOutlined, PieChartOutlined, SortAscendingOutlined, SortDescendingOutlined } from '@ant-design/icons';
+import './styles/Q06_StateWiseHospitalCount.css';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -76,45 +77,49 @@ const Q06_StateWiseHospitalCount = () => {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
 
   if (loading) return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '300px' }}>
-      <Spin size="large" />
+    <div className="state-wise-dashboard">
+      <div className="loading-container">
+        <Spin size="large" />
+      </div>
     </div>
   );
   
   if (error) return (
-    <div style={{ padding: '20px' }}>
-      <Alert message="Error" description={error} type="error" showIcon />
+    <div className="state-wise-dashboard">
+      <div className="error-container">
+        <Alert message="Error" description={error} type="error" showIcon />
+      </div>
     </div>
   );
 
   return (
-    <div style={{ padding: '20px' }}>
-      <Title level={2}>State-wise Hospital Distribution</Title>
+    <div className="state-wise-dashboard">
+      <Title level={2} className="page-title">State-wise Hospital Distribution</Title>
       
       {/* KPI Cards */}
-      <Row gutter={[16, 16]} style={{ marginBottom: '20px' }}>
+      <Row gutter={[16, 16]} className="kpi-cards-row">
         <Col xs={24} md={8}>
-          <Card>
-            <Text type="secondary">Total Hospitals</Text>
-            <Title level={3} style={{ margin: '8px 0 0 0' }}>{totalHospitals}</Title>
+          <Card className="kpi-card">
+            <Text className="kpi-secondary-text">Total Hospitals</Text>
+            <Title level={3} className="kpi-primary-value">{totalHospitals}</Title>
           </Card>
         </Col>
         <Col xs={24} md={8}>
-          <Card>
-            <Text type="secondary">States Covered</Text>
-            <Title level={3} style={{ margin: '8px 0 0 0' }}>{totalStates}</Title>
+          <Card className="kpi-card">
+            <Text className="kpi-secondary-text">States Covered</Text>
+            <Title level={3} className="kpi-primary-value">{totalStates}</Title>
           </Card>
         </Col>
         <Col xs={24} md={8}>
-          <Card>
-            <Text type="secondary">Total Beds</Text>
-            <Title level={3} style={{ margin: '8px 0 0 0' }}>{totalBeds.toLocaleString()}</Title>
+          <Card className="kpi-card">
+            <Text className="kpi-secondary-text">Total Beds</Text>
+            <Title level={3} className="kpi-primary-value">{totalBeds.toLocaleString()}</Title>
           </Card>
         </Col>
       </Row>
 
       {/* View and Sort Controls */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }}>
+      <div className="controls-section">
         <Radio.Group
           value={viewType}
           onChange={(e) => setViewType(e.target.value)}
@@ -128,11 +133,11 @@ const Q06_StateWiseHospitalCount = () => {
           </Radio.Button>
         </Radio.Group>
 
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div className="sort-controls">
           <Select
             value={sortBy}
             onChange={(value) => setSortBy(value)}
-            style={{ width: 120 }}
+            className="sort-select"
           >
             <Option value="count">Count</Option>
             <Option value="beds">Beds</Option>
@@ -154,49 +159,51 @@ const Q06_StateWiseHospitalCount = () => {
       </div>
 
       {/* Chart */}
-      <div style={{ height: '400px', marginBottom: '40px' }}>
-        {viewType === 'bar' ? (
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={processedData}
-              margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="state" angle={-45} textAnchor="end" height={70} />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="count" name="Hospital Count" fill="#0088FE" />
-              <Bar dataKey="beds" name="Total Beds" fill="#00C49F" />
-            </BarChart>
-          </ResponsiveContainer>
-        ) : (
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
+      <div className="chart-container">
+        <div className="chart-wrapper">
+          {viewType === 'bar' ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
                 data={processedData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                outerRadius={150}
-                fill="#8884d8"
-                dataKey="count"
-                nameKey="state"
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
               >
-                {processedData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        )}
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="state" angle={-45} textAnchor="end" height={70} />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="count" name="Hospital Count" fill="#0088FE" />
+                <Bar dataKey="beds" name="Total Beds" fill="#00C49F" />
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={processedData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  outerRadius={150}
+                  fill="#8884d8"
+                  dataKey="count"
+                  nameKey="state"
+                  label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                >
+                  {processedData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          )}
+        </div>
       </div>
 
       {/* Detailed Table */}
-      <Title level={4} style={{ marginTop: '40px', marginBottom: '16px' }}>
+      <Title level={4} className="table-title">
         Detailed State-wise Breakdown
       </Title>
       <Table

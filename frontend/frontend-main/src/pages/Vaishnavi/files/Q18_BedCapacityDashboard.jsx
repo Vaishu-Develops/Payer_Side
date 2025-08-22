@@ -13,7 +13,7 @@ import {
 import { api } from '../../../services/api';
 import { useBedCapacityData } from '../../../hooks/useBedCapacityData';
 import BedCapacityPrediction from '../../../components/BedCapacityPrediction';
-import './Q18_BedCapacityDashboard.css';
+import './styles/Q18_BedCapacityDashboard.css';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;

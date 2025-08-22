@@ -1,4 +1,4 @@
-/* CSS Reset for better Ant Design compatibility */
+/* Global Reset */
 * {
   box-sizing: border-box;
 }
@@ -12,7 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Reset for common elements */
+/* Reset common elements */
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   padding: 0;
@@ -24,7 +24,7 @@ ul, ol {
   list-style: none;
 }
 
-/* Global App Styles */
+/* Global App Layout */
 .App {
   min-height: 100vh;
   background-color: #f0f2f5;
@@ -71,21 +71,12 @@ ul, ol {
   line-height: 40px !important;
 }
 
-/* Card Enhancements for Ant Design */
+/* ✅ Do NOT override all ant-card globally — let each page handle */
 .ant-card {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin-bottom: 16px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  min-height: 200px;
-}
-
-.ant-card .ant-card-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  background: #fff;
 }
 
 .ant-card:hover {
@@ -93,112 +84,30 @@ ul, ol {
   transition: box-shadow 0.3s ease;
 }
 
-/* Grid system fixes for equal height cards */
+/* Grid system fixes (restore defaults) */
 .ant-row {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  display: flex;
-  flex-wrap: wrap;
+  margin-left: -8px;
+  margin-right: -8px;
 }
 
 .ant-col {
   padding-left: 8px;
   padding-right: 8px;
-  display: flex;
-  flex-direction: column;
 }
 
-/* Text alignment fixes */
+.ant-col-24 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Statistic alignment */
 .ant-statistic {
   text-align: center;
 }
 
-.ant-statistic-title {
-  margin-bottom: 4px;
-  color: rgba(0, 0, 0, 0.45);
-  font-size: 14px;
-  font-weight: normal;
-}
-
-.ant-statistic-content {
-  color: rgba(0, 0, 0, 0.85);
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-/* Component Isolation - Prevent global styles from affecting specific components */
-.ant-card {
-  position: relative;
-}
-
-.ant-card .ant-card-body {
-  position: relative;
-}
-
-/* Ensure component-specific CSS takes precedence */
-[class*="-dashboard"] .ant-card,
-[class*="-container"] .ant-card,
-[class*="-performance"] .ant-card {
-  position: relative !important;
-}
-
-/* Dashboard specific styling for consistent card layout */
-.dashboard-row {
-  display: flex !important;
-  align-items: stretch !important;
-  margin-bottom: 24px;
-}
-
-.dashboard-col {
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.dashboard-col .ant-card {
-  height: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.dashboard-col .ant-card .ant-card-body {
-  flex: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-/* Statistic cards specific styling */
-.stat-card {
-  text-align: center;
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.stat-card .ant-card-body {
-  padding: 20px 24px;
-}
-
-/* Hospital cards specific styling */
-.hospital-card {
-  min-height: 250px;
-}
-
-.hospital-card .ant-card-body {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Chart cards specific styling */
-.chart-card {
-  min-height: 400px;
-}
-
-.chart-card .ant-card-body {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-}
+/* ❌ Removed:
+   - summary-card overrides
+   - flex forcing on .ant-card
+   - [-dashboard], [-container] hacks
+   → These will now live in per-page CSS only.
+*/

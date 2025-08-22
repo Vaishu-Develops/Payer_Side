@@ -3,7 +3,7 @@ import { Card, Col, Row, Spin, Alert, Typography, Tag, Statistic, Progress, Empt
 import { TeamOutlined, UserOutlined, AlertOutlined } from '@ant-design/icons';
 import { fetchStaffingData } from "../../../services/staffingService";
 import { getStaffingStatus } from "../../../utils/staffingUtils";
-import './Q26_StaffingAdequacy.css';
+import './styles/Q26_StaffingAdequacy.css';
 
 const { Title, Text } = Typography;
 

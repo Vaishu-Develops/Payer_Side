@@ -1,0 +1,359 @@
+/* Q06_StateWiseHospitalCount.css - Enhanced Component Isolation */
+
+.state-wise-dashboard {
+  padding: 24px !important;
+  background: #f0f2f5 !important;
+  min-height: 100vh !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  contain: layout style !important;
+  isolation: isolate !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Global CSS Reset for this component */
+.state-wise-dashboard * {
+  box-sizing: border-box !important;
+}
+
+.state-wise-dashboard .page-title {
+  margin-bottom: 24px !important;
+  color: #1890ff !important;
+  text-align: center !important;
+  font-size: 32px !important;
+  font-weight: 600 !important;
+}
+
+/* Ant Design Row/Col Component Fixes */
+.state-wise-dashboard .ant-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+.state-wise-dashboard .ant-col {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  min-height: auto !important;
+  flex: none !important;
+}
+
+/* KPI Cards Styling - Enhanced Isolation */
+.state-wise-dashboard .kpi-cards-row {
+  margin-bottom: 24px !important;
+  justify-content: center !important;
+}
+
+.state-wise-dashboard .kpi-card {
+  height: 160px !important;
+  min-height: 160px !important;
+  max-height: 160px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+  overflow: visible !important;
+  position: relative !important;
+  background-color: #ffffff !important;
+  border: 1px solid #f0f0f0 !important;
+}
+
+.state-wise-dashboard .kpi-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px) !important;
+}
+
+.state-wise-dashboard .kpi-card .ant-card-body {
+  padding: 20px !important;
+  height: 120px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.state-wise-dashboard .kpi-secondary-text {
+  color: #8c8c8c !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  margin-bottom: 12px !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  text-align: center !important;
+}
+
+.state-wise-dashboard .kpi-primary-value {
+  margin: 0 !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  color: #1890ff !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+}
+
+/* Controls Section - Center Aligned */
+.state-wise-dashboard .controls-section {
+  display: flex !important;
+  justify-content: center !important;
+  margin-bottom: 24px !important;
+  flex-wrap: wrap !important;
+  gap: 24px !important;
+  align-items: center !important;
+  padding: 16px !important;
+  background: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.state-wise-dashboard .sort-controls {
+  display: flex !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+.state-wise-dashboard .sort-select {
+  width: 140px !important;
+}
+
+/* Chart Section - Enhanced Container */
+.state-wise-dashboard .chart-container {
+  height: 450px !important;
+  margin-bottom: 40px !important;
+  background: white !important;
+  border-radius: 8px !important;
+  padding: 24px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.state-wise-dashboard .chart-wrapper {
+  height: 100% !important;
+  width: 100% !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+/* Table Section - Center Aligned */
+.state-wise-dashboard .table-title {
+  margin-top: 40px !important;
+  margin-bottom: 20px !important;
+  color: #262626 !important;
+  text-align: center !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+}
+
+.state-wise-dashboard .ant-table-wrapper {
+  background: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  overflow: visible !important;
+}
+
+.state-wise-dashboard .ant-table {
+  overflow: visible !important;
+}
+
+.state-wise-dashboard .ant-table-tbody > tr > td {
+  padding: 16px !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.state-wise-dashboard .ant-table-thead > tr > th {
+  background: #fafafa !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+  padding: 16px !important;
+}
+
+/* Loading State - Center Aligned */
+.state-wise-dashboard .loading-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 400px !important;
+  background: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Error State - Center Aligned */
+.state-wise-dashboard .error-container {
+  padding: 24px !important;
+  text-align: center !important;
+  background: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Responsive Design - Enhanced */
+@media (max-width: 768px) {
+  .state-wise-dashboard {
+    padding: 16px !important;
+  }
+  
+  .state-wise-dashboard .page-title {
+    font-size: 24px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .state-wise-dashboard .kpi-card {
+    height: 140px !important;
+    min-height: 140px !important;
+    max-height: 140px !important;
+  }
+  
+  .state-wise-dashboard .kpi-card .ant-card-body {
+    padding: 16px !important;
+    height: 108px !important;
+  }
+  
+  .state-wise-dashboard .kpi-primary-value {
+    font-size: 28px !important;
+  }
+  
+  .state-wise-dashboard .controls-section {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 16px !important;
+  }
+  
+  .state-wise-dashboard .chart-container {
+    height: 350px !important;
+    padding: 16px !important;
+  }
+  
+  .state-wise-dashboard .table-title {
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .state-wise-dashboard .page-title {
+    font-size: 20px !important;
+  }
+  
+  .state-wise-dashboard .kpi-card {
+    height: 120px !important;
+    min-height: 120px !important;
+    max-height: 120px !important;
+  }
+  
+  .state-wise-dashboard .kpi-card .ant-card-body {
+    padding: 12px !important;
+    height: 96px !important;
+  }
+  
+  .state-wise-dashboard .kpi-secondary-text {
+    font-size: 12px !important;
+  }
+  
+  .state-wise-dashboard .kpi-primary-value {
+    font-size: 24px !important;
+  }
+  
+  .state-wise-dashboard .chart-container {
+    height: 300px !important;
+    padding: 12px !important;
+  }
+  
+  .state-wise-dashboard .table-title {
+    font-size: 18px !important;
+  }
+}
+
+/* Enhanced Anti-Compression and Visibility Fixes */
+.state-wise-dashboard .ant-card {
+  margin-bottom: 0 !important;
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.state-wise-dashboard .ant-card .ant-card-body {
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.state-wise-dashboard .ant-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.state-wise-dashboard .ant-col {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+/* Radio Button and Select Component Fixes */
+.state-wise-dashboard .ant-radio-group {
+  display: flex !important;
+  gap: 8px !important;
+}
+
+.state-wise-dashboard .ant-radio-button-wrapper {
+  height: 32px !important;
+  line-height: 30px !important;
+  padding: 0 16px !important;
+  border-radius: 4px !important;
+}
+
+.state-wise-dashboard .ant-select {
+  height: 32px !important;
+}
+
+.state-wise-dashboard .ant-select-selector {
+  height: 32px !important;
+  align-items: center !important;
+}
+
+/* Force visibility for all text and interactive elements */
+.state-wise-dashboard .kpi-secondary-text,
+.state-wise-dashboard .kpi-primary-value,
+.state-wise-dashboard .page-title,
+.state-wise-dashboard .table-title {
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+/* Animation Enhancement */
+.state-wise-dashboard .kpi-card {
+  animation: fadeInUp 0.6s ease-out !important;
+}
+
+.state-wise-dashboard .chart-container {
+  animation: fadeInUp 0.8s ease-out !important;
+}
+
+.state-wise-dashboard .ant-table-wrapper {
+  animation: fadeInUp 1s ease-out !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Final isolation and containment */
+.state-wise-dashboard {
+  contain: layout style paint !important;
+  isolation: isolate !important;
+}
+
+.state-wise-dashboard * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}

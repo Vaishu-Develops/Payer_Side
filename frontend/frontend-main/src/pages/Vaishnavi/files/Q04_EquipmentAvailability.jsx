@@ -26,7 +26,7 @@ import {
   ExperimentOutlined,
   ThunderboltOutlined,
 } from '@ant-design/icons';
-import './Q04_EquipmentAvailability.css';
+import './styles/Q04_EquipmentAvailability.css';
 import _ from 'lodash';
 
 const { Title, Text } = Typography;

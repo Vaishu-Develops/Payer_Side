@@ -3,7 +3,7 @@ import { Card, Col, Row, Spin, Alert, Typography, Input, Radio, Tag, Statistic, 
 import { PhoneOutlined, CheckCircleOutlined, CloseCircleOutlined, PercentageOutlined } from '@ant-design/icons';
 import { fetchEmergencyContacts } from '../../../services/emergencyContactService';
 import { filterContacts, calculateSummaryStats } from '../../../utils/emergencyContactUtils';
-import './Q03_EmergencyContactAvailability.css';
+import './styles/Q03_EmergencyContactAvailability.css';
 
 const { Title, Text } = Typography;
 const { Search } = Input;

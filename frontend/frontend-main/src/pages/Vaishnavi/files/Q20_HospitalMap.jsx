@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import dataService from '../../../services/dataService.jsx';
-import './Q20_HospitalMap.css';
+import './styles/Q20_HospitalMap.css';
 
 // Fix for default markers in React Leaflet
 delete L.Icon.Default.prototype._getIconUrl;

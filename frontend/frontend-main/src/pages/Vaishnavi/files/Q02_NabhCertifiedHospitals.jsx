@@ -3,6 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { useNabhData } from '../../../hooks/useNabhData';
 import { Card, Row, Col, Input, Select, Typography, Spin, Alert, Empty } from 'antd';
 import HospitalCertificationCard from './shared/HospitalCertificationCard';
+import './styles/Q02_NabhCertifiedHospitals.css';
 
 const { Title, Text } = Typography;
 const { Search } = Input;
@@ -43,9 +44,9 @@ const Q02_NabhCertifiedHospitals = () => {
   const renderContent = () => {
     if (loading) {
       return (
-        <div style={{ textAlign: 'center', padding: '50px' }}>
+        <div className="nabh-loading">
           <Spin size="large">
-            <div style={{ padding: '40px' }}>Loading Certifications...</div>
+            <div>Loading Certifications...</div>
           </Spin>
         </div>
       );
@@ -57,9 +58,9 @@ const Q02_NabhCertifiedHospitals = () => {
       return <Empty description="No hospitals found matching your criteria." />;
     }
     return (
-      <Row gutter={[24, 24]}>
+      <Row gutter={[16, 16]} className="nabh-hospitals-grid">
         {filteredAndSortedHospitals.map(hospital => (
-          <Col key={hospital.key} xs={24} sm={12} lg={8}>
+          <Col key={hospital.key} xs={24} sm={12} lg={8} style={{ display: 'flex' }}>
             <HospitalCertificationCard hospital={hospital} />
           </Col>
         ))}
@@ -68,9 +69,9 @@ const Q02_NabhCertifiedHospitals = () => {
   };
 
   return (
-    <div style={{ padding: '24px' }}>
-      <Title level={2}>NABH Certified Hospitals ({loading ? '...' : filteredAndSortedHospitals.length})</Title>
-      <Card style={{ marginBottom: '24px' }}>
+    <div className="nabh-hospitals-container">
+      <Title level={2} className="nabh-hospitals-header">NABH Certified Hospitals ({loading ? '...' : filteredAndSortedHospitals.length})</Title>
+      <Card className="nabh-hospitals-filters">
         <Row gutter={[16, 16]} align="bottom">
           <Col xs={24} md={10}>
             <Text>Search by Name</Text>

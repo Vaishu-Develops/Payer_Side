@@ -919,9 +919,19 @@ def get_hospital_metrics_all():
 
 @app.get("/wards_rooms", tags=["Wards"])
 def get_wards_rooms():
-    """Get all ward and room data"""
+    """Get all wards and rooms data"""
     return load_json_data("wards_rooms.json")
+
+@app.get("/medical_specialties", tags=["Medical"])
+def get_medical_specialties():
+    """Get all medical specialties"""
+    return load_json_data("medical_specialties.json")
+
+@app.get("/doctors", tags=["Medical"])  
+def get_doctors():
+    """Get all doctors"""
+    return load_json_data("doctors.json")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8001)
