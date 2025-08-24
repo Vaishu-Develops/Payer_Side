@@ -1,0 +1,362 @@
+import React, { useState, useEffect } from 'react';
+import { Calendar, Clock, AlertTriangle, Award, CheckCircle, XCircle, Filter } from 'lucide-react';
+import certificationService from '../../../services/certificationService';
+import { 
+  calculateDaysToExpiry, 
+  getCertificationStatus, 
+  formatDate, 
+  getCertificationTypeColor 
+} from '../../../utils/certificationUtils';
+import './styles/Q13_CertificationTimeline.css';
+
+// Hospital Selector Component
+const HospitalSelector = ({ hospitalId, availableHospitals, onChange }) => (
+  <div className="hospital-selector">
+    <label htmlFor="hospital-select">Hospital:</label>
+    <select 
+      id="hospital-select"
+      value={hospitalId} 
+      onChange={(e) => onChange(parseInt(e.target.value))}
+      className="hospital-select"
+    >
+      {availableHospitals.map(id => (
+        <option key={id} value={id}>Hospital {id}</option>
+      ))}
+    </select>
+  </div>
+);
+
+// Timeline Controls Component
+const TimelineControls = ({ view, onChange, certifications }) => {
+  const getFilterCounts = () => {
+    const active = certifications.filter(c => c.status === 'active').length;
+    const expiring = certifications.filter(c => ['warning', 'critical'].includes(c.status)).length;
+    const expired = certifications.filter(c => c.status === 'expired').length;
+    return { all: certifications.length, active, expiring, expired };
+  };
+
+  const counts = getFilterCounts();
+
+  return (
+    <div className="view-filters">
+      <button className={`filter-btn ${view === 'all' ? 'active' : ''}`} onClick={() => onChange('all')}>
+        <Filter size={16} /> All ({counts.all})
+      </button>
+      <button className={`filter-btn ${view === 'active' ? 'active' : ''}`} onClick={() => onChange('active')}>
+        <CheckCircle size={16} /> Active ({counts.active})
+      </button>
+      <button className={`filter-btn ${view === 'expiring' ? 'active' : ''}`} onClick={() => onChange('expiring')}>
+        <AlertTriangle size={16} /> Expiring ({counts.expiring})
+      </button>
+      <button className={`filter-btn ${view === 'expired' ? 'active' : ''}`} onClick={() => onChange('expired')}>
+        <XCircle size={16} /> Expired ({counts.expired})
+      </button>
+    </div>
+  );
+};
+
+// Summary Component
+const CertificationSummary = ({ certifications }) => {
+  const getSummaryStats = () => {
+    const active = certifications.filter(c => c.status === 'active').length;
+    const critical = certifications.filter(c => c.status === 'critical').length;
+    const warning = certifications.filter(c => c.status === 'warning').length;
+    const expired = certifications.filter(c => c.status === 'expired').length;
+    return { total: certifications.length, active, critical, warning, expired };
+  };
+
+  const stats = getSummaryStats();
+  const activeRate = stats.total > 0 ? Math.round((stats.active / stats.total) * 100) : 0;
+
+  return (
+    <div className="certification-summary">
+      <div className="summary-cards">
+        <div className="summary-card total">
+          <div className="card-content">
+            <div className="card-number">{stats.total}</div>
+            <div className="card-label">Total Certifications</div>
+          </div>
+          <Award className="card-icon" />
+        </div>
+        <div className="summary-card active">
+          <div className="card-content">
+            <div className="card-number">{stats.active}</div>
+            <div className="card-label">Active</div>
+          </div>
+          <CheckCircle className="card-icon" />
+        </div>
+        <div className="summary-card expiring">
+          <div className="card-content">
+            <div className="card-number">{stats.critical + stats.warning}</div>
+            <div className="card-label">Expiring Soon</div>
+          </div>
+          <Clock className="card-icon" />
+        </div>
+        <div className="summary-card expired">
+          <div className="card-content">
+            <div className="card-number">{stats.expired}</div>
+            <div className="card-label">Expired</div>
+          </div>
+          <XCircle className="card-icon" />
+        </div>
+      </div>
+      <div className="compliance-rate">
+        <div className="rate-label">Compliance Rate</div>
+        <div className="rate-progress">
+          <div className="rate-fill" style={{ width: `${activeRate}%` }}></div>
+        </div>
+        <div className="rate-percentage">{activeRate}%</div>
+      </div>
+    </div>
+  );
+};
+
+// Certification Details Modal
+const CertificationDetails = ({ certification, onClose }) => (
+  <div className="certification-details-overlay" onClick={onClose}>
+    <div className="certification-details" onClick={e => e.stopPropagation()}>
+      <div className="details-header">
+        <h3>{certification.certification_type}</h3>
+        <button className="close-btn" onClick={onClose}>&times;</button>
+      </div>
+      <div className="details-content">
+        <div className="detail-row">
+          <strong>Certificate Number:</strong>
+          <span>{certification.certificate_number}</span>
+        </div>
+        <div className="detail-row">
+          <strong>Level:</strong>
+          <span>{certification.certification_level}</span>
+        </div>
+        <div className="detail-row">
+          <strong>Issued Date:</strong>
+          <span>{formatDate(certification.issued_date)}</span>
+        </div>
+        <div className="detail-row">
+          <strong>Expiry Date:</strong>
+          <span>{formatDate(certification.expiry_date)}</span>
+        </div>
+        <div className="detail-row">
+          <strong>Issuing Authority:</strong>
+          <span>{certification.issuing_authority}</span>
+        </div>
+        <div className="detail-row">
+          <strong>Status:</strong>
+          <span className={`status-badge ${certification.status}`}>
+            {certification.status.toUpperCase()}
+          </span>
+        </div>
+        {certification.remarks && (
+          <div className="detail-row">
+            <strong>Remarks:</strong>
+            <span>{certification.remarks}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+);
+
+// Interactive Timeline Component
+const InteractiveTimeline = ({ data, view }) => {
+  const [selectedCert, setSelectedCert] = useState(null);
+
+  const getStatusIcon = (status) => {
+    const icons = {
+      'active': <CheckCircle className="status-icon active" />,
+      'warning': <Clock className="status-icon warning" />,
+      'critical': <AlertTriangle className="status-icon critical" />,
+      'expired': <XCircle className="status-icon expired" />
+    };
+    return icons[status] || <Award className="status-icon" />;
+  };
+
+  return (
+    <div className="interactive-timeline">
+      <div className="timeline-container">
+        <div className="timeline-line"></div>
+        {data.map((cert) => (
+          <div 
+            key={cert.id} 
+            className={`timeline-item ${cert.status} ${selectedCert?.id === cert.id ? 'selected' : ''}`}
+            onClick={() => setSelectedCert(selectedCert?.id === cert.id ? null : cert)}
+          >
+            <div 
+              className="timeline-marker"
+              style={{ backgroundColor: getCertificationTypeColor(cert.certification_type) }}
+            >
+              {getStatusIcon(cert.status)}
+            </div>
+            <div className="timeline-content">
+              <div className="cert-header">
+                <h4 className="cert-type">{cert.certification_type}</h4>
+                <span className="cert-level">{cert.certification_level}</span>
+              </div>
+              <div className="cert-dates">
+                <div className="date-item">
+                  <Calendar size={14} />
+                  <span>Issued: {formatDate(cert.issued_date)}</span>
+                </div>
+                <div className="date-item">
+                  <Clock size={14} />
+                  <span>Expires: {formatDate(cert.expiry_date)}</span>
+                </div>
+              </div>
+              <div className="cert-authority">
+                <strong>Authority:</strong> {cert.issuing_authority}
+              </div>
+              {cert.daysToExpiry >= 0 ? (
+                <div className={`days-remaining ${cert.status}`}>
+                  {cert.daysToExpiry} days remaining
+                </div>
+              ) : (
+                <div className="days-remaining expired">
+                  Expired {Math.abs(cert.daysToExpiry)} days ago
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+      {selectedCert && (
+        <CertificationDetails 
+          certification={selectedCert} 
+          onClose={() => setSelectedCert(null)}
+        />
+      )}
+    </div>
+  );
+};
+
+// Expiry Alerts Component
+const ExpiryAlerts = ({ certifications }) => {
+  const criticalAlerts = certifications.filter(cert => cert.status === 'critical');
+  const warningAlerts = certifications.filter(cert => cert.status === 'warning');
+
+  if (criticalAlerts.length === 0 && warningAlerts.length === 0) return null;
+
+  return (
+    <div className="expiry-alerts">
+      <h3>
+        <AlertTriangle className="alert-icon" />
+        Renewal Alerts
+      </h3>
+      {criticalAlerts.length > 0 && (
+        <div className="alert-section critical">
+          <h4>Critical - Expires within 30 days</h4>
+          {criticalAlerts.map(cert => (
+            <div key={cert.id} className="alert-item critical">
+              <div className="alert-content">
+                <strong>{cert.certification_type}</strong>
+                <span>Expires in {cert.daysToExpiry} days</span>
+                <span className="expire-date">({formatDate(cert.expiry_date)})</span>
+              </div>
+              <AlertTriangle className="alert-status-icon" />
+            </div>
+          ))}
+        </div>
+      )}
+      {warningAlerts.length > 0 && (
+        <div className="alert-section warning">
+          <h4>Warning - Expires within 90 days</h4>
+          {warningAlerts.map(cert => (
+            <div key={cert.id} className="alert-item warning">
+              <div className="alert-content">
+                <strong>{cert.certification_type}</strong>
+                <span>Expires in {cert.daysToExpiry} days</span>
+                <span className="expire-date">({formatDate(cert.expiry_date)})</span>
+              </div>
+              <Clock className="alert-status-icon" />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Main Timeline Component
+const CertificationTimeline = ({ hospitalId = 121 }) => {
+  const [certifications, setCertifications] = useState([]);
+  const [timelineView, setTimelineView] = useState('all');
+  const [loading, setLoading] = useState(true);
+  const [selectedHospitalId, setSelectedHospitalId] = useState(hospitalId);
+
+  useEffect(() => {
+    loadCertificationData();
+  }, []);
+
+  const loadCertificationData = async () => {
+    try {
+      setLoading(true);
+      const data = await certificationService.getAllCertifications();
+      setCertifications(data);
+    } catch (error) {
+      console.error('Error loading certification data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const processTimelineData = (certs) => {
+    return certs
+      .filter(cert => cert.hospital_id === selectedHospitalId)
+      .map(cert => ({
+        ...cert,
+        daysToExpiry: calculateDaysToExpiry(cert.expiry_date),
+        status: getCertificationStatus(cert.expiry_date)
+      }))
+      .sort((a, b) => new Date(a.issued_date) - new Date(b.issued_date));
+  };
+
+  const filterCertifications = (certs) => {
+    switch (timelineView) {
+      case 'active': return certs.filter(cert => cert.status === 'active');
+      case 'expiring': return certs.filter(cert => ['warning', 'critical'].includes(cert.status));
+      case 'expired': return certs.filter(cert => cert.status === 'expired');
+      default: return certs;
+    }
+  };
+
+  const processedCerts = processTimelineData(certifications);
+  const filteredCerts = filterCertifications(processedCerts);
+  const availableHospitals = [...new Set(certifications.map(cert => cert.hospital_id))];
+
+  if (loading) {
+    return (
+      <div className="certification-timeline-loading">
+        <div className="loading-spinner"></div>
+        <p>Loading certification data...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="certification-timeline">
+      <div className="timeline-header">
+        <div className="timeline-title">
+          <Award className="header-icon" />
+          <h2>Hospital Quality Certification Timeline</h2>
+        </div>
+        <div className="timeline-controls">
+          <HospitalSelector 
+            hospitalId={selectedHospitalId}
+            availableHospitals={availableHospitals}
+            onChange={setSelectedHospitalId}
+          />
+          <TimelineControls 
+            view={timelineView} 
+            onChange={setTimelineView}
+            certifications={processedCerts}
+          />
+        </div>
+      </div>
+
+      <CertificationSummary certifications={processedCerts} />
+      <InteractiveTimeline data={filteredCerts} view={timelineView} />
+      <ExpiryAlerts certifications={processedCerts} />
+    </div>
+  );
+};
+
+export default CertificationTimeline;

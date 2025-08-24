@@ -1,0 +1,1084 @@
+/* =======================================================
+   Q11_StaffingAnalysis.css - Anti-Compression Layout
+   ======================================================= */
+
+/* --- Main Container --- */
+.staffing-analysis-container {
+  padding: 24px !important;
+  background-color: #f5f7fa !important;
+  min-height: 100vh !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  contain: layout style !important;
+  isolation: isolate !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.staffing-analysis-container * {
+  box-sizing: border-box !important;
+}
+
+/* --- Header Section --- */
+.staffing-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  margin-bottom: 32px !important;
+  gap: 24px !important;
+  flex-wrap: wrap !important;
+}
+
+.header-title {
+  flex: 1 !important;
+  min-width: 300px !important;
+}
+
+.header-title .ant-typography-h2 {
+  margin-bottom: 8px !important;
+  color: #262626 !important;
+  font-weight: 600 !important;
+}
+
+.header-title .ant-typography {
+  margin-bottom: 0 !important;
+  color: #8c8c8c !important;
+}
+
+.hospital-selector {
+  width: 350px !important;
+  min-width: 280px !important;
+  max-width: 400px !important;
+}
+
+.hospital-selector .ant-select-selector {
+  height: 44px !important;
+  align-items: center !important;
+  padding: 0 16px !important;
+  border-radius: 8px !important;
+  border: 2px solid #d9d9d9 !important;
+  transition: all 0.3s ease !important;
+}
+
+.hospital-selector:hover .ant-select-selector {
+  border-color: #40a9ff !important;
+}
+
+.hospital-selector.ant-select-focused .ant-select-selector {
+  border-color: #1890ff !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+}
+
+/* --- Content Layout --- */
+.staffing-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 32px !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+}
+
+/* --- KPI Cards Section --- */
+.kpi-cards-section {
+  width: 100% !important;
+}
+
+.kpi-cards-grid {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 24px !important;
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+}
+
+.kpi-card-wrapper {
+  flex: 0 0 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+  display: flex !important;
+}
+
+/* --- KPI Cards Styling --- */
+.kpi-card-staffing {
+  width: 100% !important;
+  height: 140px !important;
+  min-height: 140px !important;
+  max-height: 140px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #f0f0f0 !important;
+  background: #ffffff !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden !important;
+  contain: layout style size !important;
+  cursor: pointer !important;
+}
+
+.kpi-card-staffing:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  border-color: #d9d9d9 !important;
+}
+
+.kpi-card-staffing .ant-card-body {
+  padding: 0 !important;
+  height: 108px !important;
+  max-height: 108px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.kpi-content {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 20px !important;
+  width: 100% !important;
+  padding: 24px !important;
+}
+
+.kpi-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%) !important;
+  border-radius: 14px !important;
+  font-size: 24px !important;
+  color: #1890ff !important;
+  flex-shrink: 0 !important;
+}
+
+.kpi-info {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+  text-align: left !important;
+}
+
+.kpi-title {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #8c8c8c !important;
+  margin-bottom: 6px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px !important;
+  line-height: 1.2 !important;
+}
+
+.kpi-value {
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  color: #262626 !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+/* --- Charts Section --- */
+.charts-section {
+  width: 100% !important;
+}
+
+.charts-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+.chart-card-wrapper {
+  display: flex !important;
+  min-height: 400px !important;
+}
+
+/* --- Ratio Card --- */
+.ratio-card {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 400px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #f0f0f0 !important;
+  background: #ffffff !important;
+  overflow: hidden !important;
+}
+
+.ratio-card .ant-card-head {
+  background: #fafbfc !important;
+  border-bottom: 2px solid #f0f0f0 !important;
+  padding: 0 24px !important;
+}
+
+.ratio-card .ant-card-head-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+  padding: 16px 0 !important;
+}
+
+.ratio-card .ant-card-body {
+  padding: 24px !important;
+  height: calc(100% - 64px) !important;
+}
+
+.ratios-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 32px !important;
+  height: 100% !important;
+  justify-content: center !important;
+}
+
+/* --- Gauge Styling --- */
+.ratio-gauge {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  padding: 20px !important;
+  background: #f8f9fa !important;
+  border-radius: 8px !important;
+  border: 1px solid #e9ecef !important;
+}
+
+.gauge-header {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.gauge-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.gauge-values {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 8px !important;
+}
+
+.gauge-ratio {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  color: #1890ff !important;
+  line-height: 1 !important;
+}
+
+.gauge-benchmark {
+  font-size: 13px !important;
+  color: #8c8c8c !important;
+  font-weight: 400 !important;
+}
+
+.ratio-progress-bar {
+  margin: 0 !important;
+}
+
+.ratio-progress-bar .ant-progress-inner {
+  background: #e9ecef !important;
+  border-radius: 100px !important;
+  height: 8px !important;
+}
+
+.ratio-progress-bar .ant-progress-bg {
+  border-radius: 100px !important;
+  height: 8px !important;
+}
+
+.ratio-progress-bar .ant-progress-text {
+  font-size: 12px !important;
+  color: #595959 !important;
+  font-weight: 500 !important;
+}
+
+/* --- Pie Chart Card --- */
+.pie-card {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 400px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #f0f0f0 !important;
+  background: #ffffff !important;
+  overflow: hidden !important;
+}
+
+.pie-card .ant-card-head {
+  background: #fafbfc !important;
+  border-bottom: 2px solid #f0f0f0 !important;
+  padding: 0 24px !important;
+}
+
+.pie-card .ant-card-head-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+  padding: 16px 0 !important;
+}
+
+.pie-card .ant-card-body {
+  padding: 24px !important;
+  height: calc(100% - 64px) !important;
+}
+
+.pie-chart-container {
+  height: 320px !important;
+  min-height: 320px !important;
+  max-height: 320px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+/* --- Loading State --- */
+.loading-state {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-height: 500px !important;
+  background: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1200px) {
+  .charts-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 800px !important;
+  }
+  
+  .chart-card-wrapper {
+    min-height: 350px !important;
+  }
+  
+  .pie-chart-container {
+    height: 280px !important;
+    min-height: 280px !important;
+    max-height: 280px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .staffing-analysis-container {
+    padding: 16px !important;
+  }
+  
+  .staffing-header {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  
+  .hospital-selector {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .kpi-cards-grid {
+    gap: 16px !important;
+  }
+  
+  .kpi-card-wrapper {
+    flex: 0 0 100% !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+  }
+  
+  .charts-grid {
+    gap: 20px !important;
+  }
+  
+  .chart-card-wrapper {
+    min-height: 320px !important;
+  }
+  
+  .ratio-card,
+  .pie-card {
+    min-height: 320px !important;
+  }
+  
+  .ratios-container {
+    gap: 24px !important;
+  }
+  
+  .pie-chart-container {
+    height: 240px !important;
+    min-height: 240px !important;
+    max-height: 240px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .staffing-content {
+    gap: 24px !important;
+  }
+  
+  .kpi-content {
+    gap: 16px !important;
+    padding: 20px !important;
+  }
+  
+  .kpi-icon {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    font-size: 20px !important;
+  }
+  
+  .kpi-value {
+    font-size: 28px !important;
+  }
+  
+  .kpi-card-staffing {
+    height: 120px !important;
+    min-height: 120px !important;
+    max-height: 120px !important;
+  }
+  
+  .kpi-card-staffing .ant-card-body {
+    height: 88px !important;
+  }
+  
+  .chart-card-wrapper {
+    min-height: 280px !important;
+  }
+  
+  .ratio-card,
+  .pie-card {
+    min-height: 280px !important;
+  }
+  
+  .pie-chart-container {
+    height: 200px !important;
+    min-height: 200px !important;
+    max-height: 200px !important;
+  }
+  
+  .ratios-container {
+    gap: 20px !important;
+  }
+  
+  .ratio-gauge {
+    padding: 16px !important;
+  }
+  
+  .gauge-ratio {
+    font-size: 20px !important;
+  }
+}
+
+/* --- Animation Enhancement --- */
+.kpi-card-staffing,
+.ratio-card,
+.pie-card {
+  animation: fadeInUp 0.6s ease-out !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Final isolation and containment --- */
+.staffing-analysis-container {
+  contain: layout style paint !important;
+  isolation: isolate !important;
+}
+
+/* --- Override any external interference --- */
+.staffing-analysis-container .kpi-cards-grid * {
+  flex-shrink: 0 !important;
+}
+
+.staffing-analysis-container .kpi-card-staffing *,
+.staffing-analysis-container .ratio-card *,
+.staffing-analysis-container .pie-card * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* --- Ensure proper spacing and alignment --- */
+.staffing-analysis-container .ant-card {
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* =======================================================
+   Center-Aligned Gauge Styling - Matching Reference Design
+   ======================================================= */
+
+/* --- Ratio Card Updates --- */
+.ratio-card {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 420px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #f0f0f0 !important;
+  background: #ffffff !important;
+  overflow: hidden !important;
+}
+
+.ratio-card .ant-card-head {
+  background: #fafbfc !important;
+  border-bottom: 2px solid #f0f0f0 !important;
+  padding: 0 24px !important;
+}
+
+.ratio-card .ant-card-head-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+  padding: 18px 0 !important;
+}
+
+.ratio-card .ant-card-body {
+  padding: 32px 24px !important;
+  height: calc(100% - 68px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* --- Center-Aligned Ratios Container --- */
+.ratios-container-centered {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 48px !important;
+  height: 100% !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 500px !important;
+  margin: 0 auto !important;
+}
+
+/* --- Center-Aligned Gauge Component --- */
+.ratio-gauge-centered {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  max-width: 400px !important;
+  padding: 24px !important;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%) !important;
+  border-radius: 12px !important;
+  border: 1px solid #e9ecef !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.3s ease !important;
+}
+
+.ratio-gauge-centered:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+.gauge-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+/* --- Gauge Title Section --- */
+.gauge-title-section {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.gauge-main-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+  letter-spacing: 0.2px !important;
+}
+
+/* --- Gauge Value Section --- */
+.gauge-value-section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  margin: 8px 0 !important;
+}
+
+.gauge-primary-value {
+  font-size: 48px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  text-align: center !important;
+  transition: color 0.3s ease !important;
+}
+
+.gauge-benchmark-text {
+  font-size: 13px !important;
+  color: #8c8c8c !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+}
+
+/* --- Gauge Progress Section --- */
+.gauge-progress-section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  max-width: 280px !important;
+  margin-top: 8px !important;
+}
+
+.centered-progress-bar {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.centered-progress-bar .ant-progress-inner {
+  background: #f0f0f0 !important;
+  border-radius: 100px !important;
+  height: 6px !important;
+}
+
+.centered-progress-bar .ant-progress-bg {
+  border-radius: 100px !important;
+  height: 6px !important;
+  transition: all 0.3s ease !important;
+}
+
+.gauge-status-text {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  transition: color 0.3s ease !important;
+}
+
+/* --- Color States for Different Status --- */
+.ratio-gauge-centered[data-status="success"] {
+  border-color: rgba(82, 196, 26, 0.2) !important;
+  background: linear-gradient(135deg, #f6ffed 0%, #ffffff 100%) !important;
+}
+
+.ratio-gauge-centered[data-status="normal"] {
+  border-color: rgba(24, 144, 255, 0.2) !important;
+  background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%) !important;
+}
+
+.ratio-gauge-centered[data-status="exception"] {
+  border-color: rgba(255, 77, 79, 0.2) !important;
+  background: linear-gradient(135deg, #fff2f0 0%, #ffffff 100%) !important;
+}
+
+/* --- Responsive Design for Gauges --- */
+@media (max-width: 1200px) {
+  .ratios-container-centered {
+    gap: 40px !important;
+    max-width: 450px !important;
+  }
+  
+  .ratio-gauge-centered {
+    max-width: 380px !important;
+    padding: 20px !important;
+  }
+  
+  .gauge-primary-value {
+    font-size: 42px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ratio-card {
+    min-height: 380px !important;
+  }
+  
+  .ratio-card .ant-card-body {
+    padding: 24px 20px !important;
+  }
+  
+  .ratios-container-centered {
+    gap: 32px !important;
+    max-width: 100% !important;
+  }
+  
+  .ratio-gauge-centered {
+    max-width: 100% !important;
+    padding: 20px 16px !important;
+  }
+  
+  .gauge-primary-value {
+    font-size: 38px !important;
+  }
+  
+  .gauge-main-title {
+    font-size: 15px !important;
+  }
+  
+  .gauge-progress-section {
+    max-width: 240px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .ratio-card {
+    min-height: 340px !important;
+  }
+  
+  .ratios-container-centered {
+    gap: 28px !important;
+  }
+  
+  .ratio-gauge-centered {
+    padding: 16px 12px !important;
+  }
+  
+  .gauge-primary-value {
+    font-size: 32px !important;
+  }
+  
+  .gauge-main-title {
+    font-size: 14px !important;
+  }
+  
+  .gauge-benchmark-text {
+    font-size: 12px !important;
+  }
+  
+  .gauge-status-text {
+    font-size: 13px !important;
+  }
+  
+  .gauge-progress-section {
+    max-width: 200px !important;
+  }
+  
+  .centered-progress-bar .ant-progress-inner,
+  .centered-progress-bar .ant-progress-bg {
+    height: 5px !important;
+  }
+}
+
+/* --- Enhanced Visual Polish --- */
+.ratio-gauge-centered::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(24, 144, 255, 0.1) 50%, transparent 100%);
+  border-radius: 12px 12px 0 0;
+}
+
+/* --- Animation Enhancement --- */
+.ratio-gauge-centered {
+  animation: fadeInScale 0.6s ease-out !important;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.gauge-primary-value {
+  animation: countUp 0.8s ease-out 0.2s both !important;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- Final Polish and Isolation --- */
+.ratio-gauge-centered * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.ratios-container-centered {
+  contain: layout style !important;
+  isolation: isolate !important;
+}
+
+/* =======================================================
+   Center-Aligned Progress Bar Fix for Gauge Components
+   ======================================================= */
+
+/* --- Gauge Progress Section - Center Alignment Fix --- */
+.gauge-progress-section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  max-width: 280px !important;
+  margin: 8px auto 0 auto !important; /* Center the entire progress section */
+}
+
+/* --- Progress Bar Container - Perfect Center --- */
+.centered-progress-bar {
+  width: 100% !important;
+  margin: 0 auto !important; /* Center the progress bar */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+/* --- Ant Design Progress Component Override --- */
+.centered-progress-bar .ant-progress {
+  width: 100% !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.centered-progress-bar .ant-progress-line {
+  width: 100% !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.centered-progress-bar .ant-progress-outer {
+  width: 100% !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.centered-progress-bar .ant-progress-inner {
+  background: #f0f0f0 !important;
+  border-radius: 100px !important;
+  height: 6px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  position: relative !important;
+}
+
+.centered-progress-bar .ant-progress-bg {
+  border-radius: 100px !important;
+  height: 6px !important;
+  transition: all 0.3s ease !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+/* --- Status Text - Center Alignment --- */
+.gauge-status-text {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+  margin: 0 auto !important;
+  transition: color 0.3s ease !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+/* --- Additional Center Alignment for Container --- */
+.ratio-gauge-centered {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  max-width: 400px !important;
+  padding: 24px !important;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%) !important;
+  border-radius: 12px !important;
+  border: 1px solid #e9ecef !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.3s ease !important;
+  margin: 0 auto !important; /* Center the entire gauge */
+}
+
+.gauge-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+/* --- Force Center Alignment for All Text Elements --- */
+.gauge-title-section {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.gauge-main-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+  margin: 0 auto !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+  letter-spacing: 0.2px !important;
+  width: 100% !important;
+}
+
+.gauge-value-section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  margin: 8px auto !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+.gauge-primary-value {
+  font-size: 48px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  transition: color 0.3s ease !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+.gauge-benchmark-text {
+  font-size: 13px !important;
+  color: #8c8c8c !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+/* --- Container Center Alignment Override --- */
+.ratios-container-centered {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 48px !important;
+  height: 100% !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 500px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .gauge-progress-section {
+    max-width: 240px !important;
+    margin: 8px auto 0 auto !important;
+  }
+  
+  .centered-progress-bar {
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+  
+  .ratio-gauge-centered {
+    max-width: 100% !important;
+    padding: 20px 16px !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .gauge-progress-section {
+    max-width: 200px !important;
+    margin: 8px auto 0 auto !important;
+  }
+  
+  .centered-progress-bar .ant-progress-inner,
+  .centered-progress-bar .ant-progress-bg {
+    height: 5px !important;
+  }
+  
+  .ratio-gauge-centered {
+    padding: 16px 12px !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* --- Force Override Any External Styles --- */
+.staffing-analysis-container .ratio-gauge-centered,
+.staffing-analysis-container .gauge-progress-section,
+.staffing-analysis-container .centered-progress-bar {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.staffing-analysis-container .ant-progress-outer {
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.staffing-analysis-container .gauge-status-text {
+  text-align: center !important;
+  margin: 0 auto !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* --- Additional Centering for Progress Components --- */
+.ratio-gauge-centered .ant-progress,
+.ratio-gauge-centered .ant-progress-line,
+.ratio-gauge-centered .ant-progress-outer {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+}
