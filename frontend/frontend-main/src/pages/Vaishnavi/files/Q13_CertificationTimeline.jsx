@@ -7,7 +7,7 @@ import {
   formatDate, 
   getCertificationTypeColor 
 } from '../../../utils/certificationUtils';
-import './styles/Q13_CertificationTimeline.css';
+import './styles/Q13_HospitalCertificationTimeline.css';
 
 // Hospital Selector Component
 const HospitalSelector = ({ hospitalId, availableHospitals, onChange }) => (

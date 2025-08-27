@@ -56,24 +56,72 @@ export const getHospitalProfile = async (id) => {
   }
 
   try {
-    const [hospital, metrics, specialties, equipment, doctors] = await Promise.all([
+    console.log(`🔄 Fetching hospital profile for ID: ${id}`);
+    
+    // Use global endpoints for more reliable data availability
+    const [hospitalRes, certificationsRes, contactsRes, addressesRes, equipmentRes] = await Promise.all([
       api.get(`/hospitals/${id}`),
-      api.get(`/hospital_metrics`, { params: { hospital_id: id } }),
-      api.get(`/hospitals/${id}/specialties`),
-      api.get(`/hospitals/${id}/equipment`),
-      api.get(`/hospitals/${id}/doctors`)
+      // Always use global endpoints and filter, as they seem more reliable
+      api.get(`/hospital_certifications`).then(res => ({
+        ...res,
+        data: { certifications: Array.isArray(res.data) ? res.data.filter(cert => cert.hospital_id == id) : [] }
+      })),
+      api.get(`/hospital_contacts`).then(res => ({
+        ...res,
+        data: { contacts: Array.isArray(res.data) ? res.data.filter(contact => contact.hospital_id == id) : [] }
+      })),
+      api.get(`/hospitals/${id}/addresses`).catch(err => {
+        console.warn('Addresses specific endpoint failed, trying global:', err.message);
+        return api.get(`/hospital_addresses`).then(res => ({
+          ...res,
+          data: { addresses: Array.isArray(res.data) ? res.data.filter(address => address.hospital_id == id) : [] }
+        }));
+      }),
+      api.get(`/hospitals/${id}/equipment`).catch(err => {
+        console.warn('Equipment specific endpoint failed, trying global:', err.message);
+        return api.get(`/hospital_equipment`).then(res => ({
+          ...res,
+          data: { equipment: Array.isArray(res.data) ? res.data.filter(equipment => equipment.hospital_id == id) : [] }
+        }));
+      })
     ]);
 
+    // Extract data from responses, handling different endpoint structures
+    const certifications = certificationsRes.data?.certifications || certificationsRes.data || [];
+    const contacts = contactsRes.data?.contacts || contactsRes.data || [];
+    const addresses = addressesRes.data?.addresses || addressesRes.data || [];
+    const equipment = equipmentRes.data?.equipment || equipmentRes.data || [];
+
+    // Process equipment data to create summary - ensure equipment is an array
+    const equipmentArray = Array.isArray(equipment) ? equipment : [];
+    const equipmentSummary = {
+      diagnostic_count: equipmentArray.filter(eq => eq.category === 'Diagnostic').length,
+      critical_care_count: equipmentArray.filter(eq => eq.category === 'Critical Care').length,
+      surgical_count: equipmentArray.filter(eq => eq.category === 'Surgery').length,
+      laboratory_count: equipmentArray.filter(eq => eq.category === 'Laboratory').length,
+      cardiology_count: equipmentArray.filter(eq => eq.category === 'Cardiology').length
+    };
+
+    console.log(`✅ Successfully fetched hospital profile for ID: ${id}`);
+    console.log(`📊 Profile data summary:`, {
+      hospital: !!hospitalRes.data,
+      certifications: certifications.length,
+      contacts: contacts.length,
+      addresses: addresses.length,
+      equipment: equipmentArray.length
+    });
+    
     return {
-      hospital: hospital.data,
-      metrics: metrics.data,
-      specialties: specialties.data,
-      equipment: equipment.data,
-      doctors: doctors.data
+      hospital: hospitalRes.data,
+      certifications: certifications,
+      contacts: contacts,
+      addresses: addresses,
+      equipment: equipmentArray,
+      equipment_summary: equipmentSummary
     };
   } catch (error) {
     console.error('❌ Error fetching hospital profile:', error);
-    throw error;
+    throw new Error(`Failed to fetch hospital profile: ${error.message}`);
   }
 };
 

@@ -1,0 +1,665 @@
+/* =======================================================
+   Nurse-to-Bed Ratio Dashboard - Professional Healthcare
+   SCOPED TO PREVENT AFFECTING OTHER PAGES
+   ======================================================= */
+
+/* --- Main Container --- */
+.nurse-ratio-dashboard {
+  padding: 24px !important;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important; /* Beautiful gradient background instead of black */
+  min-height: 100vh !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  contain: layout style !important;
+  isolation: isolate !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.nurse-ratio-dashboard * {
+  box-sizing: border-box !important;
+}
+
+/* --- Header Section - SCOPED TO NURSE RATIO DASHBOARD ONLY --- */
+.nurse-ratio-dashboard .dashboard-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  margin-bottom: 32px !important;
+  padding: 24px !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; /* Purple gradient header */
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  gap: 24px !important;
+}
+
+.nurse-ratio-dashboard .header-content {
+  flex: 1 !important;
+  min-width: 300px !important;
+}
+
+/* Page Title Styling - Made it a proper heading */
+.page-title.ant-typography-h1,
+.header-content .ant-typography-h2 {
+  font-size: 32px !important; /* Larger font size for main heading */
+  font-weight: 700 !important; /* Bold font weight */
+  color: #ffffff !important; /* White text on colored background */
+  margin-bottom: 12px !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.5px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important; /* Text shadow for better readability */
+}
+
+.nurse-ratio-dashboard .header-content .ant-typography {
+  color: rgba(255, 255, 255, 0.9) !important; /* Slightly transparent white */
+  margin-bottom: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+.nurse-ratio-dashboard .header-controls {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  min-width: 280px !important;
+}
+
+.control-group {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.control-label {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important; /* White text */
+}
+
+.type-selector {
+  width: 100% !important;
+}
+
+.type-selector .ant-select-selector {
+  height: 44px !important;
+  padding: 0 16px !important;
+  border-radius: 8px !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.95) !important; /* Semi-transparent white */
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* --- Dashboard Content --- */
+.dashboard-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 32px !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+}
+
+/* --- Summary Cards Section (Keep Original Colors) --- */
+.summary-section {
+  width: 100% !important;
+}
+
+.summary-cards-grid {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 24px !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+.summary-card-wrapper {
+  flex: 0 0 270px !important;
+  min-width: 270px !important;
+  max-width: 270px !important;
+}
+
+.summary-card {
+  width: 100% !important;
+  height: 140px !important;
+  min-height: 140px !important;
+  max-height: 140px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden !important;
+  contain: layout style size !important;
+  cursor: pointer !important;
+}
+
+.summary-card:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Keep Original Card Colors */
+.summary-card.general-ratio {
+  background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%) !important;
+}
+
+.summary-card.icu-ratio {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%) !important;
+}
+
+.summary-card.compliance {
+  background: linear-gradient(135deg, #722ed1 0%, #9254de 100%) !important;
+}
+
+.summary-card.outliers {
+  background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%) !important;
+}
+
+.summary-card .ant-card-body {
+  padding: 0 !important;
+  height: 108px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.summary-content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+  padding: 20px !important;
+}
+
+.summary-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 48px !important;
+  height: 48px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-radius: 12px !important;
+  font-size: 20px !important;
+  color: #ffffff !important;
+  flex-shrink: 0 !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.summary-info {
+  flex: 1 !important;
+}
+
+.summary-title {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-bottom: 6px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px !important;
+}
+
+.summary-value {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  line-height: 1 !important;
+  margin-bottom: 8px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.summary-status {
+  font-size: 12px !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  line-height: 1.2 !important;
+}
+
+.summary-progress {
+  width: 100% !important;
+  margin: 4px 0 !important;
+}
+
+.summary-progress .ant-progress-inner {
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-radius: 100px !important;
+  height: 4px !important;
+}
+
+.summary-progress .ant-progress-bg {
+  border-radius: 100px !important;
+  height: 4px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* --- Content Grid --- */
+.content-grid {
+  display: grid !important;
+  grid-template-columns: 2fr 1fr !important;
+  grid-template-rows: auto auto !important;
+  gap: 24px !important;
+  grid-template-areas: 
+    "chart ranking"
+    "table table" !important;
+}
+
+.chart-section {
+  grid-area: chart !important;
+}
+
+.ranking-section {
+  grid-area: ranking !important;
+}
+
+.table-section {
+  grid-area: table !important;
+}
+
+/* --- Chart Card --- */
+.chart-card {
+  height: 500px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.95) !important; /* Semi-transparent white */
+  backdrop-filter: blur(10px) !important;
+}
+
+.chart-card .ant-card-head {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important; /* Blue gradient header */
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.chart-card .ant-card-head-title {
+  color: #ffffff !important;
+}
+
+.chart-card .ant-card-body {
+  padding: 20px !important;
+  height: calc(100% - 64px) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.chart-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chart-tooltip {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.tooltip-title {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  margin-bottom: 8px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding-bottom: 4px !important;
+}
+
+.tooltip-content {
+  color: #ffffff !important;
+  font-size: 13px !important;
+}
+
+.tooltip-content div {
+  margin-bottom: 4px !important;
+}
+
+/* --- Ranking Card --- */
+.ranking-card {
+  height: 500px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.ranking-card .ant-card-head {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important; /* Pink-yellow gradient */
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.ranking-card .ant-card-head-title {
+  color: #ffffff !important;
+}
+
+.ranking-card .ant-card-body {
+  padding: 16px !important;
+  height: calc(100% - 64px) !important;
+  overflow-y: auto !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.ranking-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+.ranking-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 16px !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; /* Purple gradient items */
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2) !important;
+}
+
+.ranking-item:hover {
+  transform: translateX(8px) scale(1.02) !important;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3) !important;
+}
+
+.rank-badge {
+  flex-shrink: 0 !important;
+}
+
+.ranking-content {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.hospital-info {
+  margin-bottom: 8px !important;
+}
+
+.hospital-name {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important; /* White text on gradient background */
+  line-height: 1.2 !important;
+  display: block !important;
+  margin-bottom: 4px !important;
+}
+
+.hospital-type {
+  font-size: 12px !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.ranking-metrics {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.ratio-text {
+  font-size: 13px !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.hospital-stats {
+  margin-top: 4px !important;
+}
+
+.beds-nurses {
+  font-size: 12px !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* --- Table Card --- */
+.table-card {
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.table-card .ant-card-head {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%) !important; /* Mint-pink gradient */
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.table-card .ant-card-head-title {
+  color: #262626 !important; /* Dark text on light gradient */
+}
+
+.table-card .ant-card-body {
+  padding: 16px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.table-container {
+  width: 100% !important;
+}
+
+.hospital-details-table .ant-table-thead > tr > th {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  font-weight: 600 !important;
+  color: #ffffff !important; /* White text on gradient */
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.hospital-details-table .ant-table-tbody > tr > td {
+  border-bottom: 1px solid #f5f5f5 !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+
+.hospital-details-table .ant-table-tbody > tr:hover > td {
+  background: rgba(102, 126, 234, 0.1) !important; /* Light purple hover */
+}
+
+.hospital-details-table .ant-table-tbody > tr:nth-child(even) > td {
+  background: rgba(167, 243, 208, 0.1) !important; /* Light green for alternate rows */
+}
+
+.hospital-name-cell {
+  font-weight: 600 !important;
+  color: #262626 !important;
+}
+
+.compliance-tag {
+  font-weight: 500 !important;
+}
+
+/* --- Radio Button Groups with Colors --- */
+.nurse-ratio-dashboard .ant-radio-group {
+  border-radius: 6px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.nurse-ratio-dashboard .ant-radio-button-wrapper {
+  height: 32px !important;
+  line-height: 30px !important;
+  padding: 0 16px !important;
+  border: none !important;
+  background: transparent !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #262626 !important;
+}
+
+.nurse-ratio-dashboard .ant-radio-button-wrapper:first-child {
+  border-radius: 6px 0 0 6px !important;
+}
+
+.nurse-ratio-dashboard .ant-radio-button-wrapper:last-child {
+  border-radius: 0 6px 6px 0 !important;
+}
+
+.nurse-ratio-dashboard .ant-radio-button-wrapper-checked {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%) !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3) !important;
+}
+
+.nurse-ratio-dashboard .ant-radio-button-wrapper:hover {
+  color: #1890ff !important;
+  background: rgba(24, 144, 255, 0.1) !important;
+}
+
+.nurse-ratio-dashboard .ant-radio-button-wrapper-checked:hover {
+  color: white !important;
+}
+
+/* --- Card Titles Enhancement --- */
+.nurse-ratio-dashboard .ant-card-head-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.nurse-ratio-dashboard .ant-card-head-title .anticon {
+  font-size: 16px !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* --- Loading and Error States --- */
+.nurse-ratio-dashboard-loading {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 60vh !important;
+  gap: 24px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.nurse-ratio-dashboard-error,
+.nurse-ratio-dashboard-empty {
+  margin: 24px !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* --- Badge Enhancements --- */
+.ranking-list .ant-badge .ant-badge-count {
+  min-width: 22px !important;
+  height: 22px !important;
+  line-height: 20px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  border-radius: 11px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%) !important;
+  color: #2d3436 !important;
+}
+
+/* --- Hover Effects --- */
+.chart-card:hover,
+.ranking-card:hover,
+.table-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* --- Select Component Enhancements --- */
+.type-selector:hover .ant-select-selector {
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2) !important;
+}
+
+.type-selector.ant-select-focused .ant-select-selector {
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
+}
+
+.type-selector .ant-select-selection-item {
+  font-weight: 500 !important;
+  color: #262626 !important;
+}
+
+.type-selector .ant-select-arrow {
+  color: #8c8c8c !important;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1200px) {
+  .content-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: 
+      "chart"
+      "ranking"
+      "table" !important;
+  }
+  
+  .page-title.ant-typography-h1 {
+    font-size: 28px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .nurse-ratio-dashboard {
+    padding: 16px !important;
+  }
+  
+  .dashboard-header {
+    flex-direction: column !important;
+    padding: 20px !important;
+  }
+  
+  .page-title.ant-typography-h1 {
+    font-size: 24px !important;
+    text-align: center !important;
+  }
+  
+  .chart-card,
+  .ranking-card {
+    height: 400px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title.ant-typography-h1 {
+    font-size: 20px !important;
+  }
+  
+  .chart-card,
+  .ranking-card {
+    height: 350px !important;
+  }
+}
+
+/* --- Animation Enhancements --- */
+.summary-card,
+.chart-card,
+.ranking-card,
+.table-card {
+  animation: fadeInUp 0.6s ease-out !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-title.ant-typography-h1 {
+  animation: titleSlideIn 0.8s ease-out !important;
+}
+
+@keyframes titleSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

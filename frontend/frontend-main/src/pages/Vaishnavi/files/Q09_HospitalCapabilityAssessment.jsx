@@ -112,10 +112,8 @@ const Q09_HospitalCapabilityAssessment = () => {
                     <Card className="primary-score-card">
                       <div className="score-content">
                         <div className="score-header">Overall Capability Score</div>
-                        <div className="score-value-container">
-                          <div className="score-value">{capabilityScore.overallScore}</div>
-                          <div className="score-suffix">/ 100</div>
-                        </div>
+                        <div className="score-value">{capabilityScore.overallScore}</div>
+                        <div className="score-suffix">/ 100</div>
                         <Progress 
                           percent={capabilityScore.overallScore} 
                           showInfo={false} 
@@ -180,10 +178,8 @@ const Q09_HospitalCapabilityAssessment = () => {
                             </div>
                             <div className="stat-info">
                               <div className="stat-title">Infra Score</div>
-                              <div className="score-value-container">
-                                <div className="stat-value">{capabilityScore.categoryScores.infrastructure}</div>
-                                <div className="stat-suffix">/ 100</div>
-                              </div>
+                              <div className="stat-value">{capabilityScore.categoryScores.infrastructure}</div>
+                              <div className="stat-suffix">/ 100</div>
                             </div>
                           </div>
                         </Card>

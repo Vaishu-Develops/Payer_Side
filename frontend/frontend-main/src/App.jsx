@@ -28,6 +28,11 @@ import Q07_DoctorSpecialtyDistribution from './pages/Vaishnavi/files/Q07_DoctorS
 import Q09_HospitalCapabilityAssessment from './pages/Vaishnavi/files/Q09_HospitalCapabilityAssessment';
 import Q11_HospitalStaffingAnalysis from './pages/Vaishnavi/files/Q11_HospitalStaffingAnalysis';
 import Q13_CertificationTimeline from './pages/Vaishnavi/files/Q13_CertificationTimeline';
+import Q15_HospitalLocationAnalysis from './pages/Vaishnavi/files/Q15_HospitalLocationAnalysis';
+import Q17_NurseBedRatioDashboard from './pages/Vaishnavi/files/Q17_NurseBedRatioDashboard';
+import Q19_EquipmentModernizationDashboard from './pages/Vaishnavi/files/Q19_EquipmentModernizationDashboard';
+
+
 
 
 
@@ -249,7 +254,21 @@ function App() {
                     {
                       key: 'q13',
                       label: <Link to="/q13">Q13: Certification Timeline</Link>
-                    }
+                    },
+                    {
+                      key: 'q15',
+                      label: <Link to="/q15">Q15: Hospital Location Analysis</Link>
+                    },
+                    {
+                      key: 'q17',
+                      label: <Link to="/q17">Q17: Nurse-Bed Ratio Dashboard</Link>
+                    },
+                    {
+                      key: 'q19',
+                      label: <Link to="/q19">Q19: Equipment Modernization</Link>
+                    },
+                    
+                    
 
                     // More questions will be added here
                   ]
@@ -288,6 +307,9 @@ function App() {
                 <Route path="/q09" element={<ErrorBoundary><Q09_HospitalCapabilityAssessment /></ErrorBoundary>} />
                 <Route path="/q11" element={<ErrorBoundary><Q11_HospitalStaffingAnalysis /></ErrorBoundary>} />
                 <Route path="/q13" element={<ErrorBoundary><Q13_CertificationTimeline /></ErrorBoundary>} />
+                <Route path="/q15" element={<ErrorBoundary><Q15_HospitalLocationAnalysis /></ErrorBoundary>} />
+                <Route path="/q17" element={<ErrorBoundary><Q17_NurseBedRatioDashboard /></ErrorBoundary>} />
+                <Route path="/q19" element={<ErrorBoundary><Q19_EquipmentModernizationDashboard /></ErrorBoundary>} />
                 {/* More routes will be added here */}
               </Routes>
             </ErrorBoundary>
