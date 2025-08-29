@@ -1,0 +1,998 @@
+/* Certification Coverage Analysis - Complete CSS with Gap Fix */
+.certification-coverage-analysis {
+  width: 100%;
+  background-color: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Loading state */
+.certification-coverage-analysis .cca-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+.certification-coverage-analysis .cca-loading-container p {
+  color: #6b7280;
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+/* Header */
+.certification-coverage-analysis .cca-dashboard-header {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.certification-coverage-analysis .cca-header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 32px;
+  min-height: 88px;
+  gap: 20px;
+}
+
+.certification-coverage-analysis .cca-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.certification-coverage-analysis .cca-main-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.certification-coverage-analysis .cca-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.certification-coverage-analysis .cca-header-controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Dashboard Content */
+.certification-coverage-analysis .cca-dashboard-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* KPI Cards */
+.certification-coverage-analysis .cca-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.certification-coverage-analysis .cca-kpi-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.certification-coverage-analysis .cca-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.certification-coverage-analysis .cca-kpi-content {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.certification-coverage-analysis .cca-kpi-icon-container {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+
+.certification-coverage-analysis .cca-kpi-details {
+  flex: 1;
+}
+
+.certification-coverage-analysis .cca-kpi-value {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  color: #1f2937;
+}
+
+.certification-coverage-analysis .cca-kpi-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.certification-coverage-analysis .cca-kpi-description {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Charts Row Layout - MAIN CHARTS */
+.certification-coverage-analysis .cca-charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+  margin: 0;
+}
+
+.certification-coverage-analysis .cca-chart-wrapper {
+  width: 100%;
+  height: 420px;
+}
+
+.certification-coverage-analysis .cca-chart-card {
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.certification-coverage-analysis .cca-chart-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.certification-coverage-analysis .cca-chart-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  flex-shrink: 0;
+}
+
+.certification-coverage-analysis .cca-chart-icon {
+  font-size: 18px;
+  color: #2563eb;
+}
+
+.certification-coverage-analysis .cca-chart-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.certification-coverage-analysis .cca-chart-body {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.certification-coverage-analysis .cca-chart-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.certification-coverage-analysis .cca-chart-content {
+  width: 100%;
+  height: 100%;
+  max-height: 340px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Distribution Chart - Simple Version */
+.certification-coverage-analysis .distribution-chart {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.certification-coverage-analysis .cca-bar-chart-wrapper {
+  flex: 1;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+/* Simple Summary Cards */
+.certification-coverage-analysis .cca-simple-summary {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.certification-coverage-analysis .cca-summary-card {
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.certification-coverage-analysis .cca-summary-number {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.certification-coverage-analysis .cca-summary-text {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.certification-coverage-analysis .cca-summary-card:hover {
+  background-color: #f1f5f9;
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* Gap Analysis Chart */
+.certification-coverage-analysis .gap-analysis-chart {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.certification-coverage-analysis .cca-pie-chart-wrapper {
+  width: 280px;
+  height: 280px;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Perfectly Centered Text */
+.certification-coverage-analysis .cca-chart-center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.certification-coverage-analysis .cca-center-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.certification-coverage-analysis .cca-center-label {
+  font-size: 11px;
+  color: #4b5563;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Empty state styling */
+.certification-coverage-analysis .cca-empty-state-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  min-height: 300px;
+}
+
+/* Tabs Section */
+.certification-coverage-analysis .cca-tabs {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-top: 0;
+}
+
+/* SPECIFIC FIX FOR TREND CHARTS GAP ISSUE */
+.certification-coverage-analysis .cca-trend-charts-row {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.certification-coverage-analysis .cca-trend-charts-row > .ant-col {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Override any Ant Design Row gutter that might cause spacing */
+.certification-coverage-analysis .cca-trend-charts-row.ant-row {
+  margin-left: -12px !important;
+  margin-right: -12px !important;
+  margin-bottom: 0 !important;
+}
+
+.certification-coverage-analysis .cca-trend-charts-row.ant-row > .ant-col {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  margin-bottom: 0 !important;
+}
+
+/* Ensure the cards themselves don't have bottom margin */
+.certification-coverage-analysis .cca-trend-card {
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 0 !important;
+}
+
+.certification-coverage-analysis .cca-trend-chart {
+  height: 300px;
+  padding: 16px;
+}
+
+/* Table Styles */
+.certification-coverage-analysis .cca-table-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.certification-coverage-analysis .cca-hospital-name {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+.certification-coverage-analysis .cca-hospital-category {
+  color: #6b7280;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.certification-coverage-analysis .cca-cert-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.certification-coverage-analysis .cca-cert-tag {
+  margin: 0;
+  border-radius: 6px;
+}
+
+.certification-coverage-analysis .cca-expiry-date {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.certification-coverage-analysis .cca-cert-type {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.certification-coverage-analysis .cca-coverage-status {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.certification-coverage-analysis .cca-status-label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Expanded Row Content */
+.certification-coverage-analysis .cca-expanded-row {
+  padding: 16px;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.certification-coverage-analysis .cca-expanded-section {
+  margin-bottom: 16px;
+}
+
+.certification-coverage-analysis .cca-expanded-section h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.certification-coverage-analysis .cca-gap-alert {
+  padding: 12px 16px;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+/* Ant Design Overrides - Scoped to certification-coverage-analysis */
+.certification-coverage-analysis .ant-card {
+  box-shadow: none;
+  margin-bottom: 0 !important;
+}
+
+.certification-coverage-analysis .ant-card-body {
+  padding: 0;
+}
+
+.certification-coverage-analysis .ant-card-head {
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  padding: 0 24px;
+  min-height: 60px;
+}
+
+.certification-coverage-analysis .ant-card-head-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Override Ant Design Row/Col spacing that might cause gaps */
+.certification-coverage-analysis .ant-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.certification-coverage-analysis .ant-col {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Specifically target the gutter spacing */
+.certification-coverage-analysis .ant-row[class*="ant-row-gutter"] > .ant-col {
+  margin-bottom: 0 !important;
+}
+
+.certification-coverage-analysis .ant-select-selector {
+  border-radius: 6px !important;
+  border-color: #d1d5db !important;
+}
+
+.certification-coverage-analysis .ant-select-focused .ant-select-selector {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
+}
+
+.certification-coverage-analysis .ant-btn-primary {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+  border-radius: 6px !important;
+}
+
+.certification-coverage-analysis .ant-btn-primary:hover {
+  background-color: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+}
+
+.certification-coverage-analysis .ant-progress-inner {
+  background-color: #e5e7eb;
+}
+
+.certification-coverage-analysis .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #2563eb;
+}
+
+.certification-coverage-analysis .ant-tabs-ink-bar {
+  background-color: #2563eb;
+}
+
+.certification-coverage-analysis .ant-tabs-content-holder {
+  background-color: #ffffff;
+}
+
+.certification-coverage-analysis .ant-tabs-tab {
+  padding: 12px 16px;
+}
+
+.certification-coverage-analysis .ant-table-thead > tr > th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #1f2937;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.certification-coverage-analysis .ant-table-tbody > tr.ant-table-row:hover > td {
+  background-color: #f3f4f6;
+}
+
+.certification-coverage-analysis .ant-table-tbody > tr > td {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.certification-coverage-analysis .ant-empty-image {
+  height: 60px;
+}
+
+.certification-coverage-analysis .ant-empty-description {
+  color: #6b7280;
+}
+
+.certification-coverage-analysis .ant-badge-status-dot {
+  width: 8px;
+  height: 8px;
+}
+
+.certification-coverage-analysis .ant-tag {
+  border-radius: 6px;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.certification-coverage-analysis .ant-tag-success {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.certification-coverage-analysis .ant-tag-warning {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.certification-coverage-analysis .ant-tag-error {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.certification-coverage-analysis .ant-tag-default {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.certification-coverage-analysis .ant-input {
+  border-radius: 6px;
+  border-color: #d1d5db;
+}
+
+.certification-coverage-analysis .ant-input:focus,
+.certification-coverage-analysis .ant-input-focused {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.certification-coverage-analysis .ant-picker {
+  border-radius: 6px;
+  border-color: #d1d5db;
+}
+
+.certification-coverage-analysis .ant-picker:hover {
+  border-color: #2563eb;
+}
+
+.certification-coverage-analysis .ant-picker-focused {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .certification-coverage-analysis .cca-kpi-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .certification-coverage-analysis .cca-charts-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .certification-coverage-analysis .cca-chart-wrapper {
+    height: 380px;
+  }
+  
+  .certification-coverage-analysis .cca-pie-chart-wrapper {
+    width: 240px;
+    height: 240px;
+  }
+  
+  .certification-coverage-analysis .cca-bar-chart-wrapper {
+    height: 180px;
+  }
+  
+  .certification-coverage-analysis .cca-center-value {
+    font-size: 20px;
+  }
+  
+  .certification-coverage-analysis .cca-center-label {
+    font-size: 10px;
+  }
+  
+  .certification-coverage-analysis .cca-chart-center-text {
+    padding: 10px 14px;
+  }
+  
+  .certification-coverage-analysis .cca-header-container {
+    padding: 20px;
+  }
+  
+  .certification-coverage-analysis .cca-dashboard-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .certification-coverage-analysis .cca-kpi-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .certification-coverage-analysis .cca-charts-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .certification-coverage-analysis .cca-chart-wrapper {
+    height: 350px;
+  }
+  
+  .certification-coverage-analysis .cca-pie-chart-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .certification-coverage-analysis .cca-bar-chart-wrapper {
+    height: 160px;
+  }
+  
+  .certification-coverage-analysis .cca-center-value {
+    font-size: 18px;
+  }
+  
+  .certification-coverage-analysis .cca-center-label {
+    font-size: 9px;
+  }
+  
+  .certification-coverage-analysis .cca-chart-center-text {
+    padding: 8px 12px;
+  }
+  
+  .certification-coverage-analysis .cca-header-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .certification-coverage-analysis .cca-header-controls-row > * {
+    width: 100% !important;
+  }
+  
+  .certification-coverage-analysis .cca-dashboard-content {
+    padding: 16px;
+    gap: 24px;
+  }
+  
+  .certification-coverage-analysis .cca-main-title {
+    font-size: 24px;
+  }
+  
+  .certification-coverage-analysis .cca-subtitle {
+    font-size: 14px;
+  }
+  
+  .certification-coverage-analysis .cca-kpi-content {
+    padding: 20px;
+    gap: 16px;
+  }
+  
+  .certification-coverage-analysis .cca-kpi-value {
+    font-size: 28px;
+  }
+  
+  .certification-coverage-analysis .cca-chart-header {
+    padding: 16px 20px;
+  }
+  
+  .certification-coverage-analysis .cca-chart-body {
+    padding: 16px;
+  }
+  
+  .certification-coverage-analysis .ant-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .certification-coverage-analysis .cca-header-container {
+    padding: 16px;
+  }
+  
+  .certification-coverage-analysis .cca-dashboard-content {
+    padding: 12px;
+    gap: 20px;
+  }
+  
+  .certification-coverage-analysis .cca-main-title {
+    font-size: 20px;
+  }
+  
+  .certification-coverage-analysis .cca-kpi-content {
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .certification-coverage-analysis .cca-kpi-icon-container {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .certification-coverage-analysis .cca-kpi-value {
+    font-size: 24px;
+  }
+  
+  .certification-coverage-analysis .cca-kpi-label {
+    font-size: 14px;
+  }
+  
+  .certification-coverage-analysis .cca-kpi-description {
+    font-size: 12px;
+  }
+  
+  .certification-coverage-analysis .cca-chart-wrapper {
+    height: 300px;
+  }
+  
+  .certification-coverage-analysis .cca-pie-chart-wrapper {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .certification-coverage-analysis .cca-bar-chart-wrapper {
+    height: 140px;
+  }
+  
+  .certification-coverage-analysis .cca-center-value {
+    font-size: 16px;
+  }
+  
+  .certification-coverage-analysis .cca-center-label {
+    font-size: 8px;
+  }
+  
+  .certification-coverage-analysis .cca-chart-center-text {
+    padding: 6px 10px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .certification-coverage-analysis .cca-dashboard-header {
+    position: static;
+  }
+  
+  .certification-coverage-analysis .cca-header-controls-row {
+    display: none;
+  }
+  
+  .certification-coverage-analysis .cca-charts-row {
+    break-inside: avoid;
+  }
+  
+  .certification-coverage-analysis .cca-kpi-row {
+    break-inside: avoid;
+  }
+}
+
+/* Focus States for Accessibility */
+.certification-coverage-analysis button:focus,
+.certification-coverage-analysis .ant-btn:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.certification-coverage-analysis .ant-select:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .certification-coverage-analysis .cca-kpi-card {
+    border: 2px solid #000;
+  }
+  
+  .certification-coverage-analysis .cca-chart-card {
+    border: 2px solid #000;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .certification-coverage-analysis .cca-kpi-card:hover {
+    transform: none;
+    transition: none;
+  }
+  
+  .certification-coverage-analysis .cca-chart-card:hover {
+    transition: none;
+  }
+}
+
+
+
+/* COMPLETE GAP FIX - Replace the existing trend chart styles with these */
+
+/* Trend Charts Container - Using CSS Grid instead of Ant Design Row/Col */
+.certification-coverage-analysis .cca-trend-charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.certification-coverage-analysis .cca-trend-chart-item {
+  margin: 0;
+  padding: 0;
+}
+
+/* Trend Analysis Cards - Force remove all margins */
+.certification-coverage-analysis .cca-trend-card {
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.certification-coverage-analysis .cca-trend-chart {
+  height: 300px;
+  padding: 16px;
+  margin: 0;
+}
+
+/* Override ALL Ant Design spacing for trend charts */
+.certification-coverage-analysis .cca-trend-charts-container .ant-card {
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+.certification-coverage-analysis .cca-trend-charts-container .ant-card-body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.certification-coverage-analysis .cca-trend-charts-container .ant-card-head {
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Force remove any inherited spacing */
+.certification-coverage-analysis .cca-trend-charts-container * {
+  margin-bottom: 0 !important;
+}
+
+.certification-coverage-analysis .cca-trend-charts-container::after,
+.certification-coverage-analysis .cca-trend-charts-container::before {
+  display: none;
+}
+
+/* Responsive for trend charts */
+@media (max-width: 768px) {
+  .certification-coverage-analysis .cca-trend-charts-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .certification-coverage-analysis .cca-trend-card {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .certification-coverage-analysis .cca-trend-charts-container {
+    gap: 12px;
+  }
+  
+  .certification-coverage-analysis .cca-trend-card {
+    height: 300px;
+  }
+  
+  .certification-coverage-analysis .cca-trend-chart {
+    height: 250px;
+    padding: 12px;
+  }
+}
+
+/* Remove any default browser spacing */
+.certification-coverage-analysis .cca-trend-charts-container {
+  box-sizing: border-box;
+}
+
+.certification-coverage-analysis .cca-trend-chart-item {
+  box-sizing: border-box;
+}
+
+/* Additional force overrides for stubborn gaps */
+.certification-coverage-analysis .cca-tabs .ant-tabs-content-holder {
+  padding: 0;
+}
+
+.certification-coverage-analysis .cca-tabs .ant-tabs-tabpane {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure tab content has no spacing */
+.certification-coverage-analysis .cca-tabs .ant-tabs-tabpane > * {
+  margin-top: 0 !important;
+}

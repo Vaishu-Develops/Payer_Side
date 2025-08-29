@@ -1,0 +1,583 @@
+/* Hospital Tier Classification System - Scoped Styles */
+.hospital-tier-classification {
+  width: 100%;
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Loading State */
+.hospital-tier-classification .htc-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 20px;
+}
+
+.hospital-tier-classification .htc-loading-container p {
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* Header */
+.hospital-tier-classification .htc-header {
+  background: white;
+  color: #333;
+  padding: 40px 0;
+  margin-bottom: 32px;
+}
+
+.hospital-tier-classification .htc-header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.hospital-tier-classification .htc-main-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hospital-tier-classification .htc-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.hospital-tier-classification .htc-header-controls {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Content */
+.hospital-tier-classification .htc-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* KPI Cards */
+.hospital-tier-classification .htc-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.hospital-tier-classification .htc-kpi-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.hospital-tier-classification .htc-kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+}
+
+.hospital-tier-classification .htc-kpi-content {
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.hospital-tier-classification .htc-kpi-icon-container {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+
+.hospital-tier-classification .htc-kpi-details {
+  flex: 1;
+}
+
+.hospital-tier-classification .htc-kpi-value {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+
+.hospital-tier-classification .htc-kpi-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 4px;
+}
+
+.hospital-tier-classification .htc-kpi-description {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Charts Grid */
+.hospital-tier-classification .htc-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.hospital-tier-classification .htc-chart-item {
+  min-height: 380px;
+  width: 100%;
+  display: flex;
+}
+
+.hospital-tier-classification .htc-chart-card {
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.hospital-tier-classification .htc-chart-header {
+  padding: 24px 24px 0;
+  position: relative;
+}
+
+.hospital-tier-classification .htc-chart-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.hospital-tier-classification .htc-summary-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 12px 0 8px;
+}
+
+.hospital-tier-classification .htc-summary-value span {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+
+.hospital-tier-classification .htc-chart-center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+  width: auto;
+}
+
+.hospital-tier-classification .htc-center-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.hospital-tier-classification .htc-center-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+.hospital-tier-classification .htc-chart-container {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible; /* Changed from hidden to allow tooltips to show */
+}
+
+/* Specific styling for scatter and bar charts to prevent overflow */
+.hospital-tier-classification .htc-chart-container canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+.hospital-tier-classification .htc-scatter-container,
+.hospital-tier-classification .htc-bar-container {
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  position: relative;
+  aspect-ratio: 4/3;  /* Maintain a consistent aspect ratio */
+  cursor: pointer; /* Show pointer cursor when hovering over charts */
+}
+
+/* Ensure Chart.js tooltips are visible */
+#chartjs-tooltip, .chartjs-tooltip {
+  z-index: 100;
+  opacity: 1 !important;
+  pointer-events: none;
+  transition: all 0.1s ease;
+  max-width: 300px;
+}
+
+/* Canvas container for better chart positioning */
+.hospital-tier-classification .htc-scatter-container > canvas,
+.hospital-tier-classification .htc-bar-container > canvas {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1;  /* Ensure canvas is above background but below tooltips */
+}
+
+@media (max-width: 1200px) {
+  .hospital-tier-classification .htc-scatter-container,
+  .hospital-tier-classification .htc-bar-container {
+    padding: 10px;
+    aspect-ratio: 3/2; /* Slightly different ratio for smaller screens */
+  }
+}
+
+.hospital-tier-classification .htc-empty-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: #64748b;
+}
+
+/* Table */
+.hospital-tier-classification .htc-table-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.hospital-tier-classification .htc-table-header {
+  padding: 24px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hospital-tier-classification .htc-table-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+/* Hospital Details */
+.hospital-tier-classification .htc-hospital-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hospital-tier-classification .htc-hospital-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.3;
+}
+
+.hospital-tier-classification .htc-hospital-meta {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.hospital-tier-classification .htc-hospital-stats {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* Tier Classification */
+.hospital-tier-classification .htc-tier-classification {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hospital-tier-classification .htc-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.hospital-tier-classification .htc-score-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hospital-tier-classification .htc-score-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Capacity Metrics */
+.hospital-tier-classification .htc-capacity-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hospital-tier-classification .htc-metric-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hospital-tier-classification .htc-metric-label {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.hospital-tier-classification .htc-metric-value {
+  font-size: 14px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Quality Indicators */
+.hospital-tier-classification .htc-quality-indicators {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hospital-tier-classification .htc-certifications {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.hospital-tier-classification .htc-cert-tag {
+  margin: 0;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.hospital-tier-classification .htc-quality-score {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.hospital-tier-classification .htc-excellence {
+  font-size: 12px;
+}
+
+/* Infrastructure */
+.hospital-tier-classification .htc-infrastructure {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hospital-tier-classification .htc-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.hospital-tier-classification .htc-services .ant-badge {
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
+.hospital-tier-classification .htc-infrastructure-score {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Ant Design Overrides */
+.hospital-tier-classification .ant-card {
+  border-radius: 16px;
+}
+
+.hospital-tier-classification .ant-card-body {
+  padding: 0;
+}
+
+.hospital-tier-classification .ant-table-thead > tr > th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.hospital-tier-classification .ant-table-tbody > tr:hover > td {
+  background-color: #f8fafc;
+}
+
+.hospital-tier-classification .ant-progress-bg {
+  border-radius: 4px;
+}
+
+.hospital-tier-classification .ant-select-selector {
+  border-radius: 8px;
+  border-color: #d1d5db;
+}
+
+.hospital-tier-classification .ant-btn-primary {
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .hospital-tier-classification .htc-chart-container {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .hospital-tier-classification .htc-kpi-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .hospital-tier-classification .htc-charts-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .hospital-tier-classification .htc-chart-item {
+    min-height: 350px;
+  }
+  
+  .hospital-tier-classification .htc-chart-header {
+    padding: 20px 20px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hospital-tier-classification .htc-header {
+    padding: 32px 0;
+  }
+  
+  .hospital-tier-classification .htc-main-title {
+    font-size: 28px;
+  }
+  
+  .hospital-tier-classification .htc-subtitle {
+    font-size: 16px;
+  }
+  
+  .hospital-tier-classification .htc-header-controls {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .hospital-tier-classification .htc-kpi-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .hospital-tier-classification .htc-content {
+    padding: 0 16px 32px;
+  }
+  
+  .hospital-tier-classification .htc-table-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .hospital-tier-classification .htc-chart-container {
+    min-height: 260px;
+    padding: 16px;
+  }
+  
+  .hospital-tier-classification .htc-chart-item {
+    min-height: 320px;
+  }
+  
+  .hospital-tier-classification .htc-chart-header h3 {
+    font-size: 16px;
+  }
+  
+  .hospital-tier-classification .htc-summary-value {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hospital-tier-classification .htc-kpi-content {
+    padding: 20px;
+    gap: 16px;
+  }
+  
+  .hospital-tier-classification .htc-kpi-icon-container {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .hospital-tier-classification .htc-kpi-value {
+    font-size: 28px;
+  }
+  
+  .hospital-tier-classification .htc-chart-container {
+    min-height: 240px;
+    padding: 12px;
+  }
+  
+  .hospital-tier-classification .htc-chart-item {
+    min-height: 300px;
+  }
+  
+  .hospital-tier-classification .htc-chart-header {
+    padding: 16px 16px 0;
+  }
+  
+  .hospital-tier-classification .htc-charts-grid {
+    gap: 20px;
+  }
+}
