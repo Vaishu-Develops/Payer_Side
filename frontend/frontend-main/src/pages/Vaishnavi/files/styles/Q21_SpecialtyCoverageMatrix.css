@@ -1,0 +1,800 @@
+/* Specialty Coverage Matrix - Fully Scoped CSS */
+.specialty-coverage-matrix {
+  width: 100%;
+  background-color: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Loading state */
+.specialty-coverage-matrix ..specialty-coverage-matrix .scm-city-name {
+  font-weight: 600;
+  font-size: 12px; /* Reduced from 14px */
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.specialty-coverage-matrix .scm-city-state {
+  font-size: 11px; /* Reduced from 12px */
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}ntainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+/* Header */
+.specialty-coverage-matrix .scm-dashboard-header {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.specialty-coverage-matrix .scm-header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 32px;
+  min-height: 88px;
+  gap: 20px;
+}
+
+.specialty-coverage-matrix .scm-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.specialty-coverage-matrix .scm-main-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.specialty-coverage-matrix .scm-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.specialty-coverage-matrix .scm-header-controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Dashboard Content */
+.specialty-coverage-matrix .scm-dashboard-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* KPI Cards */
+.specialty-coverage-matrix .scm-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.specialty-coverage-matrix .scm-kpi-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.specialty-coverage-matrix .scm-kpi-content {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.specialty-coverage-matrix .scm-kpi-icon-container {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+
+.specialty-coverage-matrix .scm-kpi-icon-container.blue {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.specialty-coverage-matrix .scm-kpi-icon-container.yellow {
+  background: #fffbeb;
+  border-color: #fef3c7;
+}
+
+.specialty-coverage-matrix .scm-kpi-icon-container.green {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.specialty-coverage-matrix .scm-kpi-details {
+  flex: 1;
+  min-width: 0; /* Allow text to shrink */
+  overflow: hidden; /* Prevent text overflow */
+}
+
+.specialty-coverage-matrix .scm-kpi-value {
+  font-size: 28px; /* Reduced from 32px */
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.specialty-coverage-matrix .scm-kpi-label {
+  font-size: 14px; /* Reduced from 16px */
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.specialty-coverage-matrix .scm-kpi-description {
+  font-size: 12px; /* Reduced from 14px */
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Matrix Styles */
+/* Overflow settings - visible only for tooltips */
+.ant-card, 
+.ant-card-body {
+  overflow: hidden !important;
+}
+
+/* Override for tooltip visibility */
+.specialty-coverage-matrix .scm-cell-tooltip {
+  overflow: visible !important;
+  pointer-events: none;
+}
+
+.specialty-coverage-matrix .scm-chart-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+.specialty-coverage-matrix .scm-chart-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.specialty-coverage-matrix .scm-chart-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  flex: 1;
+}
+
+.specialty-coverage-matrix .scm-matrix-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.specialty-coverage-matrix .scm-chart-content {
+  padding: 24px;
+  overflow: auto;
+  flex: 1;
+  max-width: 100%;
+}
+
+.specialty-coverage-matrix .scm-matrix-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Matrix Legend */
+.specialty-coverage-matrix .scm-matrix-legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.specialty-coverage-matrix .scm-legend-title {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.specialty-coverage-matrix .scm-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.specialty-coverage-matrix .scm-legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* Matrix Grid */
+.specialty-coverage-matrix .scm-matrix-grid-container {
+  overflow: auto;
+  max-height: 600px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.specialty-coverage-matrix .scm-matrix-grid {
+  width: fit-content; /* Use fit-content to prevent extra white space */
+  max-width: fit-content;
+  display: table; /* Using table layout to ensure the grid takes only the necessary space */
+}
+
+.specialty-coverage-matrix .scm-matrix-header-row {
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #ffffff;
+}
+
+.specialty-coverage-matrix .scm-matrix-corner-cell {
+  min-width: 200px;
+  flex-shrink: 0;
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  position: sticky;
+  left: 0;
+  z-index: 3;
+}
+
+.specialty-coverage-matrix .scm-sort-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.specialty-coverage-matrix .scm-sort-controls .ant-btn {
+  font-size: 12px;
+  padding: 4px 8px;
+  height: auto;
+}
+
+.specialty-coverage-matrix .scm-sort-controls .ant-btn.active {
+  background-color: #dbeafe;
+  border-color: #93c5fd;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.specialty-coverage-matrix .scm-matrix-header-cell {
+  min-width: 120px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  text-align: center;
+}
+
+.specialty-coverage-matrix .scm-specialty-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 60px;
+}
+
+.specialty-coverage-matrix .scm-specialty-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.specialty-coverage-matrix .scm-specialty-category {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.specialty-coverage-matrix .scm-specialty-stats {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Matrix Data Rows */
+.specialty-coverage-matrix .scm-matrix-data-row {
+  display: flex;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.specialty-coverage-matrix .scm-matrix-row-header {
+  min-width: 200px;
+  flex-shrink: 0;
+  padding: 16px;
+  background-color: #f9fafb;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.specialty-coverage-matrix .scm-city-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.specialty-coverage-matrix .scm-city-name {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+.specialty-coverage-matrix .scm-city-state {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.specialty-coverage-matrix .scm-city-stats {
+  margin-top: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* Matrix Cells */
+.specialty-coverage-matrix .scm-matrix-cell {
+  min-width: 120px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.specialty-coverage-matrix .scm-cell-value {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  text-align: center;
+}
+
+.specialty-coverage-matrix .scm-matrix-cell:hover {
+  transform: scale(1.05);
+  z-index: 10;
+  outline: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.specialty-coverage-matrix .scm-matrix-cell.selected {
+  box-shadow: 0 0 0 2px #2563eb, 0 0 8px rgba(37, 99, 235, 0.5);
+  z-index: 15; /* Higher than hover to ensure selection is visible */
+  transform: scale(1.05);
+}
+
+/* Black tooltip styling */
+.specialty-coverage-matrix .scm-cell-tooltip {
+  position: fixed; /* Use fixed positioning for consistent behavior */
+  top: 0;
+  left: 0;
+  z-index: 9999 !important; /* Highest z-index */
+  background-color: #111827;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.1);
+  max-width: 300px;
+  min-width: 200px;
+  transform: translate(-50%, -110%); /* Position well above the cell */
+  white-space: normal; /* Allow text wrapping */
+  opacity: 0.97; /* Slight transparency */
+  transition: none; /* No transition for better accuracy */
+  will-change: transform; /* Performance optimization for animations */
+}
+
+.tooltip-portal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.specialty-coverage-matrix .scm-cell-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #111827;
+}
+
+.specialty-coverage-matrix .scm-tooltip-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  white-space: normal;
+  max-width: 280px;
+}
+
+.specialty-coverage-matrix .scm-tooltip-content div {
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* Side Panel */
+.specialty-coverage-matrix .scm-side-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.specialty-coverage-matrix .scm-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.specialty-coverage-matrix .scm-panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.specialty-coverage-matrix .scm-panel-content {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.specialty-coverage-matrix .scm-detail-section {
+  margin-bottom: 24px;
+}
+
+.specialty-coverage-matrix .scm-detail-section h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.specialty-coverage-matrix .scm-detail-section p {
+  margin: 8px 0;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.specialty-coverage-matrix .scm-hospital-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.specialty-coverage-matrix .scm-hospital-item {
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  border: 1px solid #f1f5f9;
+}
+
+.specialty-coverage-matrix .scm-hospital-name {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.specialty-coverage-matrix .scm-hospital-type {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.specialty-coverage-matrix .scm-gap-info {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  color: #b91c1c;
+}
+
+.specialty-coverage-matrix .scm-gap-recommendation h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+}
+
+.specialty-coverage-matrix .scm-gap-recommendation ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.specialty-coverage-matrix .scm-gap-recommendation li {
+  margin: 4px 0;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+/* Bottom Panels */
+.specialty-coverage-matrix .scm-ranking-list,
+.specialty-coverage-matrix .scm-specialty-list,
+.specialty-coverage-matrix .scm-regional-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.specialty-coverage-matrix .scm-ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  border: 1px solid #f1f5f9;
+}
+
+.specialty-coverage-matrix .scm-rank-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.specialty-coverage-matrix .scm-rank-details {
+  flex: 1;
+}
+
+.specialty-coverage-matrix .scm-rank-name {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.specialty-coverage-matrix .scm-rank-stats {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.specialty-coverage-matrix .scm-rank-score {
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.specialty-coverage-matrix .scm-specialty-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  border: 1px solid #f1f5f9;
+}
+
+.specialty-coverage-matrix .scm-specialty-info {
+  flex: 1;
+}
+
+.specialty-coverage-matrix .scm-specialty-name {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.specialty-coverage-matrix .scm-specialty-progress {
+  width: 140px;
+  flex-shrink: 0;
+}
+
+.specialty-coverage-matrix .scm-regional-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  border: 1px solid #f1f5f9;
+}
+
+.specialty-coverage-matrix .scm-regional-name {
+  width: 120px;
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.specialty-coverage-matrix .scm-regional-count {
+  width: 80px;
+  text-align: right;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.specialty-coverage-matrix .scm-regional-bar {
+  flex: 1;
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-left: 12px;
+}
+
+.specialty-coverage-matrix .scm-regional-fill {
+  height: 100%;
+  background-color: #3b82f6;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .specialty-coverage-matrix .scm-kpi-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .specialty-coverage-matrix .scm-kpi-content {
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .specialty-coverage-matrix .scm-kpi-icon-container {
+    width: 48px;
+    height: 48px;
+  }
+
+  .specialty-coverage-matrix .scm-kpi-value {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .specialty-coverage-matrix .scm-kpi-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .specialty-coverage-matrix .scm-header-controls-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .specialty-coverage-matrix .scm-header-controls-row > * {
+    width: 100% !important;
+    min-width: auto !important;
+  }
+  
+  .specialty-coverage-matrix .scm-matrix-cell {
+    min-width: 80px;
+    height: 50px;
+  }
+
+  .specialty-coverage-matrix .scm-kpi-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .specialty-coverage-matrix .scm-kpi-icon-container {
+    width: 40px;
+    height: 40px;
+  }
+
+  .specialty-coverage-matrix .scm-kpi-value {
+    font-size: 20px;
+  }
+
+  .specialty-coverage-matrix .scm-kpi-label {
+    font-size: 13px;
+  }
+
+  .specialty-coverage-matrix .scm-kpi-description {
+    font-size: 11px;
+  }
+}
+
+/* Fix for any Ant Design specific styles to avoid conflicts */
+.specialty-coverage-matrix .ant-card {
+  box-shadow: none;
+}
+
+.specialty-coverage-matrix .ant-card-body {
+  padding: 0;
+}
+
+.specialty-coverage-matrix .ant-select-selector {
+  border-radius: 6px !important;
+}
+
+.specialty-coverage-matrix .ant-select-focused .ant-select-selector {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
+}
+
+.specialty-coverage-matrix .ant-btn-primary {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+.specialty-coverage-matrix .ant-btn-primary:hover {
+  background-color: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+}
+
+.specialty-coverage-matrix .ant-tag {
+  margin: 0;
+}
+
+.specialty-coverage-matrix .ant-progress-text {
+  color: #4b5563;
+}

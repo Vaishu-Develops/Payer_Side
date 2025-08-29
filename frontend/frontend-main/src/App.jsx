@@ -31,7 +31,9 @@ import Q13_CertificationTimeline from './pages/Vaishnavi/files/Q13_Certification
 import Q15_HospitalLocationAnalysis from './pages/Vaishnavi/files/Q15_HospitalLocationAnalysis';
 import Q17_NurseBedRatioDashboard from './pages/Vaishnavi/files/Q17_NurseBedRatioDashboard';
 import Q19_EquipmentModernizationDashboard from './pages/Vaishnavi/files/Q19_EquipmentModernizationDashboard';
-
+import Q21_SpecialtyCoverageMatrix from './pages/Vaishnavi/files/Q21_SpecialtyCoverageMatrix';
+import Q23_CertificationCoverageAnalysis from './pages/Vaishnavi/files/Q23_CertificationCoverageAnalysis';
+import Q25_HospitalTierClassification  from './pages/Vaishnavi/files/Q25_HospitalTierClassification';
 
 
 
@@ -267,6 +269,19 @@ function App() {
                       key: 'q19',
                       label: <Link to="/q19">Q19: Equipment Modernization</Link>
                     },
+                    {
+                      key: 'q21',
+                      label: <Link to="/q21">Q21: Specialty Coverage Matrix</Link>
+                    },
+                    {
+                      key: 'q23',
+                      label: <Link to="/q23">Q23: Certification Coverage Analysis</Link>
+                    },
+                    {
+                      key: 'q25',
+                      label: <Link to="/q25">Q25: Hospital Tier Classification</Link>
+                    },
+                  
                     
                     
 
@@ -310,6 +325,9 @@ function App() {
                 <Route path="/q15" element={<ErrorBoundary><Q15_HospitalLocationAnalysis /></ErrorBoundary>} />
                 <Route path="/q17" element={<ErrorBoundary><Q17_NurseBedRatioDashboard /></ErrorBoundary>} />
                 <Route path="/q19" element={<ErrorBoundary><Q19_EquipmentModernizationDashboard /></ErrorBoundary>} />
+                <Route path="/q21" element={<ErrorBoundary><Q21_SpecialtyCoverageMatrix /></ErrorBoundary>} />
+                <Route path="/q23" element={<ErrorBoundary><Q23_CertificationCoverageAnalysis /></ErrorBoundary>} />
+                <Route path="/q25" element={<ErrorBoundary><Q25_HospitalTierClassification /></ErrorBoundary>} />
                 {/* More routes will be added here */}
               </Routes>
             </ErrorBoundary>

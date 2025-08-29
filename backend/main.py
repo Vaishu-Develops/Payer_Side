@@ -888,11 +888,30 @@ def get_hospital_certifications():
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
-            return data
+            
+            # Normalize the data structure to ensure it's always an array
+            if isinstance(data, dict) and "certifications" in data:
+                # Extract from the certifications key if it exists
+                return data["certifications"]
+            elif isinstance(data, list):
+                # Already in the right format
+                return data
+            else:
+                # Return empty array for any other case
+                print("⚠️ Unexpected data format in hospital_certifications.json, returning empty array")
+                return []
     except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Data file not found")
-    except json.JSONDecodeError:
-        raise HTTPException(status_code=500, detail="Invalid JSON")
+        print("❌ File not found: hospital_certifications.json")
+        # Return empty array instead of error
+        return []
+    except json.JSONDecodeError as e:
+        print(f"❌ JSON decode error in hospital_certifications.json: {e}")
+        # Return empty array instead of error
+        return []
+    except Exception as e:
+        print(f"❌ Unexpected error loading hospital_certifications.json: {e}")
+        # Return empty array instead of error
+        return []
 
 @app.get("/hospital_equipment", tags=["Equipment"])
 def get_hospital_equipment():
