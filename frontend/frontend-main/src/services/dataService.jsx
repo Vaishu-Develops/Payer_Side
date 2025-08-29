@@ -1,5 +1,7 @@
+//dataService.jsx
+
 // Comprehensive Data Service - Fetches data from the backend API
-const API_BASE_URL = 'http://127.0.0.1:8000';
+const API_BASE_URL = '/api';
 
 class DataService {
   async handleRequest(endpoint, options = {}) {
@@ -114,7 +116,15 @@ class DataService {
   }
 
   async getWardData(hospitalId) {
-    return this.handleRequest(`/hospitals/${hospitalId}/wards`);
+    // Since there's no hospital-specific endpoint, get all wards and filter by hospital_id
+    const allWardsResponse = await this.handleRequest('/wards_rooms');
+    if (allWardsResponse.success) {
+      const allWards = allWardsResponse.data;
+      const hospitalWards = Array.isArray(allWards) ? 
+        allWards.filter(ward => ward.hospital_id == hospitalId) : [];
+      return { success: true, data: hospitalWards };
+    }
+    return allWardsResponse;
   }
 
   async fetchHospitalsData() {

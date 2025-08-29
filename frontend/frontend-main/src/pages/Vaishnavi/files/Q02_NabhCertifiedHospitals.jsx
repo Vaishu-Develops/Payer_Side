@@ -2,7 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { useNabhData } from '../../../hooks/useNabhData';
 import { Card, Row, Col, Input, Select, Typography, Spin, Alert, Empty } from 'antd';
-import HospitalCertificationCard from './shared/HospitalCertificationCard';
+import HospitalCertificationCard from './components/HospitalCertificationCard';
 import './styles/Q02_NabhCertifiedHospitals.css';
 
 const { Title, Text } = Typography;

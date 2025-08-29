@@ -47,10 +47,19 @@ const HospitalProfileDrawer = ({ open, onClose, hospitalId, hospitalName }) => {
       setLoading(true);
       setError(null);
       try {
+        console.log('🔄 Fetching hospital profile for ID:', hospitalId);
         const data = await getHospitalProfile(hospitalId);
+        console.log('✅ Hospital profile data received:', data);
+        console.log('📊 Data structure:', {
+          hospital: !!data.hospital,
+          addresses: data.addresses?.length || 0,
+          certifications: data.certifications?.length || 0,
+          equipment: data.equipment?.length || 0,
+          equipment_summary: !!data.equipment_summary
+        });
         setProfileData(data);
       } catch (err) {
-        console.error('Profile fetch error:', err);
+        console.error('❌ Profile fetch error:', err);
         setError(err.message || 'Failed to load hospital profile');
       } finally {
         setLoading(false);
@@ -201,6 +210,7 @@ const HospitalProfileDrawer = ({ open, onClose, hospitalId, hospitalName }) => {
   };
 
   const renderAddress = () => {
+    console.log('🏠 Rendering address, data:', profileData?.addresses);
     const addresses = profileData?.addresses;
     if (!addresses || addresses.length === 0) {
       return <Empty description="No address information available." />;
@@ -239,7 +249,8 @@ const HospitalProfileDrawer = ({ open, onClose, hospitalId, hospitalName }) => {
   };
 
   const renderCertifications = () => {
-    if (!profileData?.certifications) return null;
+    console.log('🏆 Rendering certifications, data:', profileData?.certifications);
+    if (!profileData?.certifications) return <Empty description="No certification data available." />;
 
     return (
       <Card title="Certifications" style={{ marginBottom: 16 }}>
@@ -275,38 +286,70 @@ const HospitalProfileDrawer = ({ open, onClose, hospitalId, hospitalName }) => {
   };
 
   const renderEquipmentSummary = () => {
-    if (!profileData?.equipment_summary) return null;
-    const equipment = profileData.equipment_summary;
+    console.log('🔧 Rendering equipment, data:', profileData?.equipment, 'summary:', profileData?.equipment_summary);
+    if (!profileData?.equipment_summary && !profileData?.equipment) return <Empty description="No equipment data available." />;
+    
+    const equipment = profileData.equipment_summary || {};
+    const equipmentList = profileData.equipment || [];
 
     return (
-      <Card title="Equipment Overview" style={{ marginBottom: 16 }}>
-        <Row gutter={16}>
-          <Col span={8}>
-            <Statistic
-              title="Diagnostic"
-              value={equipment.diagnostic_count || 0}
-              prefix={<MedicineBoxOutlined />}
-              valueStyle={{ color: '#1890ff' }}
+      <>
+        <Card title="Equipment Overview" style={{ marginBottom: 16 }}>
+          <Row gutter={16}>
+            <Col span={8}>
+              <Statistic
+                title="Diagnostic"
+                value={equipment.diagnostic_count || 0}
+                prefix={<MedicineBoxOutlined />}
+                valueStyle={{ color: '#1890ff' }}
+              />
+            </Col>
+            <Col span={8}>
+              <Statistic
+                title="Critical Care"
+                value={equipment.critical_care_count || 0}
+                prefix={<HeartOutlined />}
+                valueStyle={{ color: '#52c41a' }}
+              />
+            </Col>
+            <Col span={8}>
+              <Statistic
+                title="Surgical"
+                value={equipment.surgical_count || 0}
+                prefix={<ToolOutlined />}
+                valueStyle={{ color: '#722ed1' }}
+              />
+            </Col>
+          </Row>
+        </Card>
+
+        {equipmentList.length > 0 && (
+          <Card title="Equipment Details" style={{ marginBottom: 16 }}>
+            <List
+              dataSource={equipmentList.slice(0, 10)} // Show first 10 items
+              renderItem={equipment => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={<ToolOutlined style={{ fontSize: 20, color: '#1890ff' }} />}
+                    title={equipment?.equipment_name || 'Unknown Equipment'}
+                    description={
+                      <Space>
+                        <Tag color="blue">{equipment?.category || 'Unknown'}</Tag>
+                        <Tag color={equipment?.is_available ? 'green' : 'red'}>
+                          {equipment?.is_available ? 'Available' : 'Not Available'}
+                        </Tag>
+                      </Space>
+                    }
+                  />
+                </List.Item>
+              )}
             />
-          </Col>
-          <Col span={8}>
-            <Statistic
-              title="Critical Care"
-              value={equipment.critical_care_count || 0}
-              prefix={<HeartOutlined />}
-              valueStyle={{ color: '#52c41a' }}
-            />
-          </Col>
-          <Col span={8}>
-            <Statistic
-              title="Surgical"
-              value={equipment.surgical_count || 0}
-              prefix={<ToolOutlined />}
-              valueStyle={{ color: '#722ed1' }}
-            />
-          </Col>
-        </Row>
-      </Card>
+            {equipmentList.length > 10 && (
+              <Text type="secondary">... and {equipmentList.length - 10} more items</Text>
+            )}
+          </Card>
+        )}
+      </>
     );
   };
 

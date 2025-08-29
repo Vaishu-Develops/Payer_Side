@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
+    "@ant-design/plots": "^2.6.3",
     "antd": "^5.27.0",
     "axios": "^1.11.0",
     "leaflet": "^1.9.4",
+    "lucide-react": "^0.541.0",
     "mapbox-gl": "^3.14.0",
     "maplibre-gl": "^5.6.2",
     "react": "^19.1.1",

@@ -19,13 +19,20 @@ import Q20_HospitalMap from './pages/Vaishnavi/files/Q20_HospitalMap';
 import Q22_CertificationMatrix from './pages/Vaishnavi/files/Q22_CertificationMatrix';
 import Q24_ContactAvailability from './pages/Vaishnavi/files/Q24_ContactAvailability';
 import Q26_StaffingAdequacy from './pages/Vaishnavi/files/Q26_StaffingAdequacy';
-import HospitalProfileDrawer from './pages/Vaishnavi/files/shared/HospitalProfileDrawer';
+import HospitalProfileDrawer from './pages/Vaishnavi/files/components/HospitalProfileDrawer';
 import testAPI from './utils/apiTest';
 import Q01_HospitalTypeDistribution from './pages/Vaishnavi/files/Q01_HospitalTypeDistribution';
 import Q03_EmergencyContactAvailability from './pages/Vaishnavi/files/Q03_EmergencyContactAvailability';
 import Q05_HospitalInfrastructureScoring from './pages/Vaishnavi/files/Q05_HospitalInfrastructureScoring';
 import Q07_DoctorSpecialtyDistribution from './pages/Vaishnavi/files/Q07_DoctorSpecialtyDistribution';
 import Q09_HospitalCapabilityAssessment from './pages/Vaishnavi/files/Q09_HospitalCapabilityAssessment';
+import Q11_HospitalStaffingAnalysis from './pages/Vaishnavi/files/Q11_HospitalStaffingAnalysis';
+import Q13_CertificationTimeline from './pages/Vaishnavi/files/Q13_CertificationTimeline';
+import Q15_HospitalLocationAnalysis from './pages/Vaishnavi/files/Q15_HospitalLocationAnalysis';
+import Q17_NurseBedRatioDashboard from './pages/Vaishnavi/files/Q17_NurseBedRatioDashboard';
+import Q19_EquipmentModernizationDashboard from './pages/Vaishnavi/files/Q19_EquipmentModernizationDashboard';
+
+
 
 
 
@@ -240,6 +247,28 @@ function App() {
                       key: 'q09',
                       label: <Link to="/q09">Q09: Hospital Capability Assessment</Link>
                     },
+                    {
+                      key: 'q11',
+                      label: <Link to="/q11">Q11: Hospital Staffing Analysis</Link>
+                    },
+                    {
+                      key: 'q13',
+                      label: <Link to="/q13">Q13: Certification Timeline</Link>
+                    },
+                    {
+                      key: 'q15',
+                      label: <Link to="/q15">Q15: Hospital Location Analysis</Link>
+                    },
+                    {
+                      key: 'q17',
+                      label: <Link to="/q17">Q17: Nurse-Bed Ratio Dashboard</Link>
+                    },
+                    {
+                      key: 'q19',
+                      label: <Link to="/q19">Q19: Equipment Modernization</Link>
+                    },
+                    
+                    
 
                     // More questions will be added here
                   ]
@@ -276,6 +305,11 @@ function App() {
                 <Route path="/q05" element={<ErrorBoundary><Q05_HospitalInfrastructureScoring /></ErrorBoundary>} />
                 <Route path="/q07" element={<ErrorBoundary><Q07_DoctorSpecialtyDistribution /></ErrorBoundary>} />
                 <Route path="/q09" element={<ErrorBoundary><Q09_HospitalCapabilityAssessment /></ErrorBoundary>} />
+                <Route path="/q11" element={<ErrorBoundary><Q11_HospitalStaffingAnalysis /></ErrorBoundary>} />
+                <Route path="/q13" element={<ErrorBoundary><Q13_CertificationTimeline /></ErrorBoundary>} />
+                <Route path="/q15" element={<ErrorBoundary><Q15_HospitalLocationAnalysis /></ErrorBoundary>} />
+                <Route path="/q17" element={<ErrorBoundary><Q17_NurseBedRatioDashboard /></ErrorBoundary>} />
+                <Route path="/q19" element={<ErrorBoundary><Q19_EquipmentModernizationDashboard /></ErrorBoundary>} />
                 {/* More routes will be added here */}
               </Routes>
             </ErrorBoundary>

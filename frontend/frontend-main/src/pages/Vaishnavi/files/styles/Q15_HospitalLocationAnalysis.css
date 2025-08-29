@@ -1,0 +1,703 @@
+/* =======================================================
+   Hospital Location Analysis Dashboard - Perfect Structure
+   ======================================================= */
+
+/* --- Main Container --- */
+.location-analysis-dashboard {
+  padding: 24px !important;
+  background: #f5f7fa !important;
+  min-height: 100vh !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  contain: layout style !important;
+  isolation: isolate !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.location-analysis-dashboard * {
+  box-sizing: border-box !important;
+}
+
+/* --- Header Section - Fixed Alignment --- */
+.location-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  margin-bottom: 32px !important;
+  padding: 24px !important;
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #f0f0f0 !important;
+  gap: 24px !important;
+}
+
+.header-left {
+  flex: 1 !important;
+  min-width: 300px !important;
+}
+
+.header-left .ant-typography-h1 {
+  margin-bottom: 12px !important;
+  color: #262626 !important;
+  font-weight: 700 !important;
+  font-size: 32px !important;
+  line-height: 1.2 !important;
+}
+
+.header-left .ant-typography-h2 {
+  margin-bottom: 8px !important;
+  color: #262626 !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+}
+
+.subtitle-wrapper {
+  margin-top: 8px !important;
+}
+
+.header-left .ant-typography {
+  color: #8c8c8c !important;
+  margin-bottom: 0 !important;
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+}
+
+.header-right {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  min-width: 300px !important;
+  align-items: flex-end !important;
+}
+
+.control-group {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  align-items: flex-start !important;
+  width: 100% !important;
+}
+
+.control-label {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+  margin-bottom: 0 !important;
+}
+
+/* --- Hospital Selector - Fixed Text Alignment --- */
+.hospital-selector {
+  width: 100% !important;
+  min-width: 300px !important;
+}
+
+.hospital-selector .ant-select-selector {
+  height: 48px !important;
+  padding: 0 16px !important;
+  border-radius: 8px !important;
+  border: 2px solid #d9d9d9 !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.hospital-selector:hover .ant-select-selector {
+  border-color: #40a9ff !important;
+}
+
+.hospital-selector.ant-select-focused .ant-select-selector {
+  border-color: #1890ff !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+}
+
+.hospital-option {
+  padding: 4px 0 !important;
+  line-height: 1.4 !important;
+}
+
+.option-title {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+  line-height: 1.2 !important;
+}
+
+.option-subtitle {
+  font-size: 12px !important;
+  color: #8c8c8c !important;
+  line-height: 1.2 !important;
+  margin-top: 2px !important;
+}
+
+/* --- Address Type Selector --- */
+.address-type-selector {
+  display: flex !important;
+  width: 100% !important;
+}
+
+.address-type-selector .ant-radio-button-wrapper {
+  height: 48px !important;
+  line-height: 46px !important;
+  padding: 0 20px !important;
+  border: 2px solid #d9d9d9 !important;
+  transition: all 0.3s ease !important;
+  flex: 1 !important;
+  text-align: center !important;
+}
+
+.address-type-selector .ant-radio-button-wrapper:first-child {
+  border-radius: 8px 0 0 8px !important;
+}
+
+.address-type-selector .ant-radio-button-wrapper:last-child {
+  border-radius: 0 8px 8px 0 !important;
+}
+
+/* --- Content Layout --- */
+.location-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 32px !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+/* --- Score Section - Fixed Alignment --- */
+.score-section {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.accessibility-score-card {
+  width: 400px !important;
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(24, 144, 255, 0.12) !important;
+  border: 2px solid #e6f7ff !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%) !important;
+  overflow: hidden !important;
+  contain: layout style size !important;
+}
+
+.accessibility-score-card .ant-card-body {
+  padding: 24px !important;
+  height: 168px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.score-container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+.score-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 60px !important;
+  height: 60px !important;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%) !important;
+  border-radius: 16px !important;
+  font-size: 24px !important;
+  color: #ffffff !important;
+  flex-shrink: 0 !important;
+}
+
+.score-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  flex: 1 !important;
+  text-align: center !important;
+}
+
+.score-title {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #595959 !important;
+  margin-bottom: 8px !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.score-display {
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: center !important;
+  gap: 3px !important;
+  margin-bottom: 10px !important;
+}
+
+.score-value {
+  font-size: 42px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+.score-suffix {
+  font-size: 16px !important;
+  color: #8c8c8c !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+}
+
+.score-progress {
+  width: 100% !important;
+  max-width: 200px !important;
+  margin: 0 auto 10px auto !important;
+}
+
+.score-progress .ant-progress-inner {
+  background: #f0f0f0 !important;
+  border-radius: 100px !important;
+  height: 6px !important;
+}
+
+.score-progress .ant-progress-bg {
+  border-radius: 100px !important;
+  height: 6px !important;
+}
+
+.score-status {
+  text-align: center !important;
+}
+
+.score-status .ant-typography {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #595959 !important;
+}
+
+/* --- Location Grid --- */
+.location-grid {
+  display: grid !important;
+  grid-template-columns: 2fr 1fr !important;
+  grid-template-rows: auto auto !important;
+  gap: 24px !important;
+  grid-template-areas: 
+    "map factors"
+    "details details" !important;
+  width: 100% !important;
+}
+
+.map-section {
+  grid-area: map !important;
+}
+
+.factors-section {
+  grid-area: factors !important;
+}
+
+.details-section {
+  grid-area: details !important;
+}
+
+/* --- Map Card --- */
+.map-card {
+  height: 500px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #f0f0f0 !important;
+  overflow: hidden !important;
+}
+
+.map-card .ant-card-head {
+  background: #fafbfc !important;
+  border-bottom: 2px solid #f0f0f0 !important;
+}
+
+.map-card .ant-card-body {
+  padding: 0 !important;
+  height: calc(100% - 64px) !important;
+}
+
+.map-container {
+  height: 100% !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+.hospital-map {
+  border-radius: 0 !important;
+  z-index: 1 !important;
+}
+
+.map-loading {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  background: #fafafa !important;
+}
+
+.map-popup {
+  text-align: left !important;
+  font-size: 14px !important;
+}
+
+/* --- Factors Card --- */
+.factors-card {
+  height: 500px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #f0f0f0 !important;
+  overflow: hidden !important;
+}
+
+.factors-card .ant-card-head {
+  background: #fafbfc !important;
+  border-bottom: 2px solid #f0f0f0 !important;
+}
+
+.factors-card .ant-card-body {
+  padding: 20px !important;
+  height: calc(100% - 64px) !important;
+  overflow-y: auto !important;
+}
+
+.factors-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+}
+
+.factor-item {
+  padding: 20px !important;
+  background: #f8f9fa !important;
+  border-radius: 12px !important;
+  border: 1px solid #e9ecef !important;
+  transition: all 0.3s ease !important;
+}
+
+.factor-item:hover {
+  background: #e9ecef !important;
+  transform: translateX(4px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.factor-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin-bottom: 16px !important;
+}
+
+.factor-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 10px !important;
+  font-size: 18px !important;
+  flex-shrink: 0 !important;
+}
+
+.factor-info {
+  flex: 1 !important;
+}
+
+.factor-name {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+  margin-bottom: 6px !important;
+}
+
+.factor-meta {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.factor-score-text {
+  font-size: 13px !important;
+  color: #8c8c8c !important;
+  font-weight: 500 !important;
+}
+
+.factor-progress {
+  margin-top: 8px !important;
+}
+
+.factor-progress .ant-progress-inner {
+  background: #e9ecef !important;
+  border-radius: 100px !important;
+}
+
+.factor-progress .ant-progress-bg {
+  border-radius: 100px !important;
+}
+
+/* --- Details Card - Fixed Structure --- */
+.details-card {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #f0f0f0 !important;
+  overflow: hidden !important;
+}
+
+.details-card .ant-card-head {
+  background: #fafbfc !important;
+  border-bottom: 2px solid #f0f0f0 !important;
+}
+
+.details-card .ant-card-body {
+  padding: 24px !important;
+}
+
+.details-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+}
+
+.details-descriptions {
+  margin: 0 !important;
+}
+
+.details-descriptions .ant-descriptions-item {
+  padding-bottom: 16px !important;
+}
+
+.details-descriptions .ant-descriptions-item-label {
+  font-weight: 600 !important;
+  color: #262626 !important;
+  font-size: 14px !important;
+  margin-bottom: 4px !important;
+}
+
+.details-descriptions .ant-descriptions-item-content {
+  color: #595959 !important;
+  font-size: 14px !important;
+}
+
+.billing-section {
+  margin-top: 32px !important;
+  padding-top: 24px !important;
+  border-top: 2px solid #f0f0f0 !important;
+}
+
+.billing-section .ant-typography-h5 {
+  color: #262626 !important;
+  margin-bottom: 16px !important;
+}
+
+/* --- Loading and Error States --- */
+.location-dashboard-loading {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 60vh !important;
+  gap: 24px !important;
+}
+
+.location-dashboard-error,
+.no-data-alert {
+  margin: 24px !important;
+  border-radius: 12px !important;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1200px) {
+  .location-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: 
+      "map"
+      "factors"
+      "details" !important;
+  }
+  
+  .factors-card {
+    height: auto !important;
+    min-height: 400px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .location-analysis-dashboard {
+    padding: 16px !important;
+  }
+  
+  .location-header {
+    flex-direction: column !important;
+    gap: 20px !important;
+    padding: 20px !important;
+  }
+  
+  .header-right {
+    width: 100% !important;
+    min-width: unset !important;
+    align-items: stretch !important;
+  }
+  
+  .control-group {
+    align-items: stretch !important;
+  }
+  
+  .hospital-selector {
+    min-width: unset !important;
+  }
+  
+  .accessibility-score-card {
+    width: 100% !important;
+    max-width: 480px !important;
+  }
+  
+  .map-card {
+    height: 350px !important;
+  }
+  
+  .factors-list {
+    gap: 16px !important;
+  }
+  
+  .factor-item {
+    padding: 16px !important;
+  }
+  
+  .details-descriptions {
+    column-count: 1 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .location-analysis-dashboard {
+    padding: 12px !important;
+  }
+  
+  .location-header {
+    padding: 16px !important;
+  }
+  
+  .accessibility-score-card {
+    height: 160px !important;
+    min-height: 160px !important;
+  }
+  
+  .accessibility-score-card .ant-card-body {
+    height: 128px !important;
+    padding: 20px !important;
+  }
+  
+  .score-container {
+    gap: 16px !important;
+  }
+  
+  .score-icon {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 20px !important;
+  }
+  
+  .score-value {
+    font-size: 42px !important;
+  }
+  
+  .map-card {
+    height: 280px !important;
+  }
+  
+  .factors-card {
+    min-height: 320px !important;
+  }
+}
+
+/* --- Animation Enhancement --- */
+.accessibility-score-card,
+.map-card,
+.factors-card,
+.details-card {
+  animation: fadeInUp 0.6s ease-out !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.score-value {
+  animation: countUp 0.8s ease-out 0.2s both !important;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- Final isolation and containment --- */
+.location-analysis-dashboard {
+  contain: layout style paint !important;
+  isolation: isolate !important;
+}
+
+.location-analysis-dashboard * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* --- Ant Design Overrides --- */
+.ant-select-dropdown .ant-select-item {
+  padding: 8px 12px !important;
+}
+
+.ant-select-dropdown .ant-select-item-option-content {
+  white-space: normal !important;
+  line-height: 1.4 !important;
+}
+
+.ant-progress-text {
+  color: #262626 !important;
+  font-weight: 600 !important;
+}
+
+.ant-badge-status-text {
+  color: #8c8c8c !important;
+}
+
+/* --- Custom Scrollbar --- */
+.factors-card .ant-card-body::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+.factors-card .ant-card-body::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+  border-radius: 2px !important;
+}
+
+.factors-card .ant-card-body::-webkit-scrollbar-thumb {
+  background: #c1c1c1 !important;
+  border-radius: 2px !important;
+}
+
+.factors-card .ant-card-body::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8 !important;
+}
