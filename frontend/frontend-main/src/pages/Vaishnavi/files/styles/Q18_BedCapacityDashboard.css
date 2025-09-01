@@ -1,878 +1,511 @@
-/* Q18_BedCapacityDashboard.css - Isolated Component Styles */
-
+/* Hospital Dashboard Layout Fix - Complete Solution */
 .bed-capacity-dashboard {
-  padding: 24px !important;
-  background: #f0f2f5 !important;
-  min-height: 100vh !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  contain: layout style !important;
-  isolation: isolate !important;
+  box-sizing: border-box;
 }
 
-/* Override global CSS conflicts */
-.bed-capacity-dashboard * {
-  box-sizing: border-box !important;
+/* Fix for search/filter area */
+.filters-card .ant-card-body {
+  padding: 16px 20px !important;
 }
 
-/* Header Styles */
-.bed-capacity-dashboard .dashboard-header {
+.filters-content {
   display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  margin-bottom: 24px !important;
-  padding: 20px !important;
-  background: white !important;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-.bed-capacity-dashboard .header-left h1 {
-  margin: 0 !important;
-  color: #1890ff !important;
-  font-size: 28px !important;
-  font-weight: 600 !important;
-  line-height: 1.2 !important;
-}
-
-.bed-capacity-dashboard .header-left p {
-  margin: 4px 0 0 0 !important;
-  color: #8c8c8c !important;
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-}
-
-.bed-capacity-dashboard .header-controls {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
   flex-wrap: wrap !important;
+  gap: 16px !important;
+  align-items: flex-end !important;
 }
 
-/* Loading Styles */
-.bed-capacity-dashboard .loading-container {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  height: 100vh !important;
-  background: #f0f2f5 !important;
-}
-
-.bed-capacity-dashboard .loading-spinner {
-  font-size: 18px !important;
-  color: #1890ff !important;
-}
-
-/* Alerts Section */
-.bed-capacity-dashboard .alerts-section {
-  margin-bottom: 24px !important;
-  width: 100% !important;
-}
-
-/* Summary Panel - Fix Card Compression Issues */
-.bed-capacity-dashboard .summary-panel {
-  margin-bottom: 24px !important;
-  width: 100% !important;
-}
-
-.bed-capacity-dashboard .metric-card {
-  text-align: center !important;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-  transition: all 0.3s ease !important;
-  height: auto !important;
-  min-height: 160px !important;
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-.bed-capacity-dashboard .metric-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
-  transform: translateY(-2px) !important;
-}
-
-.bed-capacity-dashboard .metric-card .ant-card-body {
-  padding: 24px 16px !important;
-  height: auto !important;
-  min-height: 120px !important;
+.filter-group {
   display: flex !important;
   flex-direction: column !important;
-  justify-content: center !important;
+  min-width: 200px !important;
+  flex: 1 !important;
 }
 
-.bed-capacity-dashboard .metric-card .ant-statistic-title {
+.filter-group label {
   font-size: 14px !important;
   font-weight: 500 !important;
-  color: #8c8c8c !important;
+  color: #374151 !important;
   margin-bottom: 8px !important;
-  text-align: center !important;
 }
 
-.bed-capacity-dashboard .metric-card .ant-statistic-content {
-  font-size: 32px !important;
-  font-weight: 600 !important;
-  margin-bottom: 12px !important;
-  text-align: center !important;
-  white-space: nowrap !important;
-}
-
-.bed-capacity-dashboard .metric-card .ant-statistic-content-value {
-  white-space: nowrap !important;
-}
-
-.bed-capacity-dashboard .metric-subtitle {
-  font-size: 12px !important;
-  color: #bfbfbf !important;
-  margin-top: 8px !important;
-  text-align: center !important;
-}
-
-/* Charts Section - Fix Container Issues */
-.bed-capacity-dashboard .charts-section {
-  margin-bottom: 24px !important;
+.search-input-wrapper {
+  position: relative !important;
   width: 100% !important;
 }
 
-.bed-capacity-dashboard .chart-card {
+.search-icon {
+  position: absolute !important;
+  left: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #9ca3af !important;
+  z-index: 1 !important;
+}
+
+.search-input {
+  width: 100% !important;
+  height: 40px !important;
+  padding: 8px 12px 8px 40px !important;
+  border: 1px solid #d1d5db !important;
   border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  font-size: 14px !important;
+  transition: all 0.3s !important;
+}
+
+.search-input:focus {
+  outline: none !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+.hospital-select, .time-select {
+  height: 40px !important;
+  border-radius: 8px !important;
   width: 100% !important;
-  max-width: 100% !important;
+}
+
+.export-excel-btn {
+  background: #10b981 !important;
+  border-color: #10b981 !important;
+  height: 40px !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  width: 100% !important;
+}
+
+.export-excel-btn:hover {
+  background: #059669 !important;
+  border-color: #059669 !important;
+}
+
+/* Fix for chart card sizing */
+.chart-card {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.chart-card .ant-card-body {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 16px !important;
+}
+
+.chart-card .ant-card-body > div {
+  flex: 1 !important;
+}
+
+/* Simplified card styling */
+.bed-capacity-dashboard .metric-card, 
+.bed-capacity-dashboard .chart-card, 
+.bed-capacity-dashboard .table-card {
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  border: none !important;
+  height: 100% !important;
+  background: white !important;
+}
+
+/* Fix chart card body */
+.bed-capacity-dashboard .chart-card .ant-card-body {
+  padding: 16px !important;
   height: auto !important;
+}
+
+/* Fix card headers */
+.bed-capacity-dashboard .ant-card-head {
+  border-bottom: 1px solid #f0f0f0 !important;
+  background: white !important;
+}
+
+/* Fix for metrics grid */
+.metrics-grid .ant-col {
+  display: flex !important;
+}
+
+.metrics-grid .ant-col > div {
+  width: 100% !important;
+}
+
+/* Fix for consistent card spacing and eliminate gaps */
+.bed-capacity-dashboard .ant-tabs-content .ant-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  margin: 0 -12px !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+}
+
+.bed-capacity-dashboard .ant-tabs-content .ant-col {
+  padding: 0 12px !important;
+  margin-bottom: 24px !important;
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+.bed-capacity-dashboard .ant-tabs-content .ant-col > div {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Ensure equal heights for all cards in the same row */
+.bed-capacity-dashboard .ant-row {
+  align-items: stretch !important;
+}
+
+.bed-capacity-dashboard .ant-col {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+/* Remove any default margins/paddings that cause gaps */
+.bed-capacity-dashboard .ant-tabs-tabpane {
+  padding: 0 !important;
+}
+
+.bed-capacity-dashboard .ant-tabs-content-holder {
+  padding: 0 !important;
+}
+
+/* Table card fixes */
+.table-card {
+  width: 100% !important;
+}
+
+/* Fix for pie chart layout issues */
+.recharts-pie-label-text {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.recharts-legend-wrapper {
+  padding-top: 10px !important;
+}
+
+/* Basic chart container fixes */
+.bed-capacity-dashboard .recharts-wrapper {
+  margin: 0 auto !important;
+}
+
+/* Fix ResponsiveContainer sizing issues */
+.bed-capacity-dashboard .recharts-responsive-container {
+  min-height: 300px !important;
+}
+
+/* Fix for all chart types */
+.bed-capacity-dashboard .chart-card {
+  margin-bottom: 20px !important;
 }
 
 .bed-capacity-dashboard .chart-card .ant-card-head {
-  border-bottom: 1px solid #f0f0f0 !important;
-  padding: 16px 24px !important;
-}
-
-.bed-capacity-dashboard .chart-card .ant-card-head-title {
-  font-size: 18px !important;
-  font-weight: 600 !important;
-  color: #262626 !important;
-  margin: 0 !important;
+  min-height: 48px !important;
 }
 
 .bed-capacity-dashboard .chart-card .ant-card-body {
-  padding: 24px !important;
-  width: 100% !important;
-  overflow: visible !important;
+  padding: 16px !important;
 }
 
-/* Comparison Card */
-.bed-capacity-dashboard .comparison-card {
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-  margin-bottom: 24px !important;
-  width: 100% !important;
-  max-width: 100% !important;
+/* Ensure all chart containers have proper sizing */
+.bed-capacity-dashboard .recharts-wrapper {
+  display: block !important;
 }
 
-.bed-capacity-dashboard .comparison-card .ant-card-body {
-  padding: 24px !important;
-  overflow: visible !important;
-}
-
-.bed-capacity-dashboard .comparison-card .ant-table-thead > tr > th {
-  background: #fafafa !important;
-  font-weight: 600 !important;
-  color: #262626 !important;
-  padding: 12px 16px !important;
-}
-
-.bed-capacity-dashboard .comparison-card .ant-table-tbody > tr:hover > td {
-  background: #f5f5f5 !important;
-}
-
-.bed-capacity-dashboard .comparison-card .ant-table-tbody > tr > td {
-  padding: 12px 16px !important;
-}
-
-/* Department Card */
-.bed-capacity-dashboard .department-card {
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-.bed-capacity-dashboard .department-card .ant-card-body {
-  padding: 24px !important;
-  overflow: visible !important;
-}
-
-/* Progress Bar Customization */
-.bed-capacity-dashboard .ant-progress-line {
-  margin-bottom: 8px !important;
-}
-
-.bed-capacity-dashboard .ant-progress-text {
-  font-size: 12px !important;
-  font-weight: 500 !important;
-}
-
-/* Tag Customization */
-.bed-capacity-dashboard .ant-tag {
-  border-radius: 4px !important;
-  font-weight: 500 !important;
-  font-size: 12px !important;
-}
-
-/* Table Customization */
-.bed-capacity-dashboard .ant-table-thead > tr > th {
-  font-weight: 600 !important;
-  background: #fafafa !important;
-  padding: 12px 16px !important;
-}
-
-.bed-capacity-dashboard .ant-table-tbody > tr > td {
-  padding: 12px 16px !important;
-}
-
-.bed-capacity-dashboard .ant-table {
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow: visible !important;
-}
-
-.bed-capacity-dashboard .ant-table-wrapper {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-/* Status Indicators */
-.bed-capacity-dashboard .status-critical {
-  color: #f5222d !important;
-  font-weight: 600 !important;
-}
-
-.bed-capacity-dashboard .status-warning {
-  color: #faad14 !important;
-  font-weight: 600 !important;
-}
-
-.bed-capacity-dashboard .status-normal {
-  color: #52c41a !important;
-  font-weight: 600 !important;
-}
-
-/* Chart Tooltips */
-.bed-capacity-dashboard .recharts-tooltip-wrapper {
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-}
-
-.bed-capacity-dashboard .recharts-tooltip-content {
-  background: white !important;
-  border: none !important;
-  border-radius: 8px !important;
-  padding: 12px !important;
-}
-
-/* Dashboard Tabs Styling */
-.bed-capacity-dashboard .dashboard-tabs {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-.bed-capacity-dashboard .dashboard-tabs .ant-tabs-nav {
+/* OVERVIEW TAB - Fix for Bed Occupancy Trends and Department Distribution cards */
+.bed-capacity-dashboard .ant-tabs-tabpane:first-child .ant-row:first-child .ant-col {
+  display: flex !important;
+  align-items: stretch !important;
   margin-bottom: 24px !important;
 }
 
-.bed-capacity-dashboard .dashboard-tabs .ant-tabs-tab {
-  padding: 12px 24px !important;
+.bed-capacity-dashboard .ant-tabs-tabpane:first-child .ant-row:first-child .chart-card {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.bed-capacity-dashboard .ant-tabs-tabpane:first-child .ant-row:first-child .chart-card .ant-card-body {
+  flex: 1 !important;
+  padding: 16px !important;
+}
+
+/* Ensure no height restrictions on chart containers */
+.bed-capacity-dashboard .ant-tabs-tabpane:first-child .ant-row:first-child .chart-card .recharts-responsive-container {
+  width: 100% !important;
+  height: 350px !important;
+}
+
+/* ANALYTICS TAB - Fix for Capacity Utilization Trends and Department Performance Metrics */
+.bed-capacity-dashboard .ant-tabs-tabpane:nth-child(3) .ant-row:first-child .ant-col {
+  display: flex !important;
+  align-items: stretch !important;
+  margin-bottom: 24px !important;
+}
+
+.bed-capacity-dashboard .ant-tabs-tabpane:nth-child(3) .ant-row:first-child .chart-card {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.bed-capacity-dashboard .ant-tabs-tabpane:nth-child(3) .ant-row:first-child .chart-card .ant-card-body {
+  flex: 1 !important;
+  padding: 16px !important;
+}
+
+/* Ensure no height restrictions on chart containers */
+.bed-capacity-dashboard .ant-tabs-tabpane:nth-child(3) .ant-row:first-child .chart-card .recharts-responsive-container {
+  width: 100% !important;
+  height: 350px !important;
+}
+
+/* PREDICTIONS TAB - Fix for 7-Day Forecast and Occupancy Trend & Prediction cards */
+.bed-capacity-dashboard .ant-tabs-tabpane:nth-child(2) .ant-row:first-child .ant-col {
+  display: flex !important;
+  align-items: stretch !important;
+  margin-bottom: 24px !important;
+}
+
+.bed-capacity-dashboard .ant-tabs-tabpane:nth-child(2) .ant-row:first-child .chart-card {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.bed-capacity-dashboard .ant-tabs-tabpane:nth-child(2) .ant-row:first-child .chart-card .ant-card-body {
+  flex: 1 !important;
+  padding: 16px !important;
+}
+
+/* Ensure no height restrictions on chart containers */
+.bed-capacity-dashboard .ant-tabs-tabpane:nth-child(2) .ant-row:first-child .chart-card .recharts-responsive-container {
+  width: 100% !important;
+  height: 350px !important;
+}
+
+/* Simplified pie chart styling */
+.bed-capacity-dashboard .recharts-pie-label-text {
+  font-size: 11px !important;
   font-weight: 500 !important;
+  fill: #374151 !important;
 }
 
-.bed-capacity-dashboard .dashboard-tabs .ant-tabs-content-holder {
+.bed-capacity-dashboard .recharts-legend-wrapper {
+  margin-top: 8px !important;
+}
+
+.bed-capacity-dashboard .recharts-default-legend {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+}
+
+.bed-capacity-dashboard .recharts-legend-item {
+  margin: 4px 8px !important;
+  font-size: 12px !important;
+}
+
+/* Department Distribution pie chart specific styles */
+.bed-capacity-dashboard .ant-tabs-tabpane:first-child .ant-row:first-child .ant-col:last-child .chart-card .recharts-responsive-container {
+  height: 280px !important;
+}
+
+/* Specific styles for the pie chart card */
+.bed-capacity-dashboard .ant-tabs-tabpane:first-child .ant-row:first-child .ant-col:last-child {
+  display: flex !important;
+}
+
+/* Enhanced pie chart labels */
+.bed-capacity-dashboard .recharts-pie-label-line {
+  stroke: #6b7280 !important;
+  stroke-width: 0.5 !important;
+}
+
+/* Better spacing for the legend */
+.bed-capacity-dashboard .recharts-legend-wrapper {
+  padding-top: 8px !important;
+}
+
+/* Make sure both cards in the first row have the same height */
+.bed-capacity-dashboard .ant-tabs-tabpane:first-child .ant-row:first-child .chart-card {
+  height: 100% !important;
+}
+
+/* Ensure pie chart has proper centering */
+.bed-capacity-dashboard .recharts-pie {
+  transform: translateY(-10px);
+}
+
+/* Fix for bar and line charts in other cards */
+.bed-capacity-dashboard .recharts-cartesian-grid {
+  stroke: #f3f4f6 !important;
+}
+
+.bed-capacity-dashboard .recharts-xaxis-tick-line,
+.bed-capacity-dashboard .recharts-yaxis-tick-line {
+  stroke: #d1d5db !important;
+}
+
+.bed-capacity-dashboard .recharts-tick text {
+  font-size: 11px !important;
+  fill: #6b7280 !important;
+}
+
+/* Fix for prediction cards alignment */
+.bed-capacity-prediction .ant-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  margin: 0 -10px !important;
+}
+
+.bed-capacity-prediction .ant-col {
+  padding: 0 10px !important;
+  margin-bottom: 20px !important;
+  display: flex !important;
+}
+
+.bed-capacity-prediction .ant-col > div {
   width: 100% !important;
 }
 
-/* Analytics Card */
-.bed-capacity-dashboard .analytics-card {
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-  width: 100% !important;
-  max-width: 100% !important;
+/* Ensure all prediction cards have equal height */
+.bed-capacity-prediction .chart-card {
+  min-height: 350px !important;
 }
 
-.bed-capacity-dashboard .analytics-card .ant-card-body {
-  padding: 24px !important;
-  overflow: visible !important;
+/* Fix for progress bars in tables */
+.ant-progress-line {
+  margin: 5px 0 !important;
 }
 
-/* Responsive Design */
+/* Simplified responsive adjustments */
 @media (max-width: 1200px) {
-  .bed-capacity-dashboard .dashboard-header {
-    flex-direction: column !important;
-    gap: 16px !important;
-    text-align: center !important;
+  .bed-capacity-dashboard .ant-tabs-tabpane .ant-row .ant-col-lg-16,
+  .bed-capacity-dashboard .ant-tabs-tabpane .ant-row .ant-col-lg-8,
+  .bed-capacity-dashboard .ant-tabs-tabpane .ant-row .ant-col-lg-12 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
   }
   
-  .bed-capacity-dashboard .header-controls {
-    flex-wrap: wrap !important;
-    justify-content: center !important;
+  .bed-capacity-dashboard .recharts-responsive-container {
+    height: 300px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .bed-capacity-dashboard .ant-tabs-tabpane .ant-row .ant-col {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
   }
 }
 
 @media (max-width: 768px) {
-  .bed-capacity-dashboard {
-    padding: 16px !important;
+  .bed-capacity-dashboard .filters-content {
+    flex-direction: column !important;
+    align-items: stretch !important;
   }
   
-  .bed-capacity-dashboard .dashboard-header {
-    padding: 16px !important;
-  }
-  
-  .bed-capacity-dashboard .header-left h1 {
-    font-size: 24px !important;
-  }
-  
-  .bed-capacity-dashboard .metric-card .ant-statistic-content {
-    font-size: 24px !important;
-  }
-  
-  .bed-capacity-dashboard .header-controls {
+  .bed-capacity-dashboard .filter-group {
     width: 100% !important;
   }
   
-  .bed-capacity-dashboard .header-controls .ant-select,
-  .bed-capacity-dashboard .header-controls .ant-btn {
-    width: 100% !important;
-    margin-bottom: 8px !important;
+  .bed-capacity-dashboard .metrics-grid .ant-col {
+    margin-bottom: 16px !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .bed-capacity-dashboard .recharts-default-legend {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+  
+  .bed-capacity-dashboard .recharts-responsive-container {
+    height: 250px !important;
   }
 }
 
 @media (max-width: 576px) {
-  .bed-capacity-dashboard .summary-panel .ant-col {
-    margin-bottom: 16px !important;
+  .chart-card .ant-card-head {
+    padding: 0 12px !important;
   }
   
-  .bed-capacity-dashboard .charts-section .ant-col {
-    margin-bottom: 16px !important;
+  .chart-card .ant-card-body {
+    padding: 12px !important;
   }
   
-  .bed-capacity-dashboard .comparison-card .ant-table-wrapper {
-    overflow-x: auto !important;
+  .recharts-pie-label {
+    font-size: 9px !important;
   }
 }
 
-/* Ant Design Row and Col Component Fixes */
-.bed-capacity-dashboard .ant-row {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.bed-capacity-dashboard .ant-col {
-  width: 100% !important;
-  max-width: 100% !important;
-  padding-left: 8px !important;
-  padding-right: 8px !important;
-  margin-bottom: 16px !important;
-  flex: none !important;
-}
-
-/* Card Component Fixes */
-.bed-capacity-dashboard .ant-card {
-  width: 100% !important;
-  max-width: 100% !important;
-  height: auto !important;
-  min-height: auto !important;
-  margin-bottom: 16px !important;
-  box-sizing: border-box !important;
-}
-
-.bed-capacity-dashboard .ant-card-body {
-  padding: 20px !important;
-  width: 100% !important;
-  height: auto !important;
-  overflow: visible !important;
-  box-sizing: border-box !important;
-}
-
-.bed-capacity-dashboard .ant-card-head {
-  padding: 16px 20px !important;
-  min-height: auto !important;
-  border-bottom: 1px solid #f0f0f0 !important;
-}
-
-/* Select and Button Component Fixes */
-.bed-capacity-dashboard .ant-select {
-  width: auto !important;
-  min-width: 120px !important;
-  height: 40px !important;
-}
-
-.bed-capacity-dashboard .ant-btn {
-  height: 40px !important;
-  padding: 0 16px !important;
-  border-radius: 6px !important;
-}
-
-/* Table Component Fixes */
-.bed-capacity-dashboard .ant-table-wrapper {
-  width: 100% !important;
-  overflow-x: auto !important;
-}
-
-.bed-capacity-dashboard .ant-table {
-  min-width: 800px !important;
-}
-
-/* Animation Effects - Component Scoped */
-.bed-capacity-dashboard .metric-card {
-  animation: bedCapacityFadeInUp 0.6s ease-out !important;
-}
-
-.bed-capacity-dashboard .chart-card {
-  animation: bedCapacityFadeInUp 0.8s ease-out !important;
-}
-
-.bed-capacity-dashboard .comparison-card {
-  animation: bedCapacityFadeInUp 1s ease-out !important;
-}
-
-@keyframes bedCapacityFadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Alert Customization - Component Scoped */
-.bed-capacity-dashboard .ant-alert {
-  border-radius: 6px !important;
-  font-weight: 500 !important;
-}
-
-.bed-capacity-dashboard .ant-alert-error {
-  background: #fff2f0 !important;
-  border: 1px solid #ffccc7 !important;
-}
-
-.bed-capacity-dashboard .ant-alert-warning {
-  background: #fffbe6 !important;
-  border: 1px solid #ffe58f !important;
-}
-
-/* Button Customization - Component Scoped */
-.bed-capacity-dashboard .ant-btn {
-  border-radius: 6px !important;
-  font-weight: 500 !important;
+/* Animation for smoother resizing */
+.chart-card {
   transition: all 0.3s ease !important;
 }
 
-.bed-capacity-dashboard .ant-btn:hover {
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+/* Fix for tab content alignment */
+.dashboard-tabs .ant-tabs-content-holder {
+  padding: 0 !important;
 }
 
-/* Select Customization - Component Scoped */
-.bed-capacity-dashboard .ant-select {
-  border-radius: 6px !important;
+.dashboard-tabs .ant-tabs-content {
+  padding: 0 !important;
 }
 
-.bed-capacity-dashboard .ant-select-selector {
-  border-radius: 6px !important;
+/* Ensure all cards have equal internal spacing */
+.ant-card-head-title {
+  padding: 16px 0 !important;
 }
 
-/* Card Hover Effects - Scoped to this component only */
-.bed-capacity-dashboard .ant-card {
-  transition: all 0.3s ease;
-}
-
-.bed-capacity-dashboard .ant-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-/* Statistic Value Colors - Component Scoped */
-.bed-capacity-dashboard .occupancy-critical {
-  color: #f5222d !important;
-}
-
-.bed-capacity-dashboard .occupancy-warning {
-  color: #faad14 !important;
-}
-
-.bed-capacity-dashboard .occupancy-normal {
-  color: #52c41a !important;
-}
-
-/* Department Analysis Specific - Component Scoped */
-.bed-capacity-dashboard .department-card .recharts-bar {
-  transition: all 0.3s ease !important;
-}
-
-.bed-capacity-dashboard .department-card .recharts-bar:hover {
-  opacity: 0.8 !important;
-}
-
-/* Trend Chart Specific - Component Scoped */
-.bed-capacity-dashboard .trend-chart .recharts-area {
-  transition: all 0.3s ease !important;
-}
-
-.bed-capacity-dashboard .trend-chart .recharts-area:hover {
-  opacity: 0.9 !important;
-}
-
-/* Custom Scrollbar - Component Scoped */
-.bed-capacity-dashboard .ant-table-body::-webkit-scrollbar {
-  width: 6px !important;
-  height: 6px !important;
-}
-
-.bed-capacity-dashboard .ant-table-body::-webkit-scrollbar-track {
-  background: #f1f1f1 !important;
-  border-radius: 3px !important;
-}
-
-.bed-capacity-dashboard .ant-table-body::-webkit-scrollbar-thumb {
-  background: #c1c1c1 !important;
-  border-radius: 3px !important;
-}
-
-.bed-capacity-dashboard .ant-table-body::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8 !important;
-/* Prediction Dashboard Styles - Component Scoped */
-.bed-capacity-dashboard .prediction-dashboard {
-  margin-top: 24px !important;
-}
-
-.bed-capacity-dashboard .prediction-card {
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-}
-
-.bed-capacity-dashboard .prediction-metric {
+/* Fix for table alignment */
+.ant-table-thead > tr > th {
   text-align: center !important;
-  padding: 20px 0 !important;
 }
 
-.bed-capacity-dashboard .metric-header {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  margin-bottom: 16px !important;
-  font-size: 14px !important;
-  color: #8c8c8c !important;
-  font-weight: 500 !important;
+.ant-table-tbody > tr > td {
+  text-align: center !important;
 }
 
-.bed-capacity-dashboard .metric-value {
-  font-size: 48px !important;
-  font-weight: 700 !important;
-  color: #1890ff !important;
-  margin-bottom: 16px !important;
+.ant-table-tbody > tr > td:first-child {
+  text-align: left !important;
 }
 
-.bed-capacity-dashboard .risk-level {
-  margin-top: 16px !important;
+/* Simple protection for other pages */
+.bed-capacity-dashboard {
+  /* Scoped container to prevent style conflicts with other pages */
+  box-sizing: border-box !important;
 }
 
-.bed-capacity-dashboard .risk-level .ant-tag {
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  padding: 4px 12px !important;
-  border-radius: 16px !important;
+/* Apply styles only to charts inside the dashboard */
+.bed-capacity-dashboard .recharts-wrapper,
+.bed-capacity-dashboard .recharts-responsive-container,
+.bed-capacity-dashboard .recharts-surface {
+  overflow: visible !important;
 }
 
-/* Trend Card - Component Scoped */
-.bed-capacity-dashboard .trend-card {
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+/* Ensure other page components are not affected */
+.ant-card:not(.bed-capacity-dashboard .ant-card),
+.ant-table:not(.bed-capacity-dashboard .ant-table),
+.ant-tabs:not(.bed-capacity-dashboard .ant-tabs) {
+  /* Preserve original Ant Design styling */
+  height: auto !important;
 }
 
-.bed-capacity-dashboard .legend {
-  display: flex !important;
-  justify-content: center !important;
-  gap: 24px !important;
-  margin-top: 16px !important;
-  padding-top: 16px !important;
-  border-top: 1px solid #f0f0f0 !important;
-}
-
-.bed-capacity-dashboard .legend-item {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  font-size: 14px !important;
-  color: #595959 !important;
-}
-
-.bed-capacity-dashboard .legend-dot {
-  width: 12px !important;
-  height: 12px !important;
-  border-radius: 50% !important;
-}
-
-.bed-capacity-dashboard .legend-dot.historical {
-  background-color: #1890ff !important;
-}
-
-.bed-capacity-dashboard .legend-dot.predicted {
-  background-color: #faad14 !important;
-}
-
-/* Recommendations Card - Component Scoped */
-.bed-capacity-dashboard .recommendations-card {
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-}
-
-.bed-capacity-dashboard .recommendation-item {
-  display: flex !important;
-  align-items: flex-start !important;
-  gap: 12px !important;
-  width: 100% !important;
-}
-
-.bed-capacity-dashboard .recommendation-number {
-  background: #1890ff !important;
-  color: white !important;
-  width: 24px !important;
-  height: 24px !important;
-  border-radius: 50% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  flex-shrink: 0 !important;
-}
-
-.bed-capacity-dashboard .recommendation-text {
-  flex: 1 !important;
-  font-size: 14px !important;
-  color: #595959 !important;
-  line-height: 1.5 !important;
-}
-
-/* Risk Card - Component Scoped */
-.bed-capacity-dashboard .risk-card {
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-}
-
-.bed-capacity-dashboard .risk-assessment {
-  padding: 8px 0 !important;
-}
-
-.bed-capacity-dashboard .risk-item {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  margin-bottom: 20px !important;
-  padding-bottom: 16px !important;
-  border-bottom: 1px solid #f0f0f0 !important;
-}
-
-.bed-capacity-dashboard .risk-label {
-  font-size: 16px !important;
-  font-weight: 500 !important;
-  color: #262626 !important;
-}
-
-.bed-capacity-dashboard .risk-factors h4 {
-  margin: 16px 0 12px 0 !important;
-  color: #262626 !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-}
-
-.bed-capacity-dashboard .risk-factors ul {
-  margin: 0 !important;
-  padding-left: 20px !important;
-}
-
-.bed-capacity-dashboard .risk-factors li {
-  margin-bottom: 8px !important;
-  color: #595959 !important;
-  font-size: 14px !important;
-  line-height: 1.5 !important;
-}
-
-/* Responsive Design for Prediction Components */
-@media (max-width: 768px) {
-  .prediction-dashboard {
-    margin-top: 16px;
+/* Print styles for better printing experience */
+@media print {
+  .bed-capacity-dashboard {
+    padding: 0 !important;
   }
   
-  .metric-value {
-    font-size: 36px;
+  .chart-card {
+    page-break-inside: avoid !important;
   }
   
-  .legend {
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-  }
-  
-  .risk-item {
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  
-  .recommendation-item {
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .recommendation-number {
-    align-self: flex-start;
-  }
-}
-
-/* Animation for prediction metrics */
-.prediction-metric {
-  animation: slideInUp 0.8s ease-out;
-}
-
-.trend-card .recharts-line {
-  animation: drawLine 2s ease-out;
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes drawLine {
-  from {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-  }
-  to {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Enhanced Alert Styles - Component Scoped */
-.bed-capacity-dashboard .ant-alert-error .ant-alert-icon {
-  color: #f5222d !important;
-}
-
-.bed-capacity-dashboard .ant-alert-warning .ant-alert-icon {
-  color: #faad14 !important;
-}
-
-/* Progress Bar in Prediction - Component Scoped */
-.bed-capacity-dashboard .prediction-metric .ant-progress-line {
-  margin: 16px 0 !important;
-}
-
-.bed-capacity-dashboard .prediction-metric .ant-progress-bg {
-  border-radius: 10px !important;
-}
-
-.bed-capacity-dashboard .prediction-metric .ant-progress-inner {
-  border-radius: 10px !important;
-  background: #f5f5f5 !important;
-}
-
-/* Dashboard Tabs - Component Scoped */
-.bed-capacity-dashboard .dashboard-tabs {
-  background: white !important;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-  margin-bottom: 24px !important;
-}
-
-.bed-capacity-dashboard .dashboard-tabs .ant-tabs-nav {
-  padding: 0 24px !important;
-  margin: 0 !important;
-}
-
-.bed-capacity-dashboard .dashboard-tabs .ant-tabs-tab {
-  padding: 16px 24px !important;
-  font-size: 16px !important;
-  font-weight: 500 !important;
-}
-
-.bed-capacity-dashboard .dashboard-tabs .ant-tabs-tab-active {
-  color: #1890ff !important;
-}
-
-.bed-capacity-dashboard .dashboard-tabs .ant-tabs-content-holder {
-  padding: 24px !important;
-}
-
-.bed-capacity-dashboard .dashboard-tabs .ant-tabs-tabpane {
-  outline: none !important;
-}
-
-/* Analytics Card - Component Scoped */
-.bed-capacity-dashboard .analytics-card {
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-}
-
-.bed-capacity-dashboard .analytics-card h4 {
-  margin-bottom: 16px !important;
-  color: #262626 !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-}
-
-/* Tab Icons - Component Scoped */
-.bed-capacity-dashboard .dashboard-tabs .anticon {
-  margin-right: 8px !important;
-}
-
-/* Enhanced Table in Analytics - Component Scoped */
-.bed-capacity-dashboard .analytics-card .ant-table-thead > tr > th {
-  background: #fafafa !important;
-  font-weight: 600 !important;
-  border-bottom: 2px solid #f0f0f0 !important;
-}
-
-.bed-capacity-dashboard .analytics-card .ant-table-tbody > tr:hover > td {
-  background: #f5f5f5 !important;
-}
-
-/* Tab Content Animation - Component Scoped */
-.bed-capacity-dashboard .dashboard-tabs .ant-tabs-tabpane-active {
-  animation: bedCapacityFadeIn 0.3s ease-in !important;
-}
-
-@keyframes bedCapacityFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive Design for Dashboard Tabs - Component Scoped */
-@media (max-width: 768px) {
-  .bed-capacity-dashboard .dashboard-tabs .ant-tabs-nav {
-    padding: 0 16px !important;
-  }
-  
-  .bed-capacity-dashboard .dashboard-tabs .ant-tabs-tab {
-    padding: 12px 16px !important;
-    font-size: 14px !important;
-  }
-  
-  .bed-capacity-dashboard .dashboard-tabs .ant-tabs-content-holder {
-    padding: 16px !important;
+  .ant-tabs-content {
+    height: auto !important;
   }
 }

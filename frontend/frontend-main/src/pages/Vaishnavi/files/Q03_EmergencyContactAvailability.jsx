@@ -26,7 +26,7 @@ const ContactCard = ({ contact }) => {
         </Tag>
       </div>
       <div className="card-body">
-        <Text type="secondary">{contact.department || 'Emergency Department'}</Text>
+        <Text className="emergency-label" style={{ color: '#0d5cb6', fontWeight: 600 }}>{contact.department || 'Emergency Department'}</Text>
         <div className="phone-info">
           <PhoneOutlined />
           <Text strong>{contact.mobile || contact.phone || 'Not Available'}</Text>

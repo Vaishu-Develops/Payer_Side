@@ -6,7 +6,7 @@
 }
 
 /* Loading state */
-.specialty-coverage-matrix ..specialty-coverage-matrix .scm-city-name {
+.specialty-coverage-matrix .scm-city-name {
   font-weight: 600;
   font-size: 12px; /* Reduced from 14px */
   color: #1f2937;

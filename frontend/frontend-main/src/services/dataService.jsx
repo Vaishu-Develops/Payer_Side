@@ -28,7 +28,14 @@ class DataService {
   // API Methods
   async getHospitals(params = {}) {
     const queryString = new URLSearchParams(params).toString();
-    return this.handleRequest(`/hospitals?${queryString}`);
+    const response = await this.handleRequest(`/hospitals?${queryString}`);
+    
+    // Handle the specific structure returned by the hospitals endpoint
+    if (response.success && response.data && response.data.hospitals) {
+      return { success: true, data: response.data.hospitals };
+    }
+    
+    return response;
   }
 
   async getHospitalDetails(hospitalId) {

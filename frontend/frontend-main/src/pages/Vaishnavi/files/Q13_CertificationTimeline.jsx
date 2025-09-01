@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Clock, AlertTriangle, Award, CheckCircle, XCircle, Filter } from 'lucide-react';
+import { Calendar, Clock, AlertTriangle, Award, CheckCircle, XCircle, Filter, FileText, Shield, Star, BadgeCheck } from 'lucide-react';
 import certificationService from '../../../services/certificationService';
+import dataService from '../../../services/dataService';
 import { 
   calculateDaysToExpiry, 
   getCertificationStatus, 
@@ -9,18 +10,28 @@ import {
 } from '../../../utils/certificationUtils';
 import './styles/Q13_HospitalCertificationTimeline.css';
 
+// Certification type icons mapping
+const getCertificationIcon = (type) => {
+  const typeLower = type.toLowerCase();
+  if (typeLower.includes('jci') || typeLower.includes('joint')) return <Shield size={20} />;
+  if (typeLower.includes('iso')) return <Star size={20} />;
+  if (typeLower.includes('nabh') || typeLower.includes('national')) return <BadgeCheck size={20} />;
+  if (typeLower.includes('quality') || typeLower.includes('safety')) return <Award size={20} />;
+  return <FileText size={20} />;
+};
+
 // Hospital Selector Component
-const HospitalSelector = ({ hospitalId, availableHospitals, onChange }) => (
+const HospitalSelector = ({ hospitalId, hospitalOptions, onChange }) => (
   <div className="hospital-selector">
-    <label htmlFor="hospital-select">Hospital:</label>
+    <label htmlFor="hospital-select">Select Hospital:</label>
     <select 
       id="hospital-select"
       value={hospitalId} 
       onChange={(e) => onChange(parseInt(e.target.value))}
       className="hospital-select"
     >
-      {availableHospitals.map(id => (
-        <option key={id} value={id}>Hospital {id}</option>
+      {hospitalOptions.map(hospital => (
+        <option key={hospital.id} value={hospital.id}>{hospital.name}</option>
       ))}
     </select>
   </div>
@@ -70,6 +81,9 @@ const CertificationSummary = ({ certifications }) => {
 
   return (
     <div className="certification-summary">
+      <div className="summary-header">
+        <h3>Certification Overview</h3>
+      </div>
       <div className="summary-cards">
         <div className="summary-card total">
           <div className="card-content">
@@ -100,12 +114,17 @@ const CertificationSummary = ({ certifications }) => {
           <XCircle className="card-icon" />
         </div>
       </div>
-      <div className="compliance-rate">
-        <div className="rate-label">Compliance Rate</div>
-        <div className="rate-progress">
-          <div className="rate-fill" style={{ width: `${activeRate}%` }}></div>
+      <div className="compliance-section">
+        <div className="compliance-header">
+          <span>Compliance Rate</span>
+          <span className="compliance-percentage">{activeRate}%</span>
         </div>
-        <div className="rate-percentage">{activeRate}%</div>
+        <div className="compliance-progress">
+          <div 
+            className="compliance-progress-bar" 
+            style={{ width: `${activeRate}%` }}
+          ></div>
+        </div>
       </div>
     </div>
   );
@@ -116,40 +135,43 @@ const CertificationDetails = ({ certification, onClose }) => (
   <div className="certification-details-overlay" onClick={onClose}>
     <div className="certification-details" onClick={e => e.stopPropagation()}>
       <div className="details-header">
-        <h3>{certification.certification_type}</h3>
+        <div className="cert-type-header">
+          {getCertificationIcon(certification.certification_type)}
+          <h3>{certification.certification_type}</h3>
+        </div>
         <button className="close-btn" onClick={onClose}>&times;</button>
       </div>
       <div className="details-content">
         <div className="detail-row">
-          <strong>Certificate Number:</strong>
-          <span>{certification.certificate_number}</span>
+          <span className="detail-label">Certificate Number:</span>
+          <span className="detail-value">{certification.certificate_number}</span>
         </div>
         <div className="detail-row">
-          <strong>Level:</strong>
-          <span>{certification.certification_level}</span>
+          <span className="detail-label">Level:</span>
+          <span className="detail-value">{certification.certification_level}</span>
         </div>
         <div className="detail-row">
-          <strong>Issued Date:</strong>
-          <span>{formatDate(certification.issued_date)}</span>
+          <span className="detail-label">Issued Date:</span>
+          <span className="detail-value">{formatDate(certification.issued_date)}</span>
         </div>
         <div className="detail-row">
-          <strong>Expiry Date:</strong>
-          <span>{formatDate(certification.expiry_date)}</span>
+          <span className="detail-label">Expiry Date:</span>
+          <span className="detail-value">{formatDate(certification.expiry_date)}</span>
         </div>
         <div className="detail-row">
-          <strong>Issuing Authority:</strong>
-          <span>{certification.issuing_authority}</span>
+          <span className="detail-label">Issuing Authority:</span>
+          <span className="detail-value">{certification.issuing_authority}</span>
         </div>
         <div className="detail-row">
-          <strong>Status:</strong>
+          <span className="detail-label">Status:</span>
           <span className={`status-badge ${certification.status}`}>
             {certification.status.toUpperCase()}
           </span>
         </div>
         {certification.remarks && (
           <div className="detail-row">
-            <strong>Remarks:</strong>
-            <span>{certification.remarks}</span>
+            <span className="detail-label">Remarks:</span>
+            <span className="detail-value">{certification.remarks}</span>
           </div>
         )}
       </div>
@@ -173,6 +195,9 @@ const InteractiveTimeline = ({ data, view }) => {
 
   return (
     <div className="interactive-timeline">
+      <div className="timeline-header">
+        <h3>Certification Timeline</h3>
+      </div>
       <div className="timeline-container">
         <div className="timeline-line"></div>
         {data.map((cert) => (
@@ -185,12 +210,15 @@ const InteractiveTimeline = ({ data, view }) => {
               className="timeline-marker"
               style={{ backgroundColor: getCertificationTypeColor(cert.certification_type) }}
             >
-              {getStatusIcon(cert.status)}
+              {getCertificationIcon(cert.certification_type)}
             </div>
             <div className="timeline-content">
               <div className="cert-header">
-                <h4 className="cert-type">{cert.certification_type}</h4>
-                <span className="cert-level">{cert.certification_level}</span>
+                <div className="cert-title">
+                  <h4 className="cert-type">{cert.certification_type}</h4>
+                  <span className="cert-level">{cert.certification_level}</span>
+                </div>
+                {getStatusIcon(cert.status)}
               </div>
               <div className="cert-dates">
                 <div className="date-item">
@@ -203,7 +231,7 @@ const InteractiveTimeline = ({ data, view }) => {
                 </div>
               </div>
               <div className="cert-authority">
-                <strong>Authority:</strong> {cert.issuing_authority}
+                <span className="authority-label">Authority:</span> {cert.issuing_authority}
               </div>
               {cert.daysToExpiry >= 0 ? (
                 <div className={`days-remaining ${cert.status}`}>
@@ -237,10 +265,10 @@ const ExpiryAlerts = ({ certifications }) => {
 
   return (
     <div className="expiry-alerts">
-      <h3>
+      <div className="alerts-header">
         <AlertTriangle className="alert-icon" />
-        Renewal Alerts
-      </h3>
+        <h3>Renewal Alerts</h3>
+      </div>
       {criticalAlerts.length > 0 && (
         <div className="alert-section critical">
           <h4>Critical - Expires within 30 days</h4>
@@ -278,21 +306,37 @@ const ExpiryAlerts = ({ certifications }) => {
 // Main Timeline Component
 const CertificationTimeline = ({ hospitalId = 121 }) => {
   const [certifications, setCertifications] = useState([]);
+  const [hospitals, setHospitals] = useState([]);
   const [timelineView, setTimelineView] = useState('all');
   const [loading, setLoading] = useState(true);
   const [selectedHospitalId, setSelectedHospitalId] = useState(hospitalId);
 
   useEffect(() => {
-    loadCertificationData();
+    loadData();
   }, []);
 
-  const loadCertificationData = async () => {
+  const loadData = async () => {
     try {
       setLoading(true);
-      const data = await certificationService.getAllCertifications();
-      setCertifications(data);
+      
+      // Fetch both certifications and hospitals data
+      const [certificationsData, hospitalsResponse] = await Promise.all([
+        certificationService.getAllCertifications(),
+        dataService.getHospitals()
+      ]);
+      
+      // Set certifications data
+      setCertifications(certificationsData);
+      
+      // Set hospitals data - handle the response structure correctly
+      const hospitalsData = hospitalsResponse.success ? hospitalsResponse.data : [];
+      setHospitals(hospitalsData);
+      
+      console.log('✅ Loaded certifications:', certificationsData.length);
+      console.log('✅ Loaded hospitals:', hospitalsData.length);
+      
     } catch (error) {
-      console.error('Error loading certification data:', error);
+      console.error('Error loading data:', error);
     } finally {
       setLoading(false);
     }
@@ -320,7 +364,16 @@ const CertificationTimeline = ({ hospitalId = 121 }) => {
 
   const processedCerts = processTimelineData(certifications);
   const filteredCerts = filterCertifications(processedCerts);
-  const availableHospitals = [...new Set(certifications.map(cert => cert.hospital_id))];
+  
+  // Create hospital options with names from the hospitals data
+  const availableHospitalIds = [...new Set(certifications.map(cert => cert.hospital_id))];
+  const hospitalOptions = availableHospitalIds.map(hospitalId => {
+    const hospital = hospitals.find(h => h.id === hospitalId);
+    return {
+      id: hospitalId,
+      name: hospital ? hospital.name : `Hospital ${hospitalId}`
+    };
+  }).sort((a, b) => a.name.localeCompare(b.name));
 
   if (loading) {
     return (
@@ -333,23 +386,25 @@ const CertificationTimeline = ({ hospitalId = 121 }) => {
 
   return (
     <div className="certification-timeline">
-      <div className="timeline-header">
-        <div className="timeline-title">
+      <div className="page-header">
+        <div className="header-content">
           <Award className="header-icon" />
-          <h2>Hospital Quality Certification Timeline</h2>
+          <h1>Hospital Quality Certification Timeline</h1>
+          <p>Track and manage all hospital certifications in one place</p>
         </div>
-        <div className="timeline-controls">
-          <HospitalSelector 
-            hospitalId={selectedHospitalId}
-            availableHospitals={availableHospitals}
-            onChange={setSelectedHospitalId}
-          />
-          <TimelineControls 
-            view={timelineView} 
-            onChange={setTimelineView}
-            certifications={processedCerts}
-          />
-        </div>
+      </div>
+
+      <div className="controls-section">
+        <HospitalSelector 
+          hospitalId={selectedHospitalId}
+          hospitalOptions={hospitalOptions}
+          onChange={setSelectedHospitalId}
+        />
+        <TimelineControls 
+          view={timelineView} 
+          onChange={setTimelineView}
+          certifications={processedCerts}
+        />
       </div>
 
       <CertificationSummary certifications={processedCerts} />

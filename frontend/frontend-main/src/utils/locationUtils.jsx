@@ -156,27 +156,27 @@ export const getCoordinatesFromAddress = async (hospital) => {
   // For demo purposes, using approximate coordinates for major cities
   
   const cityCoordinates = {
-    'Mumbai': [19.0760, 72.8777],
-    'Chennai': [13.0827, 80.2707],
-    'New Delhi': [28.6139, 77.2090],
-    'Kolkata': [22.5726, 88.3639],
-    'Bangalore': [12.9716, 77.5946],
-    'Hyderabad': [17.3850, 78.4867],
-    'Pune': [18.5204, 73.8567],
-    'Ahmedabad': [23.0225, 72.5714],
-    'Gurugram': [28.4595, 77.0266]
+    'Mumbai': { lat: 19.0760, lng: 72.8777 },
+    'Chennai': { lat: 13.0827, lng: 80.2707 },
+    'New Delhi': { lat: 28.6139, lng: 77.2090 },
+    'Kolkata': { lat: 22.5726, lng: 88.3639 },
+    'Bangalore': { lat: 12.9716, lng: 77.5946 },
+    'Hyderabad': { lat: 17.3850, lng: 78.4867 },
+    'Pune': { lat: 18.5204, lng: 73.8567 },
+    'Ahmedabad': { lat: 23.0225, lng: 72.5714 },
+    'Gurugram': { lat: 28.4595, lng: 77.0266 }
   };
   
-  const baseCoords = cityCoordinates[hospital.city_town] || [20.5937, 78.9629]; // Default to India center
+  const baseCoords = cityCoordinates[hospital.city_town] || { lat: 20.5937, lng: 78.9629 }; // Default to India center
   
   // Add slight random offset based on hospital ID for variety
   const offset = 0.01;
   const hospitalOffset = (hospital.hospital_id % 10) * offset * 0.1;
   
-  return [
-    baseCoords[0] + (hospitalOffset - offset/2),
-    baseCoords[1] + (hospitalOffset - offset/2)
-  ];
+  return {
+    lat: baseCoords.lat + (hospitalOffset - offset/2),
+    lng: baseCoords.lng + (hospitalOffset - offset/2)
+  };
 };
 
 export default {

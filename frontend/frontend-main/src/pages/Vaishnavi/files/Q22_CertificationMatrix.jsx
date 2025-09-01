@@ -31,7 +31,9 @@ import {
   FilterOutlined,
   ReloadOutlined,
   ClearOutlined,
-  SearchOutlined
+  SearchOutlined,
+  InfoCircleOutlined,
+  SafetyCertificateOutlined
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import isBetween from 'dayjs/plugin/isBetween';
@@ -45,14 +47,15 @@ const { Search } = Input;
 const { RangePicker } = DatePicker;
 const { Text, Title } = Typography;
 
-// Modern styled components to override any global conflicts
+// Modern styled components with scoped CSS
 const StyledContainer = ({ children, ...props }) => (
   <div 
+    className="cert-matrix-container"
     style={{
       padding: '24px',
-      backgroundColor: '#f0f2f5',
+      backgroundColor: '#f8fafc',
       minHeight: '100vh',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
     }}
     {...props}
   >
@@ -62,14 +65,17 @@ const StyledContainer = ({ children, ...props }) => (
 
 const StyledCard = ({ children, ...props }) => (
   <Card
+    className="cert-matrix-card"
     style={{
       borderRadius: '12px',
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-      border: 'none',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)',
+      border: '1px solid #e2e8f0',
       overflow: 'hidden',
       marginBottom: '24px',
+      background: '#ffffff',
       ...props.style
     }}
+    bodyStyle={{ padding: '20px' }}
     {...props}
   >
     {children}
@@ -81,11 +87,12 @@ const FilterContainer = ({ children }) => (
     style={{
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '20px',
-      padding: '24px',
-      backgroundColor: '#fafafa',
+      gap: '16px',
+      padding: '20px',
+      backgroundColor: '#f8fafc',
       borderRadius: '8px',
-      margin: '0 0 24px 0'
+      margin: '0 0 20px 0',
+      border: '1px solid #e2e8f0'
     }}
   >
     {children}
@@ -94,7 +101,7 @@ const FilterContainer = ({ children }) => (
 
 const FilterItem = ({ label, children }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-    <Text strong style={{ fontSize: '14px', color: '#262626' }}>
+    <Text strong style={{ fontSize: '14px', color: '#374151', marginBottom: '4px' }}>
       {label}
     </Text>
     <div style={{ width: '100%' }}>
@@ -107,30 +114,69 @@ const StatsGrid = ({ children }) => (
   <div
     style={{
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '20px',
-      marginBottom: '32px'
+      gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+      gap: '16px',
+      marginBottom: '24px'
     }}
   >
     {children}
   </div>
 );
 
-const StatCard = ({ icon, title, value, suffix, color = '#1890ff' }) => (
-  <StyledCard style={{ textAlign: 'center', padding: '0' }}>
-    <div style={{ padding: '24px' }}>
-      <div style={{ fontSize: '32px', color, marginBottom: '12px' }}>
-        {icon}
+const StatCard = ({ icon, title, value, suffix, color = '#3b82f6', tooltip }) => (
+  <StyledCard 
+    style={{ 
+      textAlign: 'center', 
+      padding: '0',
+      borderTop: `4px solid ${color}`,
+      transition: 'all 0.3s ease',
+      height: '100%'
+    }}
+  >
+    <Tooltip title={tooltip}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ fontSize: '28px', color, marginBottom: '12px' }}>
+          {icon}
+        </div>
+        <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#1f2937', marginBottom: '6px' }}>
+          {value}{suffix && <span style={{ fontSize: '16px', color: '#6b7280' }}>{suffix}</span>}
+        </div>
+        <Text style={{ fontSize: '14px', color: '#6b7280' }}>
+          {title}
+        </Text>
       </div>
-      <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#262626', marginBottom: '8px' }}>
-        {value}{suffix && <span style={{ fontSize: '18px', color: '#8c8c8c' }}>{suffix}</span>}
-      </div>
-      <Text type="secondary" style={{ fontSize: '14px' }}>
-        {title}
-      </Text>
-    </div>
+    </Tooltip>
   </StyledCard>
 );
+
+const StatusIndicator = ({ status, text, size = 'default' }) => {
+  const statusConfig = {
+    active: { color: '#10b981', icon: <CheckCircleOutlined />, bg: '#ecfdf5' },
+    'expiring-soon': { color: '#f59e0b', icon: <ExclamationCircleOutlined />, bg: '#fffbeb' },
+    warning: { color: '#f59e0b', icon: <ClockCircleOutlined />, bg: '#fffbeb' },
+    expired: { color: '#ef4444', icon: <CloseCircleOutlined />, bg: '#fef2f2' },
+    default: { color: '#6b7280', icon: <InfoCircleOutlined />, bg: '#f3f4f6' }
+  };
+  
+  const config = statusConfig[status] || statusConfig.default;
+  
+  return (
+    <div style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '6px',
+      padding: size === 'small' ? '4px 8px' : '6px 12px',
+      borderRadius: '20px',
+      backgroundColor: config.bg,
+      color: config.color,
+      fontSize: size === 'small' ? '12px' : '14px',
+      fontWeight: '500'
+    }}>
+      {config.icon}
+      <span>{text}</span>
+    </div>
+  );
+};
 
 const Q22_CertificationMatrix = () => {
   const [certifications, setCertifications] = useState([]);
@@ -254,30 +300,34 @@ const Q22_CertificationMatrix = () => {
     if (daysUntilExpiry < 0) {
       return { 
         status: 'expired', 
-        color: '#ff4d4f', 
+        color: '#ef4444', 
         icon: <CloseCircleOutlined />,
-        text: 'Expired'
+        text: 'Expired',
+        description: 'Certification has expired'
       };
     } else if (daysUntilExpiry <= 90) {
       return { 
         status: 'expiring-soon', 
-        color: '#fa8c16', 
+        color: '#f59e0b', 
         icon: <ExclamationCircleOutlined />,
-        text: 'Expiring Soon'
+        text: 'Expiring Soon',
+        description: 'Certification expires within 90 days'
       };
     } else if (daysUntilExpiry <= 180) {
       return { 
         status: 'warning', 
-        color: '#faad14', 
+        color: '#f59e0b', 
         icon: <ClockCircleOutlined />,
-        text: 'Warning'
+        text: 'Warning',
+        description: 'Certification expires within 180 days'
       };
     } else {
       return { 
         status: 'active', 
-        color: '#52c41a', 
+        color: '#10b981', 
         icon: <CheckCircleOutlined />,
-        text: 'Active'
+        text: 'Active',
+        description: 'Certification is active'
       };
     }
   };
@@ -438,19 +488,19 @@ const Q22_CertificationMatrix = () => {
         width: 280,
         render: (hospital, record) => (
           <div style={{ padding: '8px 0' }}>
-            <div style={{ fontWeight: 'bold', fontSize: '14px', marginBottom: '4px' }}>
+            <div style={{ fontWeight: '600', fontSize: '14px', marginBottom: '4px', color: '#1f2937' }}>
               {hospital.name}
             </div>
-            <div style={{ fontSize: '12px', color: '#8c8c8c', marginBottom: '4px' }}>
+            <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>
               {hospital.category} | {hospital.beds_operational} beds
             </div>
-            <div style={{ fontSize: '11px', color: '#595959' }}>
-              <Badge count={record.totalCertifications} style={{ backgroundColor: '#52c41a' }} />
-              <span style={{ marginLeft: '8px' }}>Certifications</span>
+            <div style={{ fontSize: '11px', color: '#6b7280', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <Badge count={record.totalCertifications} style={{ backgroundColor: '#10b981' }} />
+              <span>Certifications</span>
               {record.expiringSoon > 0 && (
                 <>
-                  <Badge count={record.expiringSoon} style={{ backgroundColor: '#fa8c16', marginLeft: '12px' }} />
-                  <span style={{ marginLeft: '8px', color: '#fa8c16' }}>Expiring</span>
+                  <Badge count={record.expiringSoon} style={{ backgroundColor: '#f59e0b' }} />
+                  <span style={{ color: '#f59e0b' }}>Expiring</span>
                 </>
               )}
             </div>
@@ -460,8 +510,8 @@ const Q22_CertificationMatrix = () => {
       ...certTypes.map(type => ({
         title: (
           <div style={{ textAlign: 'center', padding: '8px 4px' }}>
-            <div style={{ fontWeight: 'bold', fontSize: '13px' }}>{type}</div>
-            <div style={{ fontSize: '11px', color: '#8c8c8c' }}>
+            <div style={{ fontWeight: '600', fontSize: '13px', color: '#1f2937' }}>{type}</div>
+            <div style={{ fontSize: '11px', color: '#6b7280' }}>
               {Array.isArray(filteredData) ? filteredData.filter(c => c.certification_type === type).length : 0} total
             </div>
           </div>
@@ -473,9 +523,18 @@ const Q22_CertificationMatrix = () => {
         render: (cert) => {
           if (!cert) {
             return (
-              <Tag color="default" style={{ margin: '4px 0' }}>
-                Not Certified
-              </Tag>
+              <div style={{ padding: '8px 4px' }}>
+                <div style={{
+                  padding: '6px 12px',
+                  borderRadius: '6px',
+                  backgroundColor: '#f3f4f6',
+                  color: '#6b7280',
+                  fontSize: '12px',
+                  fontWeight: '500'
+                }}>
+                  Not Certified
+                </div>
+              </div>
             );
           }
 
@@ -489,26 +548,42 @@ const Q22_CertificationMatrix = () => {
                     <div><strong>Certificate:</strong> {cert.certificate_number}</div>
                     <div><strong>Expires:</strong> {dayjs(cert.expiry_date).format('DD MMM YYYY')}</div>
                     <div><strong>Authority:</strong> {cert.issuing_authority}</div>
-                    <div style={{ marginTop: '8px', color: '#40a9ff' }}>Click for details</div>
+                    <div style={{ marginTop: '8px', color: '#3b82f6' }}>Click for details</div>
                   </div>
                 }
               >
-                <Tag
-                  color={statusInfo.status}
+                <div
                   style={{ 
-                    cursor: 'pointer', 
-                    margin: '2px 0',
-                    display: 'block',
-                    textAlign: 'center',
-                    border: `1px solid ${statusInfo.color}`,
-                    backgroundColor: `${statusInfo.color}15`
+                    cursor: 'pointer',
+                    padding: '8px',
+                    borderRadius: '8px',
+                    border: `1px solid ${statusInfo.color}30`,
+                    backgroundColor: `${statusInfo.color}10`,
+                    transition: 'all 0.2s ease',
+                    marginBottom: '4px'
                   }}
                   onClick={() => showCertificationDetails(cert)}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = `0 2px 8px ${statusInfo.color}20`;
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
                 >
-                  {statusInfo.icon} {cert.certification_level}
-                </Tag>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '4px' }}>
+                    <span style={{ color: statusInfo.color, fontSize: '14px' }}>
+                      {statusInfo.icon}
+                    </span>
+                    <span style={{ fontWeight: '600', color: '#1f2937', fontSize: '13px' }}>
+                      {cert.certification_level}
+                    </span>
+                  </div>
+                  <StatusIndicator status={statusInfo.status} text={statusInfo.text} size="small" />
+                </div>
               </Tooltip>
-              <div style={{ fontSize: '10px', color: '#8c8c8c', marginTop: '4px' }}>
+              <div style={{ fontSize: '10px', color: '#6b7280', textAlign: 'center' }}>
                 Exp: {dayjs(cert.expiry_date).format('MMM YY')}
               </div>
             </div>
@@ -518,22 +593,28 @@ const Q22_CertificationMatrix = () => {
     ];
 
     return (
-      <Table
-        columns={columns}
-        dataSource={Object.values(matrix)}
-        rowKey={(record) => record.hospital.id}
-        scroll={{ x: 'max-content', y: 600 }}
-        pagination={{ 
-          pageSize: 20,
-          showSizeChanger: true,
-          showQuickJumper: true,
-          showTotal: (total, range) => 
-            `${range[0]}-${range[1]} of ${total} hospitals`
-        }}
-        size="middle"
-        loading={loading}
-        style={{ backgroundColor: '#fff' }}
-      />
+      <div style={{ 
+        borderRadius: '8px', 
+        overflow: 'hidden',
+        border: '1px solid #e2e8f0'
+      }}>
+        <Table
+          columns={columns}
+          dataSource={Object.values(matrix)}
+          rowKey={(record) => record.hospital.id}
+          scroll={{ x: 'max-content', y: 600 }}
+          pagination={{ 
+            pageSize: 20,
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: (total, range) => 
+              `${range[0]}-${range[1]} of ${total} hospitals`
+          }}
+          size="middle"
+          loading={loading}
+          style={{ backgroundColor: '#fff' }}
+        />
+      </div>
     );
   };
 
@@ -583,21 +664,25 @@ const Q22_CertificationMatrix = () => {
     <StyledContainer>
       {/* Header Section */}
       <StyledCard>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px' }}>
           <div>
-            <Title level={2} style={{ margin: '0 0 8px 0', color: '#262626' }}>
-              Hospital Certification Matrix
-            </Title>
-            <Text style={{ fontSize: '16px', color: '#595959' }}>
-              Compare certification status across {hospitals.length} healthcare organizations
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+              <SafetyCertificateOutlined style={{ fontSize: '28px', color: '#3b82f6' }} />
+              <Title level={2} style={{ margin: 0, color: '#1f2937', fontWeight: '700' }}>
+                Hospital Certification Matrix
+              </Title>
+            </div>
+            <Text style={{ fontSize: '16px', color: '#6b7280' }}>
+              Monitor and compare certification status across {hospitals.length} healthcare organizations
             </Text>
           </div>
-          <Space size="middle">
+          <Space size="middle" style={{ flexWrap: 'wrap' }}>
             <Button
               icon={<ReloadOutlined />}
               onClick={refreshData}
               loading={refreshing}
               size="large"
+              style={{ borderRadius: '8px' }}
             >
               Refresh
             </Button>
@@ -607,6 +692,7 @@ const Q22_CertificationMatrix = () => {
               onClick={exportToExcel}
               disabled={!Array.isArray(filteredData) || filteredData.length === 0}
               size="large"
+              style={{ borderRadius: '8px', background: '#3b82f6', borderColor: '#3b82f6' }}
             >
               Export Excel
             </Button>
@@ -620,38 +706,39 @@ const Q22_CertificationMatrix = () => {
           icon={<CheckCircleOutlined />}
           title="Total Hospitals"
           value={stats.totalHospitals}
-          color="#52c41a"
+          color="#10b981"
+          tooltip="Number of hospitals in the current view"
         />
         <StatCard
           icon={<ClockCircleOutlined />}
           title="Total Certifications"
           value={stats.actualCertified}
           suffix={` / ${stats.totalPossible}`}
-          color="#1890ff"
+          color="#3b82f6"
+          tooltip="Number of certifications compared to maximum possible"
         />
         <StatCard
           icon={<ExclamationCircleOutlined />}
           title="Compliance Rate"
           value={stats.complianceRate}
           suffix="%"
-          color={stats.complianceRate >= 80 ? '#52c41a' : stats.complianceRate >= 60 ? '#faad14' : '#ff4d4f'}
+          color={stats.complianceRate >= 80 ? '#10b981' : stats.complianceRate >= 60 ? '#f59e0b' : '#ef4444'}
+          tooltip="Percentage of required certifications that are present"
         />
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <StyledCard style={{ textAlign: 'center', padding: '24px', width: '100%' }}>
-            <Progress
-              type="circle"
-              percent={stats.complianceRate || 0}
-              size={120}
-              strokeColor={stats.complianceRate >= 80 ? '#52c41a' : stats.complianceRate >= 60 ? '#faad14' : '#ff4d4f'}
-              format={(percent) => (
-                <div>
-                  <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{percent}%</div>
-                  <div style={{ fontSize: '12px', color: '#8c8c8c' }}>Compliance</div>
-                </div>
-              )}
-            />
-          </StyledCard>
-        </div>
+        <StyledCard style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          <Progress
+            type="circle"
+            percent={stats.complianceRate || 0}
+            size={100}
+            strokeColor={stats.complianceRate >= 80 ? '#10b981' : stats.complianceRate >= 60 ? '#f59e0b' : '#ef4444'}
+            format={(percent) => (
+              <div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#1f2937' }}>{percent}%</div>
+                <div style={{ fontSize: '12px', color: '#6b7280' }}>Compliance</div>
+              </div>
+            )}
+          />
+        </StyledCard>
       </StatsGrid>
 
       {/* Secondary Stats */}
@@ -660,20 +747,23 @@ const Q22_CertificationMatrix = () => {
           icon={<CheckCircleOutlined />}
           title="Active Certifications"
           value={stats.totalActive}
-          color="#52c41a"
+          color="#10b981"
+          tooltip="Certifications that are currently active"
         />
         <StatCard
           icon={<ExclamationCircleOutlined />}
           title="Expiring Soon"
           value={stats.expiringSoon}
-          color="#fa8c16"
+          color="#f59e0b"
+          tooltip="Certifications expiring within 90 days"
         />
         <StatCard
           icon={<ClockCircleOutlined />}
           title="Active Rate"
           value={stats.activeRate}
           suffix="%"
-          color="#1890ff"
+          color="#3b82f6"
+          tooltip="Percentage of certifications that are currently active"
         />
       </StatsGrid>
 
@@ -681,26 +771,28 @@ const Q22_CertificationMatrix = () => {
       <StyledCard>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <Space>
-            <FilterOutlined style={{ fontSize: '16px', color: '#1890ff' }} />
-            <Text strong style={{ fontSize: '16px' }}>Filters</Text>
+            <FilterOutlined style={{ fontSize: '16px', color: '#3b82f6' }} />
+            <Text strong style={{ fontSize: '16px', color: '#1f2937' }}>Filters</Text>
           </Space>
           <Button 
             icon={<ClearOutlined />} 
             onClick={clearAllFilters}
             type="text"
+            style={{ color: '#6b7280' }}
           >
             Clear All
           </Button>
         </div>
 
         <FilterContainer>
-          <FilterItem label="Search">
+          <FilterItem label="Search Hospitals or Certifications">
             <Search
-              placeholder="Search hospitals or certifications..."
+              placeholder="Search by name, type, or authority..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               allowClear
               size="large"
+              style={{ width: '100%' }}
             />
           </FilterItem>
 
@@ -742,7 +834,7 @@ const Q22_CertificationMatrix = () => {
             </Select>
           </FilterItem>
 
-          <FilterItem label="Date Range">
+          <FilterItem label="Issued Date Range">
             <RangePicker
               value={dateRange}
               onChange={setDateRange}
@@ -756,18 +848,24 @@ const Q22_CertificationMatrix = () => {
 
       {/* Matrix Table */}
       <StyledCard>
-        <div style={{ marginBottom: '20px' }}>
-          <Title level={4} style={{ margin: 0 }}>
+        <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Title level={4} style={{ margin: 0, color: '#1f2937' }}>
             Certification Matrix ({stats.totalHospitals} hospitals)
           </Title>
+          <Text style={{ color: '#6b7280' }}>
+            Showing {filteredData.length} certifications
+          </Text>
         </div>
 
         {(!Array.isArray(filteredData) || filteredData.length === 0) && !loading ? (
           <div style={{ textAlign: 'center', padding: '60px 20px' }}>
-            <SearchOutlined style={{ fontSize: '48px', color: '#d9d9d9', marginBottom: '16px' }} />
-            <Text type="secondary" style={{ fontSize: '16px' }}>
+            <SearchOutlined style={{ fontSize: '48px', color: '#d1d5db', marginBottom: '16px' }} />
+            <Text type="secondary" style={{ fontSize: '16px', display: 'block', marginBottom: '16px' }}>
               No certification data found with current filters
             </Text>
+            <Button type="primary" onClick={clearAllFilters}>
+              Clear Filters
+            </Button>
           </div>
         ) : (
           renderMatrixTable()
@@ -778,77 +876,78 @@ const Q22_CertificationMatrix = () => {
       <Modal
         title={
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <CheckCircleOutlined style={{ color: '#1890ff' }} />
-            <span>Certification Details</span>
+            <CheckCircleOutlined style={{ color: '#3b82f6' }} />
+            <span style={{ fontWeight: '600' }}>Certification Details</span>
           </div>
         }
         open={detailsModalVisible}
         onCancel={() => setDetailsModalVisible(false)}
         footer={null}
         width={700}
+        style={{ borderRadius: '12px' }}
       >
         {selectedCertDetail && (
           <div style={{ padding: '20px 0' }}>
             <Row gutter={[24, 20]}>
               <Col span={12}>
                 <div>
-                  <Text strong style={{ color: '#8c8c8c', fontSize: '12px' }}>HOSPITAL</Text>
-                  <div style={{ fontSize: '16px', marginTop: '4px' }}>
+                  <Text strong style={{ color: '#6b7280', fontSize: '12px', display: 'block', marginBottom: '4px' }}>HOSPITAL</Text>
+                  <div style={{ fontSize: '16px', color: '#1f2937' }}>
                     {hospitals.find(h => h.id === selectedCertDetail.hospital_id)?.name}
                   </div>
                 </div>
               </Col>
               <Col span={12}>
                 <div>
-                  <Text strong style={{ color: '#8c8c8c', fontSize: '12px' }}>CERTIFICATION TYPE</Text>
-                  <div style={{ fontSize: '16px', marginTop: '4px' }}>
+                  <Text strong style={{ color: '#6b7280', fontSize: '12px', display: 'block', marginBottom: '4px' }}>CERTIFICATION TYPE</Text>
+                  <div style={{ fontSize: '16px', color: '#1f2937' }}>
                     {selectedCertDetail.certification_type}
                   </div>
                 </div>
               </Col>
               <Col span={12}>
                 <div>
-                  <Text strong style={{ color: '#8c8c8c', fontSize: '12px' }}>LEVEL</Text>
-                  <div style={{ fontSize: '16px', marginTop: '4px' }}>
+                  <Text strong style={{ color: '#6b7280', fontSize: '12px', display: 'block', marginBottom: '4px' }}>LEVEL</Text>
+                  <div style={{ fontSize: '16px', color: '#1f2937' }}>
                     {selectedCertDetail.certification_level}
                   </div>
                 </div>
               </Col>
               <Col span={12}>
                 <div>
-                  <Text strong style={{ color: '#8c8c8c', fontSize: '12px' }}>CERTIFICATE NUMBER</Text>
-                  <div style={{ fontSize: '16px', marginTop: '4px' }}>
+                  <Text strong style={{ color: '#6b7280', fontSize: '12px', display: 'block', marginBottom: '4px' }}>CERTIFICATE NUMBER</Text>
+                  <div style={{ fontSize: '16px', color: '#1f2937' }}>
                     <Text copyable>{selectedCertDetail.certificate_number}</Text>
                   </div>
                 </div>
               </Col>
               <Col span={12}>
                 <div>
-                  <Text strong style={{ color: '#8c8c8c', fontSize: '12px' }}>ISSUED DATE</Text>
-                  <div style={{ fontSize: '16px', marginTop: '4px' }}>
+                  <Text strong style={{ color: '#6b7280', fontSize: '12px', display: 'block', marginBottom: '4px' }}>ISSUED DATE</Text>
+                  <div style={{ fontSize: '16px', color: '#1f2937' }}>
                     {dayjs(selectedCertDetail.issued_date).format('DD MMMM YYYY')}
                   </div>
                 </div>
               </Col>
               <Col span={12}>
                 <div>
-                  <Text strong style={{ color: '#8c8c8c', fontSize: '12px' }}>EXPIRY DATE</Text>
-                  <div style={{ fontSize: '16px', marginTop: '4px' }}>
+                  <Text strong style={{ color: '#6b7280', fontSize: '12px', display: 'block', marginBottom: '4px' }}>EXPIRY DATE</Text>
+                  <div style={{ fontSize: '16px', color: '#1f2937' }}>
                     {dayjs(selectedCertDetail.expiry_date).format('DD MMMM YYYY')}
                   </div>
                 </div>
               </Col>
               <Col span={24}>
                 <div>
-                  <Text strong style={{ color: '#8c8c8c', fontSize: '12px' }}>ISSUING AUTHORITY</Text>
-                  <div style={{ fontSize: '16px', marginTop: '4px' }}>
+                  <Text strong style={{ color: '#6b7280', fontSize: '12px', display: 'block', marginBottom: '4px' }}>ISSUING AUTHORITY</Text>
+                  <div style={{ fontSize: '16px', color: '#1f2937' }}>
                     {selectedCertDetail.issuing_authority}
                   </div>
                 </div>
               </Col>
               <Col span={24}>
                 <div>
-                  <Text strong style={{ color: '#8c8c8c', fontSize: '12px' }}>STATUS</Text>
+                  <Text strong style={{ color: '#6b7280', fontSize: '12px', display: 'block', marginBottom: '4px' }}>STATUS</Text>
                   <div style={{ marginTop: '8px' }}>
                     {(() => {
                       const statusInfo = getCertificationStatus(selectedCertDetail);
@@ -857,18 +956,8 @@ const Q22_CertificationMatrix = () => {
                       
                       return (
                         <Space>
-                          <Tag 
-                            color={statusInfo.status}
-                            icon={statusInfo.icon}
-                            style={{ 
-                              padding: '4px 12px',
-                              border: `1px solid ${statusInfo.color}`,
-                              backgroundColor: `${statusInfo.color}15`
-                            }}
-                          >
-                            {statusInfo.text}
-                          </Tag>
-                          <Text style={{ color: '#8c8c8c' }}>
+                          <StatusIndicator status={statusInfo.status} text={statusInfo.text} />
+                          <Text style={{ color: '#6b7280' }}>
                             ({daysUntilExpiry >= 0 
                               ? `${daysUntilExpiry} days remaining` 
                               : `Expired ${Math.abs(daysUntilExpiry)} days ago`})
@@ -882,8 +971,8 @@ const Q22_CertificationMatrix = () => {
               {selectedCertDetail.remarks && (
                 <Col span={24}>
                   <div>
-                    <Text strong style={{ color: '#8c8c8c', fontSize: '12px' }}>REMARKS</Text>
-                    <div style={{ fontSize: '16px', marginTop: '4px' }}>
+                    <Text strong style={{ color: '#6b7280', fontSize: '12px', display: 'block', marginBottom: '4px' }}>REMARKS</Text>
+                    <div style={{ fontSize: '16px', color: '#1f2937', padding: '12px', backgroundColor: '#f8fafc', borderRadius: '6px' }}>
                       {selectedCertDetail.remarks}
                     </div>
                   </div>
@@ -893,6 +982,53 @@ const Q22_CertificationMatrix = () => {
           </div>
         )}
       </Modal>
+
+      {/* Scoped CSS to prevent conflicts */}
+      <style>
+        {`
+          .cert-matrix-container .ant-card {
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+          }
+          
+          .cert-matrix-container .ant-card-head {
+            border-bottom: 1px solid #e2e8f0;
+          }
+          
+          .cert-matrix-container .ant-table-thead > tr > th {
+            background-color: #f8fafc;
+            font-weight: 600;
+          }
+          
+          .cert-matrix-container .ant-tag {
+            border-radius: 6px;
+          }
+          
+          .cert-matrix-container .ant-btn {
+            border-radius: 6px;
+          }
+          
+          .cert-matrix-container .ant-input,
+          .cert-matrix-container .ant-select-selector,
+          .cert-matrix-container .ant-picker {
+            border-radius: 6px;
+          }
+          
+          .cert-matrix-container .ant-table {
+            border-radius: 8px;
+          }
+          
+          .cert-matrix-container .ant-table-container {
+            border-radius: 8px;
+          }
+          
+          .cert-matrix-container .ant-pagination {
+            padding: 0 20px 20px 20px;
+          }
+        `}
+      </style>
     </StyledContainer>
   );
 };

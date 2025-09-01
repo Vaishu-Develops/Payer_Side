@@ -14,7 +14,7 @@ const useContactAnalysis = () => {
 
         if (contactsResponse.success && hospitalsResponse.success) {
           const contacts = contactsResponse.data;
-          const hospitals = hospitalsResponse.data.hospitals;
+          const hospitals = hospitalsResponse.data; // Changed from hospitalsResponse.data.hospitals
 
           const analysis = hospitals.map(hospital => {
             const hospitalContacts = contacts.filter(c => c.hospital_id === hospital.id);

@@ -153,6 +153,20 @@ export const getEquipmentMatrix = (equipment_type = null) =>
     params: equipment_type ? { equipment_type } : {} 
   });
 
+// Function to get hospital name by ID from the backend data
+export const getHospitalNameById = async (hospitalId) => {
+  try {
+    const response = await api.get('/hospitals');
+    const hospitals = response.data?.hospitals || response.data || [];
+    
+    const hospital = hospitals.find(h => h.id === parseInt(hospitalId));
+    return hospital ? hospital.name : `Hospital ${hospitalId}`;
+  } catch (error) {
+    console.error(`Error fetching hospital name for ID ${hospitalId}:`, error);
+    return `Hospital ${hospitalId}`;
+  }
+};
+
 export const hospitalService = {
     fetchAllData,
     getHospitals,
@@ -170,5 +184,6 @@ export const hospitalService = {
     getHospitalContacts,
     getWardData,
     getHospitalProfile,
-    getEquipmentMatrix
+    getEquipmentMatrix,
+    getHospitalNameById
 };

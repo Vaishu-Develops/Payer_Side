@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { Card, Typography, Row, Col, Radio, Select, Table, Spin, Alert } from 'antd';
 import { BarChartOutlined, PieChartOutlined, SortAscendingOutlined, SortDescendingOutlined } from '@ant-design/icons';
+import api from '../../../services/api';
 import './styles/Q06_StateWiseHospitalCount.css';
 
 const { Title, Text } = Typography;
@@ -21,9 +22,6 @@ const Q06_StateWiseHospitalCount = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        
-        // Import API service
-        const { default: api } = await import('../../../services/api');
         
         // Fetch state distribution data from API
         const stateResponse = await api.get('/analytics/hospitals-by-state');

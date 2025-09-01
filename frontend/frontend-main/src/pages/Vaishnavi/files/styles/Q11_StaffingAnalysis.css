@@ -96,21 +96,20 @@
   min-width: 280px !important;
   max-width: 280px !important;
   display: flex !important;
+  width: 100% !important;
 }
 
 /* --- KPI Cards Styling --- */
 .kpi-card-staffing {
   width: 100% !important;
-  height: 140px !important;
+  height: auto !important;
   min-height: 140px !important;
-  max-height: 140px !important;
   border-radius: 12px !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
   border: 1px solid #f0f0f0 !important;
   background: #ffffff !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  overflow: hidden !important;
-  contain: layout style size !important;
+  overflow: visible !important;
   cursor: pointer !important;
 }
 
@@ -122,8 +121,8 @@
 
 .kpi-card-staffing .ant-card-body {
   padding: 0 !important;
-  height: 108px !important;
-  max-height: 108px !important;
+  height: auto !important;
+  min-height: 108px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -132,13 +131,16 @@
 .kpi-content {
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  gap: 20px !important;
+  position: relative !important;
   width: 100% !important;
   padding: 24px !important;
 }
 
-.kpi-icon {
+.staffing-analysis-container .kpi-content .kpi-icon {
+  position: absolute !important;
+  left: 24px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -150,15 +152,26 @@
   font-size: 24px !important;
   color: #1890ff !important;
   flex-shrink: 0 !important;
+  overflow: visible !important; /* Ensure SVG isn't clipped */
 }
 
-.kpi-info {
+/* Override only for icons within this component */
+.staffing-analysis-container .kpi-icon .anticon {
+  /* Ensure proper centering and visibility without affecting other components */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.staffing-analysis-container .kpi-info {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
-  flex: 1 !important;
-  min-width: 0 !important;
-  text-align: left !important;
+  width: 100% !important;
+  text-align: center !important;
+  overflow: visible !important;
+  padding-left: 56px !important; /* Make space for the icon */
 }
 
 .kpi-title {
@@ -169,14 +182,60 @@
   text-transform: uppercase !important;
   letter-spacing: 0.3px !important;
   line-height: 1.2 !important;
+  text-align: center !important;
 }
 
 .kpi-value {
   font-size: 32px !important;
   font-weight: 700 !important;
   color: #262626 !important;
-  line-height: 1 !important;
+  line-height: 1.1 !important;
   margin: 0 !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Specific fix ONLY for the UsergroupAddOutlined icon in Staffing Analysis */
+.staffing-analysis-container .kpi-icon .anticon-usergroup-add {
+  /* This SVG needs a slight adjustment to be fully visible */
+  position: relative;
+  top: 1px;
+}
+
+/* --- Media Queries --- */
+@media (max-width: 768px) {
+  .staffing-analysis-container .kpi-cards-grid {
+    gap: 16px !important;
+  }
+  
+  .staffing-analysis-container .kpi-card-wrapper {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    min-width: 250px !important;
+  }
+  
+  .staffing-analysis-container .kpi-content {
+    padding: 16px !important;
+  }
+  
+  .staffing-analysis-container .kpi-icon {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    font-size: 18px !important;
+    left: 16px !important;
+  }
+  
+  .staffing-analysis-container .kpi-info {
+    padding-left: 42px !important; /* Adjust for smaller icon on mobile */
+  }
+  
+  .staffing-analysis-container .kpi-value {
+    font-size: 28px !important;
+  }
 }
 
 /* --- Charts Section --- */
@@ -424,19 +483,31 @@
   }
   
   .kpi-content {
-    gap: 16px !important;
-    padding: 20px !important;
+    gap: 12px !important;
+    padding: 16px !important;
   }
   
   .kpi-icon {
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-    font-size: 20px !important;
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    font-size: 18px !important;
+    left: 16px !important;
+  }
+  
+  .kpi-info {
+    width: 100% !important;
+    padding-right: 42px !important;
+  }
+  
+  .kpi-title {
+    font-size: 12px !important;
+    letter-spacing: 0.2px !important;
+    white-space: nowrap !important;
   }
   
   .kpi-value {
-    font-size: 28px !important;
+    font-size: 24px !important;
   }
   
   .kpi-card-staffing {
@@ -504,6 +575,23 @@
 /* --- Override any external interference --- */
 .staffing-analysis-container .kpi-cards-grid * {
   flex-shrink: 0 !important;
+}
+
+/* Additional fixes to prevent text compression */
+.staffing-analysis-container .kpi-card-staffing {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.staffing-analysis-container .kpi-title,
+.staffing-analysis-container .kpi-value {
+  display: block !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.staffing-analysis-container .kpi-info {
+  overflow: visible !important;
 }
 
 .staffing-analysis-container .kpi-card-staffing *,

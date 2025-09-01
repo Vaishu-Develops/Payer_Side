@@ -251,6 +251,23 @@
   pointer-events: none;
   transition: all 0.1s ease;
   max-width: 300px;
+  background: #000000;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile-friendly tooltip adjustments */
+@media (max-width: 480px) {
+  #chartjs-tooltip, .chartjs-tooltip {
+    font-size: 12px;
+    padding: 8px 12px;
+    max-width: 220px;
+    white-space: normal;
+  }
 }
 
 /* Canvas container for better chart positioning */
@@ -579,5 +596,17 @@
   
   .hospital-tier-classification .htc-charts-grid {
     gap: 20px;
+    grid-template-columns: 1fr;
+  }
+  
+  /* Additional improvements for mobile display */
+  .hospital-tier-classification .htc-chart-tools {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .hospital-tier-classification .htc-header-content {
+    padding: 0 16px;
   }
 }

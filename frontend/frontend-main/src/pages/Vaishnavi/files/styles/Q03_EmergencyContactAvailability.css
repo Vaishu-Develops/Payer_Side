@@ -120,13 +120,22 @@
   line-height: 1.3;
   font-size: 16px !important;
   font-weight: 600 !important;
-  color: #1a1a1a !important;
+  color: #1a1a1a !important; /* Ensure text is dark and visible */
   flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Ensure the Emergency text is clearly visible */
+.card-body .ant-typography {
+  display: block;
+  color: #333333 !important; /* Darker color to ensure visibility */
+  font-weight: 600 !important; /* Make it bolder */
+  margin-bottom: 12px;
 }
 
 .card-body {
@@ -138,9 +147,16 @@
 
 .card-body .ant-typography {
   display: block;
-  color: #595959 !important;
-  font-weight: 500 !important;
+  color: #333333 !important; /* Darker color for better visibility */
+  font-weight: 600 !important; /* Bolder text */
   margin-bottom: 12px;
+}
+
+/* Special styling for the emergency label */
+.emergency-label {
+  color: #0d5cb6 !important; /* Dark blue for high visibility */
+  font-weight: 600 !important;
+  font-size: 15px !important;
 }
 
 .phone-info {
@@ -148,6 +164,14 @@
   align-items: center;
   gap: 8px;
   margin-top: auto;
+  color: #1a1a1a !important; /* Ensure text color is dark */
+}
+
+/* Ensure phone numbers are clearly visible */
+.phone-info .ant-typography {
+  color: #1a1a1a !important;
+  font-weight: 600 !important;
+}
   font-size: 1.1em;
   padding: 8px;
   background-color: #fafafa;
@@ -212,6 +236,7 @@
   .hospital-name {
     font-size: 14px !important;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
   }
   
   .contact-card .ant-card-body {
@@ -239,4 +264,19 @@
     min-height: 45px;
     margin-bottom: 8px;
   }
+}
+
+/* Force all typography elements to have visible text */
+.contact-card .ant-typography {
+  color: #333333 !important; /* Dark gray for all text */
+}
+
+.contact-card .ant-typography.ant-typography-secondary {
+  color: #0d5cb6 !important; /* Dark blue for secondary text */
+}
+
+/* Target the specific Emergency text in the body */
+.contact-card .card-body .ant-typography {
+  color: #0d5cb6 !important; /* Dark blue */
+  font-weight: 600 !important;
 }

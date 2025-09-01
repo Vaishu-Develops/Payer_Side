@@ -17,6 +17,11 @@ export const fetchRiskData = async () => {
 
     // Validate the responses to ensure they are successful and contain data.
     if (!certificationsResponse.success || !metricsResponse.success || !hospitalsResponse.success) {
+      console.error('One or more responses failed:', {
+        certifications: certificationsResponse,
+        metrics: metricsResponse,
+        hospitals: hospitalsResponse
+      });
       throw new Error("Failed to fetch all required risk data.");
     }
     
@@ -38,10 +43,13 @@ export const fetchRiskData = async () => {
     
     // Return a structured object with validated data, providing empty arrays as a fallback.
     // The backend returns the data directly as arrays, not nested under additional keys
-    return {
+    const result = {
       certifications: certificationsWithNames,
       metrics: Array.isArray(metricsResponse.data) ? metricsResponse.data : [],
+      hospitals: Array.isArray(hospitalsResponse.data) ? hospitalsResponse.data : [],
     };
+    
+    return result;
   } catch (error) {
     console.error("Error in fetchRiskData service:", error);
     // Propagate the error to be handled by the UI component.
