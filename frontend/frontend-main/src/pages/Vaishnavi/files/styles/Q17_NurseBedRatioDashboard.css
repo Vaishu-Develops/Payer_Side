@@ -1,641 +1,757 @@
-/* =======================================================
-   Nurse-to-Bed Ratio Dashboard - Professional Healthcare
-   SCOPED TO PREVENT AFFECTING OTHER PAGES
-   ======================================================= */
+/* Q17_NurseBedRatioDashboard.css - Modern Healthcare Dashboard */
 
-/* --- Main Container --- */
 .nurse-ratio-dashboard {
-  padding: 24px !important;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important; /* Beautiful gradient background instead of black */
-  min-height: 100vh !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  contain: layout style !important;
-  isolation: isolate !important;
-  width: 100% !important;
-  max-width: 100% !important;
+  padding: 24px;
+  background: #f8fafc;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.nurse-ratio-dashboard * {
-  box-sizing: border-box !important;
+/* Header Section */
+.dashboard-header {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
 }
 
-/* --- Header Section - SCOPED TO NURSE RATIO DASHBOARD ONLY --- */
-.nurse-ratio-dashboard .dashboard-header {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: flex-start !important;
-  margin-bottom: 32px !important;
-  padding: 24px !important;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; /* Purple gradient header */
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.25) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  gap: 24px !important;
+.header-content {
+  flex: 1;
 }
 
-.nurse-ratio-dashboard .header-content {
-  flex: 1 !important;
-  min-width: 300px !important;
+.header-title-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
 }
 
-/* Page Title Styling - Made it a proper heading */
-.page-title.ant-typography-h1,
-.header-content .ant-typography-h2 {
-  font-size: 32px !important; /* Larger font size for main heading */
-  font-weight: 700 !important; /* Bold font weight */
-  color: #ffffff !important; /* White text on colored background */
-  margin-bottom: 12px !important;
-  line-height: 1.2 !important;
-  letter-spacing: -0.5px !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important; /* Text shadow for better readability */
+.header-icon {
+  font-size: 32px;
+  color: #4c6ef5;
 }
 
-.nurse-ratio-dashboard .header-content .ant-typography {
-  color: rgba(255, 255, 255, 0.9) !important; /* Slightly transparent white */
-  margin-bottom: 0 !important;
-  font-size: 14px !important;
-  line-height: 1.4 !important;
+.page-title {
+  margin: 0 !important;
+  color: #2d3748 !important;
+  font-weight: 700 !important;
 }
 
-.nurse-ratio-dashboard .header-controls {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 16px !important;
-  min-width: 280px !important;
+.header-subtitle {
+  color: #718096 !important;
+  font-size: 16px;
+  margin: 0 !important;
+}
+
+.header-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 280px;
 }
 
 .control-group {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .control-label {
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  color: #ffffff !important; /* White text */
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 14px;
 }
 
 .type-selector {
-  width: 100% !important;
+  width: 100%;
 }
 
 .type-selector .ant-select-selector {
-  height: 44px !important;
-  padding: 0 16px !important;
-  border-radius: 8px !important;
-  border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  background: rgba(255, 255, 255, 0.95) !important; /* Semi-transparent white */
-  transition: all 0.3s ease !important;
-  backdrop-filter: blur(10px) !important;
+  height: 44px;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
 }
 
-/* --- Dashboard Content --- */
+.type-selector .ant-select-selector:hover {
+  border-color: #4c6ef5;
+}
+
+/* Dashboard Content */
 .dashboard-content {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 32px !important;
-  max-width: 1400px !important;
-  margin: 0 auto !important;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-/* --- Summary Cards Section (Keep Original Colors) --- */
+/* Summary Cards */
 .summary-section {
-  width: 100% !important;
-}
-
-.summary-cards-grid {
-  display: flex !important;
-  justify-content: center !important;
-  flex-wrap: wrap !important;
-  gap: 24px !important;
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-}
-
-.summary-card-wrapper {
-  flex: 0 0 270px !important;
-  min-width: 270px !important;
-  max-width: 270px !important;
+  margin-bottom: 0 !important;
 }
 
 .summary-card {
-  width: 100% !important;
-  height: 140px !important;
-  min-height: 140px !important;
-  max-height: 140px !important;
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  overflow: hidden !important;
-  contain: layout style size !important;
-  cursor: pointer !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  height: 100%;
+  transition: all 0.3s ease;
 }
 
 .summary-card:hover {
-  transform: translateY(-8px) scale(1.02) !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Keep Original Card Colors */
-.summary-card.general-ratio {
-  background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%) !important;
-}
-
-.summary-card.icu-ratio {
-  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%) !important;
-}
-
-.summary-card.compliance {
-  background: linear-gradient(135deg, #722ed1 0%, #9254de 100%) !important;
-}
-
-.summary-card.outliers {
-  background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .summary-card .ant-card-body {
-  padding: 0 !important;
-  height: 108px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  padding: 20px;
 }
 
 .summary-content {
-  display: flex !important;
-  align-items: center !important;
-  gap: 16px !important;
-  width: 100% !important;
-  padding: 20px !important;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .summary-icon {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 48px !important;
-  height: 48px !important;
-  background: rgba(255, 255, 255, 0.25) !important;
-  border-radius: 12px !important;
-  font-size: 20px !important;
-  color: #ffffff !important;
-  flex-shrink: 0 !important;
-  backdrop-filter: blur(10px) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 20px;
+  flex-shrink: 0;
 }
 
 .summary-info {
-  flex: 1 !important;
+  flex: 1;
 }
 
 .summary-title {
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  margin-bottom: 6px !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.3px !important;
+  font-size: 14px;
+  font-weight: 500;
+  color: #718096;
+  margin-bottom: 8px;
 }
 
 .summary-value {
-  font-size: 28px !important;
-  font-weight: 700 !important;
-  color: #ffffff !important;
-  line-height: 1 !important;
-  margin-bottom: 8px !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
-}
-
-.summary-status {
-  font-size: 12px !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-  line-height: 1.2 !important;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 12px;
 }
 
 .summary-progress {
-  width: 100% !important;
-  margin: 4px 0 !important;
+  margin-bottom: 8px;
 }
 
 .summary-progress .ant-progress-inner {
-  background: rgba(255, 255, 255, 0.3) !important;
-  border-radius: 100px !important;
-  height: 4px !important;
+  background: #f0f0f0;
+  border-radius: 100px;
 }
 
 .summary-progress .ant-progress-bg {
-  border-radius: 100px !important;
-  height: 4px !important;
-  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 100px;
 }
 
-/* --- Content Grid --- */
+.summary-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #718096;
+}
+
+.benchmark-tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #f8f9fa;
+  color: #868e96;
+}
+
+/* Content Grid */
 .content-grid {
-  display: grid !important;
-  grid-template-columns: 2fr 1fr !important;
-  grid-template-rows: auto auto !important;
-  gap: 24px !important;
-  grid-template-areas: 
-    "chart ranking"
-    "table table" !important;
+  margin-bottom: 0 !important;
 }
 
-.chart-section {
-  grid-area: chart !important;
+.content-grid .ant-col {
+  display: flex;
+  flex-direction: column;
 }
 
-.ranking-section {
-  grid-area: ranking !important;
-}
-
-.table-section {
-  grid-area: table !important;
-}
-
-/* --- Chart Card --- */
+/* Chart Card */
 .chart-card {
-  height: 500px !important;
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  overflow: hidden !important;
-  background: rgba(255, 255, 255, 0.95) !important; /* Semi-transparent white */
-  backdrop-filter: blur(10px) !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  height: 480px; /* Fixed height to match ranking card */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevent overflow from child elements */
 }
 
 .chart-card .ant-card-head {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important; /* Blue gradient header */
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-.chart-card .ant-card-head-title {
-  color: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f7fafc;
+  padding: 16px 20px;
+  flex-shrink: 0;
 }
 
 .chart-card .ant-card-body {
-  padding: 20px !important;
-  height: calc(100% - 64px) !important;
-  background: rgba(255, 255, 255, 0.95) !important;
+  padding: 16px 20px 8px 20px;
+  height: calc(100% - 64px);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden; /* Prevent overflow from child elements */
 }
 
 .chart-container {
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 350px;
+  flex: 1;
+  display: block; /* Change to block for better layout */
+  min-height: 350px;
+  position: relative;
+  overflow: visible; /* Ensure chart elements don't get clipped */
+}
+
+.chart-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 350px;
+  width: 100%;
+  flex-direction: column;
+  color: #999;
+}
+
+/* Remove height/width constraints that might cause issues */
+.chart-container .recharts-wrapper {
+  margin-bottom: 0;
+}
+
+.chart-container .recharts-surface {
+  overflow: visible !important;
+}
+
+/* Improve bar visibility */
+.recharts-bar-rectangle {
+  opacity: 1; /* Full opacity for better visibility */
+}
+
+.recharts-bar-rectangle:hover {
+  opacity: 0.8;
+  filter: brightness(0.95);
+}
+
+/* Fix any potential issues with chart layout */
+.recharts-cartesian-grid {
+  z-index: 0;
+}
+
+.recharts-reference-line {
+  z-index: 10;
+}
+
+.recharts-bar {
+  z-index: 20; /* Ensure bars are on top */
 }
 
 .chart-tooltip {
-  background: rgba(0, 0, 0, 0.9) !important;
-  border: none !important;
-  border-radius: 8px !important;
-  padding: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-  backdrop-filter: blur(10px) !important;
+  background: rgba(0, 0, 0, 0.9);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .tooltip-title {
-  color: #ffffff !important;
-  font-weight: 600 !important;
-  margin-bottom: 8px !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-  padding-bottom: 4px !important;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 4px;
 }
 
 .tooltip-content {
-  color: #ffffff !important;
-  font-size: 13px !important;
+  color: #ffffff;
+  font-size: 13px;
 }
 
 .tooltip-content div {
-  margin-bottom: 4px !important;
+  margin-bottom: 4px;
 }
 
-/* --- Ranking Card --- */
+/* Ranking Card */
 .ranking-card {
-  height: 500px !important;
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  overflow: hidden !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(10px) !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  height: 480px; /* Fixed height to match chart card */
+  display: flex;
+  flex-direction: column;
 }
 
 .ranking-card .ant-card-head {
-  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important; /* Pink-yellow gradient */
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-.ranking-card .ant-card-head-title {
-  color: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f7fafc;
+  padding: 16px 20px;
+  flex-shrink: 0;
 }
 
 .ranking-card .ant-card-body {
-  padding: 16px !important;
-  height: calc(100% - 64px) !important;
-  overflow-y: auto !important;
-  background: rgba(255, 255, 255, 0.95) !important;
+  padding: 12px 16px;
+  height: calc(100% - 64px);
+  max-height: calc(100% - 64px);
+  overflow: hidden; /* Keep overflow hidden at card body level */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .ranking-list {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 16px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 8px; /* Space for scrollbar */
+  flex: 1;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: calc(480px - 64px - 24px); /* Card height - header - padding */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #ced4da #f8f9fa; /* Firefox */
+}
+
+/* Webkit scrollbar styles */
+.ranking-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ranking-list::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.ranking-list::-webkit-scrollbar-thumb {
+  background-color: #ced4da;
+  border-radius: 6px;
+}
+
+.ranking-list::-webkit-scrollbar-thumb:hover {
+  background-color: #adb5bd;
 }
 
 .ranking-item {
-  display: flex !important;
-  align-items: center !important;
-  gap: 16px !important;
-  padding: 16px !important;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; /* Purple gradient items */
-  border-radius: 8px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2) !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+  flex-shrink: 0; /* Prevent shrinking */
+  margin-bottom: 0;
 }
 
 .ranking-item:hover {
-  transform: translateX(8px) scale(1.02) !important;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3) !important;
+  background: #e9ecef;
+  transform: translateX(4px);
 }
 
 .rank-badge {
-  flex-shrink: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 12px;
+  color: #2d3748;
+  flex-shrink: 0;
 }
 
 .ranking-content {
-  flex: 1 !important;
-  min-width: 0 !important;
+  flex: 1;
+  min-width: 0;
 }
 
 .hospital-info {
-  margin-bottom: 8px !important;
+  margin-bottom: 8px;
 }
 
 .hospital-name {
-  font-size: 15px !important;
-  font-weight: 600 !important;
-  color: #ffffff !important; /* White text on gradient background */
-  line-height: 1.2 !important;
-  display: block !important;
-  margin-bottom: 4px !important;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d3748;
+  line-height: 1.2;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .hospital-type {
-  font-size: 12px !important;
-  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 12px;
+  color: #868e96;
 }
 
 .ranking-metrics {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
-.ratio-text {
-  font-size: 13px !important;
-  color: rgba(255, 255, 255, 0.9) !important;
+.ratio-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.ratio-label {
+  font-size: 11px;
+  color: #868e96;
+  margin-bottom: 2px;
+}
+
+.ratio-value {
+  font-size: 14px;
+  color: #2d3748;
+  font-weight: 600;
 }
 
 .hospital-stats {
-  margin-top: 4px !important;
+  margin-top: 4px;
 }
 
 .beds-nurses {
-  font-size: 12px !important;
-  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 12px;
+  color: #868e96;
 }
 
-/* --- Table Card --- */
+/* Table Card */
 .table-card {
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  overflow: hidden !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(10px) !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
 }
 
 .table-card .ant-card-head {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%) !important; /* Mint-pink gradient */
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-.table-card .ant-card-head-title {
-  color: #262626 !important; /* Dark text on light gradient */
+  border-bottom: 1px solid #e2e8f0;
+  background: #f7fafc;
 }
 
 .table-card .ant-card-body {
-  padding: 16px !important;
-  background: rgba(255, 255, 255, 0.95) !important;
+  padding: 16px;
 }
 
 .table-container {
-  width: 100% !important;
+  width: 100%;
 }
 
 .hospital-details-table .ant-table-thead > tr > th {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  font-weight: 600 !important;
-  color: #ffffff !important; /* White text on gradient */
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+  background: #f7fafc;
+  font-weight: 600;
+  color: #2d3748;
+  border-bottom: 2px solid #e2e8f0;
 }
 
 .hospital-details-table .ant-table-tbody > tr > td {
-  border-bottom: 1px solid #f5f5f5 !important;
-  background: rgba(255, 255, 255, 0.8) !important;
+  border-bottom: 1px solid #f0f0f0;
+  background: #ffffff;
 }
 
 .hospital-details-table .ant-table-tbody > tr:hover > td {
-  background: rgba(102, 126, 234, 0.1) !important; /* Light purple hover */
+  background: #f0f9ff;
 }
 
 .hospital-details-table .ant-table-tbody > tr:nth-child(even) > td {
-  background: rgba(167, 243, 208, 0.1) !important; /* Light green for alternate rows */
+  background: #fafafa;
+}
+
+.hospital-cell {
+  display: flex;
+  flex-direction: column;
 }
 
 .hospital-name-cell {
-  font-weight: 600 !important;
-  color: #262626 !important;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 4px;
+}
+
+.hospital-type-cell {
+  font-size: 12px;
+  color: #868e96;
+}
+
+.ratio-display-table {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ratio-bar {
+  width: 100%;
+  height: 4px;
+  background: #f0f0f0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ratio-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
 }
 
 .compliance-tag {
-  font-weight: 500 !important;
+  font-weight: 500;
 }
 
-/* --- Radio Button Groups with Colors --- */
+/* Radio Button Groups */
 .nurse-ratio-dashboard .ant-radio-group {
-  border-radius: 6px !important;
-  background: rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nurse-ratio-dashboard .ant-radio-button-wrapper {
-  height: 32px !important;
-  line-height: 30px !important;
-  padding: 0 16px !important;
-  border: none !important;
-  background: transparent !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  color: #262626 !important;
+  height: 32px;
+  line-height: 30px;
+  padding: 0 16px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  color: #262626;
 }
 
 .nurse-ratio-dashboard .ant-radio-button-wrapper:first-child {
-  border-radius: 6px 0 0 6px !important;
+  border-radius: 6px 0 0 6px;
 }
 
 .nurse-ratio-dashboard .ant-radio-button-wrapper:last-child {
-  border-radius: 0 6px 6px 0 !important;
+  border-radius: 0 6px 6px 0;
 }
 
 .nurse-ratio-dashboard .ant-radio-button-wrapper-checked {
-  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%) !important;
-  color: white !important;
-  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3) !important;
+  background: #4c6ef5;
+  color: white;
 }
 
 .nurse-ratio-dashboard .ant-radio-button-wrapper:hover {
-  color: #1890ff !important;
-  background: rgba(24, 144, 255, 0.1) !important;
+  color: #4c6ef5;
+  background: rgba(76, 110, 245, 0.1);
 }
 
 .nurse-ratio-dashboard .ant-radio-button-wrapper-checked:hover {
-  color: white !important;
+  color: white;
 }
 
-/* --- Card Titles Enhancement --- */
+/* Card Titles Enhancement */
 .nurse-ratio-dashboard .ant-card-head-title {
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2d3748;
 }
 
 .nurse-ratio-dashboard .ant-card-head-title .anticon {
-  font-size: 16px !important;
-  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 16px;
+  color: #4c6ef5;
 }
 
-/* --- Loading and Error States --- */
+/* Loading and Error States */
 .nurse-ratio-dashboard-loading {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-height: 60vh !important;
-  gap: 24px !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-  backdrop-filter: blur(10px) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
 }
 
 .nurse-ratio-dashboard-error,
 .nurse-ratio-dashboard-empty {
-  margin: 24px !important;
-  border-radius: 12px !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(10px) !important;
+  margin: 24px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
 }
 
-/* --- Badge Enhancements --- */
-.ranking-list .ant-badge .ant-badge-count {
-  min-width: 22px !important;
-  height: 22px !important;
-  line-height: 20px !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  border-radius: 11px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-  background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%) !important;
-  color: #2d3436 !important;
-}
-
-/* --- Hover Effects --- */
+/* Hover Effects */
 .chart-card:hover,
 .ranking-card:hover,
 .table-card:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
-  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
-/* --- Select Component Enhancements --- */
+/* Select Component Enhancements */
 .type-selector:hover .ant-select-selector {
-  border-color: rgba(255, 255, 255, 0.6) !important;
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2) !important;
+  border-color: #4c6ef5;
 }
 
 .type-selector.ant-select-focused .ant-select-selector {
-  border-color: rgba(255, 255, 255, 0.8) !important;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
+  border-color: #4c6ef5;
+  box-shadow: 0 0 0 2px rgba(76, 110, 245, 0.2);
 }
 
 .type-selector .ant-select-selection-item {
-  font-weight: 500 !important;
-  color: #262626 !important;
+  font-weight: 500;
+  color: #262626;
 }
 
 .type-selector .ant-select-arrow {
-  color: #8c8c8c !important;
+  color: #8c8c8c;
 }
 
-/* --- Responsive Design --- */
+/* Responsive Design */
 @media (max-width: 1200px) {
   .content-grid {
-    grid-template-columns: 1fr !important;
-    grid-template-areas: 
-      "chart"
-      "ranking"
-      "table" !important;
+    margin-bottom: 0;
   }
   
-  .page-title.ant-typography-h1 {
+  .page-title {
     font-size: 28px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .header-controls {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .chart-card .ant-card-body,
+  .ranking-card .ant-card-body {
+    padding: 16px;
   }
 }
 
 @media (max-width: 768px) {
   .nurse-ratio-dashboard {
-    padding: 16px !important;
+    padding: 16px;
   }
   
   .dashboard-header {
-    flex-direction: column !important;
-    padding: 20px !important;
+    padding: 20px;
   }
   
-  .page-title.ant-typography-h1 {
+  .page-title {
     font-size: 24px !important;
-    text-align: center !important;
   }
   
-  .chart-card,
-  .ranking-card {
-    height: 400px !important;
+  .header-subtitle {
+    font-size: 14px !important;
+  }
+  
+  .summary-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  .summary-icon {
+    margin: 0 auto;
+  }
+  
+  .summary-status {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .ranking-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  .rank-badge {
+    margin: 0 auto;
+  }
+  
+  .ranking-metrics {
+    justify-content: center;
+  }
+  
+  .chart-card .ant-card-head,
+  .ranking-card .ant-card-head,
+  .table-card .ant-card-head {
+    padding: 12px 16px;
+  }
+  
+  .chart-card .ant-card-body,
+  .ranking-card .ant-card-body,
+  .table-card .ant-card-body {
+    padding: 12px 16px;
   }
 }
 
-@media (max-width: 480px) {
-  .page-title.ant-typography-h1 {
+@media (max-width: 576px) {
+  .page-title {
     font-size: 20px !important;
   }
   
-  .chart-card,
-  .ranking-card {
-    height: 350px !important;
+  .dashboard-header {
+    padding: 16px;
+  }
+  
+  .header-title-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .header-icon {
+    font-size: 24px;
+  }
+  
+  .summary-card .ant-card-body {
+    padding: 16px;
+  }
+  
+  .ranking-item {
+    padding: 12px;
+  }
+  
+  .ranking-metrics {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .hospital-details-table .ant-table-thead > tr > th,
+  .hospital-details-table .ant-table-tbody > tr > td {
+    padding: 8px;
   }
 }
 
-/* --- Animation Enhancements --- */
+/* Animation Enhancements */
 .summary-card,
 .chart-card,
 .ranking-card,
 .table-card {
-  animation: fadeInUp 0.6s ease-out !important;
+  animation: fadeInUp 0.6s ease-out;
 }
 
 @keyframes fadeInUp {
@@ -649,8 +765,8 @@
   }
 }
 
-.page-title.ant-typography-h1 {
-  animation: titleSlideIn 0.8s ease-out !important;
+.page-title {
+  animation: titleSlideIn 0.8s ease-out;
 }
 
 @keyframes titleSlideIn {
@@ -661,5 +777,147 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar for Ranking List Only */
+.ranking-list::-webkit-scrollbar,
+.table-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.ranking-list::-webkit-scrollbar-track,
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.ranking-list::-webkit-scrollbar-thumb,
+.table-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.ranking-list::-webkit-scrollbar-thumb:hover,
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Fix for chart container to remove extra whitespace */
+.chart-container .recharts-wrapper {
+  margin-bottom: 0;
+  height: 100% !important;
+}
+
+.chart-container .recharts-legend-wrapper {
+  bottom: 0 !important;
+}
+
+/* Ensure proper spacing between chart and card edges */
+.chart-card .ant-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove extra padding from chart containers */
+.recharts-surface {
+  overflow: visible;
+}
+
+/* Adjust chart margins for better fit */
+.recharts-default-legend {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Responsive adjustments for chart */
+@media (max-width: 768px) {
+  .chart-container {
+    height: 300px !important;
+  }
+  
+  .recharts-legend-wrapper {
+    position: relative !important;
+    bottom: 0 !important;
+    margin-top: 10px;
+  }
+  
+  .recharts-default-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+/* Ensure no gaps between cards in grid */
+.content-grid .ant-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-grid .ant-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 480px; /* Ensure consistent height */
+}
+
+.content-grid .ant-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Specific height adjustments for chart and ranking cards */
+.chart-card,
+.ranking-card {
+  min-height: 480px;
+  max-height: 480px;
+}
+
+/* Mobile optimization for chart labels */
+@media (max-width: 480px) {
+  .recharts-x-axis .recharts-cartesian-axis-tick text {
+    font-size: 10px;
+    transform: rotate(-45deg);
+    text-anchor: end;
+  }
+  
+  .recharts-legend-item text {
+    font-size: 11px;
+  }
+  
+  .chart-container {
+    height: 280px !important;
+  }
+}
+
+/* Fix for reference line labels on small screens */
+.recharts-reference-line-line {
+  stroke-width: 2px;
+}
+
+.recharts-reference-line text {
+  font-size: 10px !important;
+  font-weight: 600;
+}
+
+/* Ensure proper printing layout */
+@media print {
+  .nurse-ratio-dashboard {
+    padding: 0;
+    background: white;
+  }
+  
+  .dashboard-header,
+  .summary-card,
+  .chart-card,
+  .ranking-card,
+  .table-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
   }
 }

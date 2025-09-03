@@ -275,8 +275,13 @@ const EquipmentDashboard = () => {
               <span className="chart-title">Equipment Age Distribution</span>
             </div>
             <div className="chart-content">
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={ageDistributionData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+              <div style={{ width: '100%', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <BarChart 
+                  width={450} 
+                  height={300} 
+                  data={ageDistributionData} 
+                  margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+                >
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                   <XAxis 
                     dataKey="range" 
@@ -293,7 +298,7 @@ const EquipmentDashboard = () => {
                     ))}
                   </Bar>
                 </BarChart>
-              </ResponsiveContainer>
+              </div>
             </div>
           </div>
           
@@ -303,8 +308,8 @@ const EquipmentDashboard = () => {
               <span className="chart-title">Modernization Priority</span>
             </div>
             <div className="chart-content">
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
+              <div style={{ width: '100%', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <PieChart width={450} height={300}>
                   <Pie
                     data={priorityData}
                     cx="50%"
@@ -325,7 +330,7 @@ const EquipmentDashboard = () => {
                     iconType="circle"
                   />
                 </PieChart>
-              </ResponsiveContainer>
+              </div>
             </div>
           </div>
         </div>
