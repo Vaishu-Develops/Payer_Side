@@ -52,11 +52,17 @@ The **Hospital Schedule of Charges (SOC) Management – Payer-Side Dashboard** i
 
 <div align="center">
 
-https://github.com/user-attachments/assets/demo-video.mp4
+### 📹 [Watch Demo Video on YouTube](YOUR_YOUTUBE_LINK_HERE)
 
 *Watch the complete walkthrough of the Hospital SOC Management Dashboard*
 
-**Alternatively, view the demo video here:** [Demo Video](./frontend/frontend-main/public/Vite%20+%20React%20-%20Google%20Chrome%202026-01-07%2020-19-13.mp4)
+> **Note:** Upload your demo video to one of these platforms:
+> - **YouTube** (Recommended) - [Upload Video](https://www.youtube.com/upload)
+> - **Loom** - [Record & Share](https://www.loom.com/)
+> - **Google Drive** - Share with "Anyone with the link"
+> - **Vimeo** - [Upload Video](https://vimeo.com/upload)
+> 
+> Then replace `YOUR_YOUTUBE_LINK_HERE` above with your video link.
 
 </div>
 
