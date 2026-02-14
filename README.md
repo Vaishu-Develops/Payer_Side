@@ -160,27 +160,48 @@ graph TD
 
 <div align="center">
 
-### �️ Dashboard Showcase
+### 🖥️ Landing Page
+<img src="frontend/images/Screenshot 2025-07-11 150403.png" alt="Hospital Dashboard Landing Page" width="95%" />
+
+<br/><br/>
+
+### 🖼️ Dashboard Showcase
 
 <table>
   <tr>
     <td align="center" width="50%">
-      <strong>🖥️ Landing Page & Dashboard Overview</strong><br/><br/>
-      <img src="frontend/images/Screenshot 2026-01-07 202353.png" alt="Landing Page" width="100%" />
+      <strong>📊 Hospital Data Analytics Overview</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2025-07-11 150429.png" alt="Hospital Data Analytics" width="100%" />
     </td>
     <td align="center" width="50%">
-      <strong>📊 Hospital Analytics & Data Visualization</strong><br/><br/>
-      <img src="frontend/images/Screenshot 2026-01-07 202431.png" alt="Hospital Analytics Dashboard" width="100%" />
+      <strong>🏥 Hospital Network Summary</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2025-07-11 113923.png" alt="Hospital Network Summary" width="100%" />
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
-      <strong>🏥 Hospital Network & Management View</strong><br/><br/>
-      <img src="frontend/images/Screenshot 2026-01-07 202458.png" alt="Hospital Network Management" width="100%" />
+      <strong>📈 Analytics & Reports</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2025-07-11 114021.png" alt="Analytics Reports" width="100%" />
     </td>
     <td align="center" width="50%">
-      <strong>📈 Performance Metrics & Reports</strong><br/><br/>
-      <img src="frontend/images/Screenshot 2026-01-07 202558.png" alt="Performance Metrics Dashboard" width="100%" />
+      <strong>🎯 Dashboard Widgets</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2026-01-07 202353.png" alt="Dashboard Widgets" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <strong>⚕️ Hospital Analytics View</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2026-01-07 202431.png" alt="Hospital Analytics View" width="100%" />
+    </td>
+    <td align="center" width="50%">
+      <strong>🏨 Network Management</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2026-01-07 202458.png" alt="Network Management" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <strong>📉 Performance Metrics & KPIs</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2026-01-07 202558.png" alt="Performance Metrics" width="50%" />
     </td>
   </tr>
 </table>
@@ -191,23 +212,43 @@ graph TD
 <summary><strong>🔍 Click to view full-size screenshots</strong></summary>
 <br/>
 
-#### 🖥️ Landing Page & Dashboard Overview
-<img src="frontend/images/Screenshot 2026-01-07 202353.png" alt="Landing Page" width="100%" />
+#### 🖥️ Landing Page
+<img src="frontend/images/Screenshot 2025-07-11 150403.png" alt="Landing Page" width="100%" />
 
 ---
 
-#### 📊 Hospital Analytics & Data Visualization
-<img src="frontend/images/Screenshot 2026-01-07 202431.png" alt="Hospital Analytics Dashboard" width="100%" />
+#### 📊 Hospital Data Analytics Overview
+<img src="frontend/images/Screenshot 2025-07-11 150429.png" alt="Hospital Data Analytics" width="100%" />
 
 ---
 
-#### 🏥 Hospital Network & Management View
-<img src="frontend/images/Screenshot 2026-01-07 202458.png" alt="Hospital Network Management" width="100%" />
+#### 🏥 Hospital Network Summary
+<img src="frontend/images/Screenshot 2025-07-11 113923.png" alt="Hospital Network Summary" width="100%" />
 
 ---
 
-#### 📈 Performance Metrics & Reports
-<img src="frontend/images/Screenshot 2026-01-07 202558.png" alt="Performance Metrics Dashboard" width="100%" />
+#### 📈 Analytics & Reports
+<img src="frontend/images/Screenshot 2025-07-11 114021.png" alt="Analytics Reports" width="100%" />
+
+---
+
+#### 🎯 Dashboard Widgets
+<img src="frontend/images/Screenshot 2026-01-07 202353.png" alt="Dashboard Widgets" width="100%" />
+
+---
+
+#### ⚕️ Hospital Analytics View
+<img src="frontend/images/Screenshot 2026-01-07 202431.png" alt="Hospital Analytics View" width="100%" />
+
+---
+
+#### 🏨 Network Management
+<img src="frontend/images/Screenshot 2026-01-07 202458.png" alt="Network Management" width="100%" />
+
+---
+
+#### 📉 Performance Metrics & KPIs
+<img src="frontend/images/Screenshot 2026-01-07 202558.png" alt="Performance Metrics" width="100%" />
 
 </details>
 
