@@ -48,24 +48,6 @@
 
 The **Hospital Schedule of Charges (SOC) Management – Payer-Side Dashboard** is an advanced analytics platform designed to empower payer organizations with comprehensive insights into healthcare provider networks. This full-stack application combines powerful data visualization capabilities with robust backend processing to deliver actionable intelligence for healthcare financial management.
 
-## 🎬 Demo Video
-
-<div align="center">
-
-### 📹 [Watch Demo Video on YouTube](YOUR_YOUTUBE_LINK_HERE)
-
-*Watch the complete walkthrough of the Hospital SOC Management Dashboard*
-
-> **Note:** Upload your demo video to one of these platforms:
-> - **YouTube** (Recommended) - [Upload Video](https://www.youtube.com/upload)
-> - **Loom** - [Record & Share](https://www.loom.com/)
-> - **Google Drive** - Share with "Anyone with the link"
-> - **Vimeo** - [Upload Video](https://vimeo.com/upload)
-> 
-> Then replace `YOUR_YOUTUBE_LINK_HERE` above with your video link.
-
-</div>
-
 ### 🎯 Key Objectives
 
 - **Provider Network Analysis**: Comprehensive evaluation of hospital networks and their capabilities
@@ -176,27 +158,58 @@ graph TD
 
 ## 📸 Screenshots & Visual Gallery
 
-> **📷 Screenshot Placeholder Section**
-> 
-> *Add your project screenshots here to showcase the dashboard interfaces*
-
 <div align="center">
 
-### 🖥️ Main Dashboard
-<!-- Add main dashboard screenshot here -->
-*[Main Dashboard Screenshot Placeholder]*
+### �️ Dashboard Showcase
 
-### 📊 Analytics Views
-<!-- Add analytics screenshots here -->
-*[Analytics Dashboard Screenshots Placeholder]*
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <strong>🖥️ Landing Page & Dashboard Overview</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2026-01-07 202353.png" alt="Landing Page" width="100%" />
+    </td>
+    <td align="center" width="50%">
+      <strong>📊 Hospital Analytics & Data Visualization</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2026-01-07 202431.png" alt="Hospital Analytics Dashboard" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <strong>🏥 Hospital Network & Management View</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2026-01-07 202458.png" alt="Hospital Network Management" width="100%" />
+    </td>
+    <td align="center" width="50%">
+      <strong>📈 Performance Metrics & Reports</strong><br/><br/>
+      <img src="frontend/images/Screenshot 2026-01-07 202558.png" alt="Performance Metrics Dashboard" width="100%" />
+    </td>
+  </tr>
+</table>
 
-### 🗺️ Geographic Analysis
-<!-- Add map view screenshot here -->
-*[Geographic Analysis Screenshot Placeholder]*
+<br/>
 
-### 📱 Responsive Design
-<!-- Add mobile view screenshots here -->
-*[Mobile Responsive Screenshots Placeholder]*
+<details>
+<summary><strong>🔍 Click to view full-size screenshots</strong></summary>
+<br/>
+
+#### 🖥️ Landing Page & Dashboard Overview
+<img src="frontend/images/Screenshot 2026-01-07 202353.png" alt="Landing Page" width="100%" />
+
+---
+
+#### 📊 Hospital Analytics & Data Visualization
+<img src="frontend/images/Screenshot 2026-01-07 202431.png" alt="Hospital Analytics Dashboard" width="100%" />
+
+---
+
+#### 🏥 Hospital Network & Management View
+<img src="frontend/images/Screenshot 2026-01-07 202458.png" alt="Hospital Network Management" width="100%" />
+
+---
+
+#### 📈 Performance Metrics & Reports
+<img src="frontend/images/Screenshot 2026-01-07 202558.png" alt="Performance Metrics Dashboard" width="100%" />
+
+</details>
 
 </div>
 
